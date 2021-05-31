@@ -12,7 +12,7 @@ import com.example.mastermind.model.PinColor;
 
 public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
 
-    int xPos, yPos;
+    int xPos, yPos; //achtung xpos wird von unten nach oben indiziert, x=0 ist also ganz unten, y=0 ist links
     PinColor pinColor;
 
     public BoardCell(Context context){

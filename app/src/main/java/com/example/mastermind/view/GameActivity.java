@@ -161,7 +161,7 @@ public class GameActivity extends AppCompatActivity {
         boardCells = new BoardCell[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 2];
         indicators = new Indikator[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 4];
 
-        for (int i = 0; i < griddiBoard.getRowCount(); i++) {
+        for (int i = griddiBoard.getRowCount()-1; i >= 0; i--) {
             //gibt 10 rows
             for (int j = 0; j < griddiBoard.getColumnCount(); j++) {
                 //gibt 6 columns
