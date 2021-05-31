@@ -3,7 +3,7 @@ package com.example.mastermind.model;
 import android.graphics.Color;
 
 public enum PinColor {
-    BLUE, GREEN, ORANGE, PINK, RED, WHITE, GREY, YELLOW, EMPTY;
+    RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, EMPTY;
 
     public int getColor(){
         switch(this){
