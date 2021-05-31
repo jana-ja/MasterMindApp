@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.example.mastermind.model.PinColor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -82,6 +84,11 @@ public class GameActivity extends AppCompatActivity {
     private void endGame(boolean won) {
         bNextRound.setEnabled(false);
 
+        PinColor[] solutionPinColors = gamei.getSolution();
+        for (int i = 0; i < solutionCells.size(); i++) {
+            solutionCells.get(i).setPinColor(solutionPinColors[i]);
+            solutionCells.get(i).displayColor();
+        }
 
         //TODO cool machen
         String dialogText;
@@ -114,16 +121,24 @@ public class GameActivity extends AppCompatActivity {
             celli.displayColor();
         }
 
-        //TODO game starten
         gamei = new Game();
 
-        PinColor[] solutionPinColors = gamei.getSolution();
-        for (int i = 0; i < solutionCells.size(); i++) {
-            solutionCells.get(i).setPinColor(solutionPinColors[i]);
-            // die solution displayen für testen
-            // TODO später dann iwie invisible oder verdeckt machen, aber schon in die dinger einspeichern
-            solutionCells.get(i).displayColor();
-        }
+        solutionCells.forEach(cell -> {
+            cell.setPinColor(PinColor.EMPTY);
+            cell.displayColor();
+//            cell.setBackground(getDrawable(R.drawable.clipart1853715));
+//            cell.setPadding(20,20,20,20);
+//            cell.setScaleType(ImageView.ScaleType.CENTER);
+//            cell.setAdjustViewBounds(true);
+        });
+
+        //        PinColor[] solutionPinColors = gamei.getSolution();
+//        for (int i = 0; i < solutionCells.size(); i++) {
+//            solutionCells.get(i).setPinColor(solutionPinColors[i]);
+//            // die solution displayen für testen
+//            // TODO später dann iwie invisible oder verdeckt machen, aber schon in die dinger einspeichern
+//            solutionCells.get(i).displayColor();
+//        }
 
     }
 
