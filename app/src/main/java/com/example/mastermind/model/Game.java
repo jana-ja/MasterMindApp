@@ -2,9 +2,7 @@ package com.example.mastermind.model;
 
 import com.example.mastermind.view.BoardCell;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.Set;
 public class Game {
 
     private int currenRound;
-    private PinColor[] solution;
+    private final PinColor[] solution;
 
     public Game(){
         this.currenRound = 0;

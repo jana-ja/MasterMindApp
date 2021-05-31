@@ -47,9 +47,7 @@ public class GameActivity extends AppCompatActivity {
         griddiPins = findViewById(R.id.pincolor_palette);
 
         bStartGame = findViewById(R.id.button_start_game);
-        bStartGame.setOnClickListener(v -> {
-            startGame();
-        });
+        bStartGame.setOnClickListener(v -> startGame());
         bNextRound = findViewById(R.id.button_next_round);
         bNextRound.setOnClickListener(v ->
                 nextRound());
@@ -99,10 +97,8 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(dialogText)
                 .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //do things
-                    }
+                .setPositiveButton("OK", (dialog, id) -> {
+                    //do things
                 });
         AlertDialog alert = builder.create();
         alert.show();

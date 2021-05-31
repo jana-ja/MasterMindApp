@@ -9,12 +9,6 @@ public class Ergebnis {
     public Ergebnis() {
     }
 
-    public Ergebnis(boolean okay, int correctColors, int correctPlaces) {
-        this.okay = okay;
-        this.correctColors = correctColors;
-        this.correctPlaces = correctPlaces;
-    }
-
     public boolean isOkay() {
         return okay;
     }

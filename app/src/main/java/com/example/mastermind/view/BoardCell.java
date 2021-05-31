@@ -2,12 +2,9 @@ package com.example.mastermind.view;
 
 import android.content.Context;
 import android.graphics.LightingColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.example.mastermind.R;
@@ -18,6 +15,9 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
     int xPos, yPos;
     PinColor pinColor;
 
+    public BoardCell(Context context){
+        super(context);
+    }
     public BoardCell(Context context, int xPos, int yPos) {
         super(context);
 
