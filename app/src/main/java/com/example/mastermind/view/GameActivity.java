@@ -72,7 +72,10 @@ public class GameActivity extends AppCompatActivity {
             if (ergebi.getCorrectPlaces() == 4 || gamei.getCurrenRound() > 9) {
                 //wenn daws true ist hat man gewonnen, sonst muss >9 true sein und dann hat man verloren
                 endGame(ergebi.getCorrectPlaces() == 4);
+                return;
             }
+
+            highlightCurrentRow();
         } else {
             //TODO fehlermeldung?
         }
@@ -109,6 +112,9 @@ public class GameActivity extends AppCompatActivity {
 
         gamei = new Game();
 
+        //show current row
+        highlightCurrentRow();
+
     }
 
     private void resetView() {
@@ -135,6 +141,12 @@ public class GameActivity extends AppCompatActivity {
         }
         this.pinCells.forEach(cell ->
                 cell.displayUnselected(this));
+
+    }
+
+    private void highlightCurrentRow() {
+        int row = gamei.getCurrenRound();
+        indicators[row][0].setText("->");
     }
 
     private void init() {
