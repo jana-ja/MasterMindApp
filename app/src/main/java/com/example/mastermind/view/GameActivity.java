@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +16,6 @@ import com.example.mastermind.model.PinColor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -57,6 +55,7 @@ public class GameActivity extends AppCompatActivity {
                 nextRound());
 
         init();
+        startGame();
 
     }
 
@@ -87,12 +86,12 @@ public class GameActivity extends AppCompatActivity {
         PinColor[] solutionPinColors = gamei.getSolution();
         for (int i = 0; i < solutionCells.size(); i++) {
             solutionCells.get(i).setPinColor(solutionPinColors[i]);
-            solutionCells.get(i).displayColor();
+            solutionCells.get(i).displayUnselected(this);
         }
 
         //TODO cool machen
         String dialogText;
-        if(won)
+        if (won)
             dialogText = "GEWONNEN";
         else
             dialogText = "VERLOREN";
@@ -112,33 +111,7 @@ public class GameActivity extends AppCompatActivity {
     private void startGame() {
         resetView();
 
-        for (BoardCell[] boardCellRow : boardCells) {
-            for (BoardCell boardCell : boardCellRow) {
-                boardCell.displayColor();
-            }
-        }
-        for (BoardCell celli : pinCells) {
-            celli.displayColor();
-        }
-
         gamei = new Game();
-
-        solutionCells.forEach(cell -> {
-            cell.setPinColor(PinColor.EMPTY);
-            cell.displayColor();
-//            cell.setBackground(getDrawable(R.drawable.clipart1853715));
-//            cell.setPadding(20,20,20,20);
-//            cell.setScaleType(ImageView.ScaleType.CENTER);
-//            cell.setAdjustViewBounds(true);
-        });
-
-        //        PinColor[] solutionPinColors = gamei.getSolution();
-//        for (int i = 0; i < solutionCells.size(); i++) {
-//            solutionCells.get(i).setPinColor(solutionPinColors[i]);
-//            // die solution displayen für testen
-//            // TODO später dann iwie invisible oder verdeckt machen, aber schon in die dinger einspeichern
-//            solutionCells.get(i).displayColor();
-//        }
 
     }
 
@@ -147,12 +120,15 @@ public class GameActivity extends AppCompatActivity {
         this.bNextRound.setEnabled(true);
 
         //solution griddi
-        this.solutionCells.forEach(celli -> {celli.setPinColor(PinColor.EMPTY); celli.displayColor();});
+        this.solutionCells.forEach(celli -> {
+            celli.setPinColor(PinColor.EMPTY);
+            celli.displayUnselected(this);
+        });
         //board cell griddi
         for (BoardCell[] boardCellRow : boardCells) {
             for (BoardCell boardCell : boardCellRow) {
                 boardCell.setPinColor(PinColor.EMPTY);
-                boardCell.displayColor();
+                boardCell.displayUnselected(this);
             }
         }
         //indicators
@@ -161,6 +137,8 @@ public class GameActivity extends AppCompatActivity {
                 indikator.setText("");
             }
         }
+        this.pinCells.forEach(cell ->
+                cell.displayUnselected(this));
     }
 
     private void init() {
@@ -201,12 +179,13 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     //über all anders in die mitte die board cells
                     BoardCell boardCell = new BoardCell(this, i, j);
+
                     boardCell.setOnClickListener(v -> {
                         BoardCell celli = (BoardCell) v;
                         this.selectedBoardCell = celli;
                         if (selectedPinColor != null && celli.getxPos() == gamei.getCurrenRound()) {
                             this.selectedBoardCell.setPinColor(selectedPinColor);
-                            this.selectedBoardCell.displayColor();
+                            this.selectedBoardCell.displayUnselected(this);
                         } else {
                             //TODO fehlermeldung?
                         }
@@ -215,8 +194,6 @@ public class GameActivity extends AppCompatActivity {
                     boardCells[i][j - 1] = boardCell;
 
                     griddiBoard.addView(boardCell);
-
-                    //TODO alles auf leeres bild setzen hier oder im konstruktor von board cell  oder wo auch immer das geht mit den bildern
                 }
             }
         }
@@ -232,10 +209,15 @@ public class GameActivity extends AppCompatActivity {
         for (int j = 0; j < griddiPins.getColumnCount(); j++) {
             BoardCell boardCell = new BoardCell(this, 0, j);
             boardCell.setPinColor(PinColor.values()[j]);
+            boardCell.displayUnselected(this);
             boardCell.setOnClickListener(v -> {
                 BoardCell celli = (BoardCell) v;
                 this.selectedPinColor = celli.pinColor;
-                //TODO iwie highlighten?
+                //die anderen unselected machen
+                this.pinCells.forEach(cell ->
+                        cell.displayUnselected(this));
+                //dieses selected machen
+                celli.displaySelected(this);
             });
             griddiPins.addView(boardCell);
             pinCells.add(boardCell);

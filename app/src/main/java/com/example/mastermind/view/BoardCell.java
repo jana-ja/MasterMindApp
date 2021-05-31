@@ -1,7 +1,16 @@
 package com.example.mastermind.view;
 
 import android.content.Context;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
+import androidx.core.content.ContextCompat;
+import androidx.gridlayout.widget.GridLayout;
+
+import com.example.mastermind.R;
 import com.example.mastermind.model.PinColor;
 
 public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
@@ -16,7 +25,14 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         this.yPos = yPos;
         this.pinColor = PinColor.EMPTY;
 
-//        displayColor();
+        displayUnselected(context);
+
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
+        params.height = 100;
+        params.width = 100;
+        this.setLayoutParams(params);
+        this.setScaleType(ImageView.ScaleType.CENTER);
+
     }
 
     public void setGridPos(int x, int y){
@@ -37,11 +53,20 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
 //        displayColor(); //TODO wieder rein??
     }
 
-    public void displayColor(){
-        this.setBackgroundColor(pinColor.getColor());
+    public void displayUnselected(Context context){
+//        this.setBackgroundColor(pinColor.getColor());
+        Drawable drawi = context.getDrawable(R.drawable.cell_unselected);
+        drawi.setColorFilter(new LightingColorFilter(0xFFFFFFFF, pinColor.getColor(context)));
+        this.setBackground(drawi);
     }
 
     public PinColor getPinColor() {
         return pinColor;
+    }
+
+    public void displaySelected(Context context) {
+        Drawable drawi = context.getDrawable(R.drawable.cell_selected);
+        drawi.setColorFilter(new LightingColorFilter(0xFFFFFFFF, pinColor.getColor(context)));
+        this.setBackground(drawi);
     }
 }

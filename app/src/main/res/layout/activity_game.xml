@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
+    android:background="@color/wood"
     tools:context=".view.GameActivity">
 
     <androidx.gridlayout.widget.GridLayout
@@ -38,18 +39,22 @@
         android:id="@+id/button_start_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start game"
+        android:text="@string/start_game"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/button_next_round"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/button_next_round"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/next_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_start_game" />
+        app:layout_constraintStart_toEndOf="@+id/button_start_game"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textColor="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,4 +8,20 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="transparent_white">#30FFFFFF</color>
+    <color name="grey_cell_dings">#FF101010</color>
+
+    <color name="wood">#a47449</color>
+    <color name="dark_wood">#63462D</color>
+
+    <color name="red_pin">#FFFF0000</color>
+    <color name="orange_pin">#FFFF7700</color>
+    <color name="yellow_pin">#FFFFDD00</color>
+    <color name="green_pin">#FF00FF00</color>
+    <color name="blue_pin">#FF0000FF</color>
+    <color name="pink_pin">#FFFF50B0</color>
+    <color name="grey_pin">#FF808080</color>
+    <color name="white_pin">#FFFFFFFF</color>
+    <color name="empty_pin">#FF000000</color>
+
 </resources>

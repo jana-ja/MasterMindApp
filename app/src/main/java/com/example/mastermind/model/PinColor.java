@@ -1,30 +1,35 @@
 package com.example.mastermind.model;
 
+import android.content.Context;
 import android.graphics.Color;
+
+import androidx.core.content.ContextCompat;
+
+import com.example.mastermind.R;
 
 public enum PinColor {
     RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, EMPTY;
 
-    public int getColor(){
+    public int getColor(Context context){
         switch(this){
             case BLUE:
-                return Color.BLUE;
+                return ContextCompat.getColor(context, R.color.blue_pin);
             case GREEN:
-                return Color.GREEN;
+                return ContextCompat.getColor(context, R.color.green_pin);
             case ORANGE:
-                return Color.rgb(255,165,0);
+                return ContextCompat.getColor(context, R.color.orange_pin);
             case PINK:
-                return Color.rgb(255,105,180);
+                return ContextCompat.getColor(context, R.color.pink_pin);
             case RED:
-                return Color.RED;
+                return ContextCompat.getColor(context, R.color.red_pin);
             case WHITE:
-                return Color.WHITE;
+                return ContextCompat.getColor(context, R.color.white_pin);
             case GREY:
-                return Color.GRAY;
+                return ContextCompat.getColor(context, R.color.grey_pin);
             case YELLOW:
-                return Color.YELLOW;
+                return ContextCompat.getColor(context, R.color.yellow_pin);
             case EMPTY:
-                return Color.BLACK;
+                return ContextCompat.getColor(context, R.color.empty_pin);
             default:
                 return Color.TRANSPARENT;
         }
