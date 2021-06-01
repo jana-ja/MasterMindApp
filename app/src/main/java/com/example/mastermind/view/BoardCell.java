@@ -3,8 +3,10 @@ package com.example.mastermind.view;
 import android.content.Context;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.widget.ImageView;
 
+import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.example.mastermind.R;
@@ -25,13 +27,20 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         this.yPos = yPos;
         this.pinColor = PinColor.EMPTY;
 
-        displayUnselected(context);
 
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
-        params.height = 100;
-        params.width = 100;
+//        params.setGravity(Gravity.CENTER);
+//        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+//        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+
+
+        params.height = (int)context.getResources().getDimension(R.dimen.board_cell);
+        params.width = (int)context.getResources().getDimension(R.dimen.board_cell);
         this.setLayoutParams(params);
         this.setScaleType(ImageView.ScaleType.CENTER);
+
+        displayUnselected(context);
+
 
     }
 

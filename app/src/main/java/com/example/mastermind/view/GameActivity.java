@@ -108,13 +108,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startGame() {
-        resetView();
-
         gamei = new Game();
-
-        //show current row
-        highlightCurrentRow();
-
+        resetView();
     }
 
     private void resetView() {
@@ -129,6 +124,7 @@ public class GameActivity extends AppCompatActivity {
         //board cell griddi
         for (BoardCell[] boardCellRow : boardCells) {
             for (BoardCell boardCell : boardCellRow) {
+//                boardCell.setMinimumHeight(boardCell.getWidth());
                 boardCell.setPinColor(PinColor.EMPTY);
                 boardCell.displayUnselected(this);
             }
@@ -136,12 +132,14 @@ public class GameActivity extends AppCompatActivity {
         //indicators
         for (Indikator[] indicatorRow : indicators) {
             for (Indikator indikator : indicatorRow) {
-                indikator.setText("");
+//                indikator.setText("0"); //TODO
             }
         }
+        //pin palette
         this.pinCells.forEach(cell ->
                 cell.displayUnselected(this));
-
+        //show current row
+        highlightCurrentRow();
     }
 
     private void highlightCurrentRow() {
@@ -154,15 +152,21 @@ public class GameActivity extends AppCompatActivity {
         //Solution Cells
         griddiSolution.setUseDefaultMargins(true);
         griddiSolution.setRowCount(1);
-        griddiSolution.setColumnCount(4);
+        griddiSolution.setColumnCount(6);
         solutionCells = new ArrayList<>();
 
         for (int j = 0; j < griddiSolution.getColumnCount(); j++) {
-            BoardCell boardCell = new BoardCell(this, 0, j);
-            boardCell.setPinColor(PinColor.EMPTY);
+            if (j == 0 || j == 5) {
+                //dummy damit so breit ist wie board dadrunter
+                Indikator indi = new Indikator(this, 0, j);
+                griddiSolution.addView(indi);
+            } else {
+                BoardCell boardCell = new BoardCell(this, 0, j);
+                boardCell.setPinColor(PinColor.EMPTY);
 
-            griddiSolution.addView(boardCell);
-            solutionCells.add(boardCell);
+                griddiSolution.addView(boardCell);
+                solutionCells.add(boardCell);
+            }
         }
 
 
@@ -200,7 +204,6 @@ public class GameActivity extends AppCompatActivity {
                     });
                     //j-1 wegen indizes vom array
                     boardCells[i][j - 1] = boardCell;
-
                     griddiBoard.addView(boardCell);
                 }
             }

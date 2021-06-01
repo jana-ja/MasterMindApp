@@ -7,5 +7,7 @@
         android:gradientRadius="30dp"
         android:startColor="@color/transparent_white"
         android:type="radial" />
-
+    <size
+        android:width="@dimen/board_cell"
+        android:height="@dimen/board_cell"/>
 </shape>

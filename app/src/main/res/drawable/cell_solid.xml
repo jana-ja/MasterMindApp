@@ -5,5 +5,7 @@
 
     <solid android:color="@color/grey_cell_dings" />
 
-
+    <size
+        android:width="@dimen/board_cell"
+        android:height="@dimen/board_cell"/>
 </shape>
