@@ -132,7 +132,7 @@ public class GameActivity extends AppCompatActivity {
         //indicators
         for (Indikator[] indicatorRow : indicators) {
             for (Indikator indikator : indicatorRow) {
-//                indikator.setText("0"); //TODO
+                indikator.setText(""); //TODO
             }
         }
         //pin palette
@@ -144,6 +144,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void highlightCurrentRow() {
         int row = gamei.getCurrenRound();
+        indicators[row][0].setTextColor(Color.BLACK);
         indicators[row][0].setText("->");
     }
 
