@@ -84,10 +84,10 @@ public class Game {
 
 
     private boolean checkOkay(BoardCell[] boardCellRow) {
-        for (BoardCell boardCell : boardCellRow) {
-            if (boardCell.getPinColor()==PinColor.EMPTY)
-                return false;
-        }
+//        for (BoardCell boardCell : boardCellRow) {
+//            if (boardCell.getPinColor()==PinColor.EMPTY)
+//                return false;
+//        }
         return true;
     }
 
