@@ -9,4 +9,5 @@
     <string name="empty_pins_text">Vom Computer können Felder in der Lösung leer gelassen werden.</string>
     <string name="play_button_text">Spielen</string>
     <string name="settings_button_text">Einstellungen</string>
+    <string name="game_settings_text">Spiel Einstellungen</string>
 </resources>
