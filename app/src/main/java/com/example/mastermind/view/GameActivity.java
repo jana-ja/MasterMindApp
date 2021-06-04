@@ -95,6 +95,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
             indicators[currentRound][0].setTextColor(Color.RED);
             indicators[currentRound][0].setText(String.valueOf(ergebi.getCorrectPlaces()));
             //richtige farben
+            indicators[currentRound][1].setTextColor(Color.BLACK);
             indicators[currentRound][1].setText(String.valueOf(ergebi.getCorrectColors()));
 
             if (ergebi.getCorrectPlaces() == 4 || gamei.getCurrenRound() > settings.getNumberRounds()-1) {
@@ -171,7 +172,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         //indicators
         for (Indikator[] indicatorRow : indicators) {
             for (Indikator indikator : indicatorRow) {
-                indikator.setText("0"); //TODO
+                indikator.setText(""); //TODO
             }
         }
         //pin palette
