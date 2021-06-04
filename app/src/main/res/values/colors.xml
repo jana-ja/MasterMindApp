@@ -14,6 +14,9 @@
     <color name="wood">#a47449</color>
     <color name="dark_wood">#63462D</color>
 
+    <color name="background_color">#8CC8C6</color>
+    <color name="accent_color">#c88c8e</color>
+
     <color name="red_pin">#FFFF0000</color>
     <color name="orange_pin">#FFFF7700</color>
     <color name="yellow_pin">#FFFFDD00</color>

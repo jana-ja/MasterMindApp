@@ -3,6 +3,7 @@ package com.example.mastermind.model;
 public class Settings {
     private boolean duplicatePins;
     private boolean emptyPins;
+    private int numberRounds;
 
     public Settings() {
     }
@@ -21,5 +22,13 @@ public class Settings {
 
     public void setEmptyPins(boolean emptyPins) {
         this.emptyPins = emptyPins;
+    }
+
+    public int getNumberRounds() {
+        return numberRounds;
+    }
+
+    public void setNumberRounds(int numberRounds) {
+        this.numberRounds = numberRounds;
     }
 }

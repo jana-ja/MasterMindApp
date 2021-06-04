@@ -80,6 +80,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         settings.setDuplicatePins(preferences.getBoolean("duplicate_pins",false));
         settings.setEmptyPins(preferences.getBoolean("empty_pins", false));
+        settings.setNumberRounds(preferences.getInt("round_number",5) + 5); //+5 weil man bei dem schieber nicht min setzen kann (1-5)
 
     }
 
@@ -96,7 +97,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
             //richtige farben
             indicators[currentRound][1].setText(String.valueOf(ergebi.getCorrectColors()));
 
-            if (ergebi.getCorrectPlaces() == 4 || gamei.getCurrenRound() > 9) {
+            if (ergebi.getCorrectPlaces() == 4 || gamei.getCurrenRound() > settings.getNumberRounds()-1) {
                 //wenn daws true ist hat man gewonnen, sonst muss >9 true sein und dann hat man verloren
                 endGame(ergebi.getCorrectPlaces() == 4);
                 return;
@@ -210,8 +211,9 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
 
         //Game Board
+        int numberRows = settings.getNumberRounds();
         griddiBoard.setUseDefaultMargins(true);
-        griddiBoard.setRowCount(10);
+        griddiBoard.setRowCount(numberRows);
         griddiBoard.setColumnCount(6);
         boardCells = new BoardCell[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 2];
         indicators = new Indikator[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 4];
