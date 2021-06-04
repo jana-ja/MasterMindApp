@@ -1,19 +1,21 @@
 package com.example.mastermind.view;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
+import androidx.preference.PreferenceManager;
 
 import com.example.mastermind.R;
 import com.example.mastermind.model.Ergebnis;
 import com.example.mastermind.model.Game;
 import com.example.mastermind.model.PinColor;
+import com.example.mastermind.model.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +40,13 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
     private boolean gameRunning = false;
 
-    final int PIN_NUMBER = 8; //TODO durch spielsettings anpassen
+    private Settings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
 
         griddiSolution = findViewById(R.id.solution_cells);
         griddiBoard = findViewById(R.id.board_cells);
@@ -64,8 +67,19 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         bNextRound.setOnClickListener(v ->
                 nextRound());
 
+
+        loadSettings();
         init();
         startGame();
+
+    }
+
+    private void loadSettings() {
+        settings = new Settings();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        settings.setDuplicatePins(preferences.getBoolean("duplicate_pins",false));
+        settings.setEmptyPins(preferences.getBoolean("empty_pins", false));
 
     }
 
@@ -124,7 +138,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
     private void startGame() {
         gameRunning = true;
-        gamei = new Game();
+        gamei = new Game(settings);
         resetView();
     }
 
@@ -132,11 +146,19 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         //next round button
         this.bNextRound.setEnabled(true);
 
+
         //solution griddi
         this.solutionCells.forEach(celli -> {
             celli.setPinColor(PinColor.EMPTY);
             celli.displayUnselected(this);
         });
+//        //for debugging
+//        PinColor[] solutionPinColors = gamei.getSolution();
+//        for (int i = 0; i < solutionCells.size(); i++) {
+//            solutionCells.get(i).setPinColor(solutionPinColors[i]);
+//            solutionCells.get(i).displayUnselected(this);
+//        }
+
         //board cell griddi
         for (BoardCell[] boardCellRow : boardCells) {
             for (BoardCell boardCell : boardCellRow) {
@@ -228,10 +250,15 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
 
         //PinColors
+        int pinNumber;
+        if(settings.isEmptyPins())
+            pinNumber = 9;
+        else
+            pinNumber = 8;
         pinCells = new ArrayList<>();
         griddiPins.setUseDefaultMargins(true);
         griddiPins.setForegroundGravity(1);
-        griddiPins.setColumnCount(PIN_NUMBER);
+        griddiPins.setColumnCount(pinNumber);
         griddiPins.setRowCount(2);
 
         for (int j = 0; j < griddiPins.getColumnCount(); j++) {

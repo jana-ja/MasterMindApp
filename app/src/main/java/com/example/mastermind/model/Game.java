@@ -14,7 +14,10 @@ public class Game {
     private int currenRound;
     private final PinColor[] solution;
 
-    public Game(){
+    private Settings settings;
+
+    public Game(Settings settings){
+        this.settings = settings;
         this.currenRound = 0;
         this.solution = chooseSolution();
     }
@@ -28,17 +31,32 @@ public class Game {
     }
 
     private PinColor[] chooseSolution() {
-        //erstmal wählen ohne zurücklegen und ohne empty
-        //TODO später nach regeln
+        //doppelt: ohne zurücklegen
+        boolean zuruecklegen = settings.isDuplicatePins();
+        //empty: aus 9 farben wählen
+        int bound;
+        if(settings.isEmptyPins())
+            bound = 9;
+        else
+            bound = 8;
+
+
         Random rand = new Random();
-        //ich brauche 4 int 0-7
+        //ich brauche 4 int 0-bound
 
         PinColor[] solution = new PinColor[4];
-        Set<Integer> dings = new HashSet<>();
+        List<Integer> dings = new ArrayList<>();
         while(dings.size() < 4){
-            int temp = rand.nextInt(7);
-            dings.add(temp);
-                //TODO test funktioniert so mit keine duplikate? oder sind verschiedene interger objekte mit gleichem wert?
+            int temp = rand.nextInt(bound);
+            if(zuruecklegen) {
+                //einfach nehmen
+                dings.add(temp);
+            } else {
+                //schauen ob die zahl schon drin ist, keine duplikate
+                if(!dings.contains(temp)){
+                    dings.add(temp);
+                }
+            }
         }
         Iterator<Integer> iti = dings.iterator();
         for (int i = 0; i < solution.length; i++) {

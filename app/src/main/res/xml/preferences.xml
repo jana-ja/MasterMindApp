@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <androidx.preference.SwitchPreference
+        android:defaultValue="false"
+        android:key="duplicate_pins"
+        android:summary="@string/duplicate_pins_text"
+        android:title="@string/duplicate_pins_title" />
+    <androidx.preference.SwitchPreference
+        android:defaultValue="false"
+        android:key="empty_pins"
+        android:summary="@string/empty_pins_text"
+        android:title="@string/empty_pins_title" />
+</PreferenceScreen>
