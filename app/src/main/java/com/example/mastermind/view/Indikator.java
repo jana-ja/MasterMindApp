@@ -6,8 +6,6 @@ import android.view.Gravity;
 import androidx.core.widget.TextViewCompat;
 import androidx.gridlayout.widget.GridLayout;
 
-import com.example.mastermind.R;
-
 public class Indikator extends androidx.appcompat.widget.AppCompatTextView {
 
     private int xPos, yPos;

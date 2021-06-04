@@ -3,10 +3,8 @@ package com.example.mastermind.view;
 import android.content.Context;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
-import android.view.Gravity;
 import android.widget.ImageView;
 
-import androidx.core.content.ContextCompat;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.example.mastermind.R;
@@ -17,9 +15,10 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
     int xPos, yPos; //achtung xpos wird von unten nach oben indiziert, x=0 ist also ganz unten, y=0 ist links
     PinColor pinColor;
 
-    public BoardCell(Context context){
+    public BoardCell(Context context) {
         super(context);
     }
+
     public BoardCell(Context context, int xPos, int yPos) {
         super(context);
 
@@ -44,11 +43,6 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
 
     }
 
-    public void setGridPos(int x, int y){
-        this.xPos = x;
-        this.yPos = y;
-    }
-
     public int getxPos() {
         return xPos;
     }
@@ -57,12 +51,12 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         return yPos;
     }
 
-    public void setPinColor(PinColor pinColor){
+    public void setPinColor(PinColor pinColor) {
         this.pinColor = pinColor;
 //        displayColor(); //TODO wieder rein??
     }
 
-    public void displayUnselected(Context context){
+    public void displayUnselected(Context context) {
 //        this.setBackgroundColor(pinColor.getColor());
         Drawable drawi = context.getDrawable(R.drawable.cell_unselected);
         drawi.setColorFilter(new LightingColorFilter(0xFFFFFFFF, pinColor.getColor(context)));
@@ -77,11 +71,5 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         Drawable drawi = context.getDrawable(R.drawable.cell_selected);
         drawi.setColorFilter(new LightingColorFilter(0xFFFFFFFF, pinColor.getColor(context)));
         this.setBackground(drawi);
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-
     }
 }
