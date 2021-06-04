@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
     <PreferenceCategory
+
         android:title="@string/game_settings_text">
 
         <androidx.preference.SwitchPreference
@@ -15,12 +17,14 @@
             android:key="empty_pins"
             android:summary="@string/empty_pins_text"
             android:title="@string/empty_pins_title" />
-        <SeekBarPreference
+        <androidx.preference.SeekBarPreference
             android:key="round_number"
             android:title="Anzahl der Versuche"
-            android:summary="Die Anzahl der Versuche die man pro Spiel hat, von 5 bis 10."
-            android:max="5"
-            android:defaultValue="5" />
+            android:summary="@string/round_number_text"
+            android:max="10"
+            app:min="5"
+            android:defaultValue="10"
+            app:showSeekBarValue="true"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

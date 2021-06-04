@@ -80,7 +80,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         settings.setDuplicatePins(preferences.getBoolean("duplicate_pins",false));
         settings.setEmptyPins(preferences.getBoolean("empty_pins", false));
-        settings.setNumberRounds(preferences.getInt("round_number",5) + 5); //+5 weil man bei dem schieber nicht min setzen kann (1-5)
+        settings.setNumberRounds(preferences.getInt("round_number",10));
 
     }
 
