@@ -30,12 +30,12 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
 
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
 //        params.setGravity(Gravity.CENTER);
-//        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-//        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-
-
-        params.height = (int)context.getResources().getDimension(R.dimen.board_cell);
-        params.width = (int)context.getResources().getDimension(R.dimen.board_cell);
+        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+//
+//
+//        params.height = (int)context.getResources().getDimension(R.dimen.board_cell);
+//        params.width = (int)context.getResources().getDimension(R.dimen.board_cell);
         this.setLayoutParams(params);
         this.setScaleType(ImageView.ScaleType.CENTER);
 
@@ -77,5 +77,11 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         Drawable drawi = context.getDrawable(R.drawable.cell_selected);
         drawi.setColorFilter(new LightingColorFilter(0xFFFFFFFF, pinColor.getColor(context)));
         this.setBackground(drawi);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
     }
 }

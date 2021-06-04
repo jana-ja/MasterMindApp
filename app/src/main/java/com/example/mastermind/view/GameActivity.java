@@ -1,10 +1,15 @@
 package com.example.mastermind.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
@@ -17,7 +22,7 @@ import com.example.mastermind.model.PinColor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements View.OnLayoutChangeListener, DialogInterface.OnClickListener {
 
     Game gamei;
 
@@ -35,7 +40,13 @@ public class GameActivity extends AppCompatActivity {
     BoardCell selectedBoardCell;
     PinColor selectedPinColor;
 
+    private boolean gameRunning = false;
+
     final int PIN_NUMBER = 8; //TODO durch spielsettings anpassen
+
+    public static void testi(int width, int height) {
+//        init();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +55,21 @@ public class GameActivity extends AppCompatActivity {
 
         griddiSolution = findViewById(R.id.solution_cells);
         griddiBoard = findViewById(R.id.board_cells);
+        griddiBoard.addOnLayoutChangeListener(this);
+
         griddiPins = findViewById(R.id.pincolor_palette);
 
         bStartGame = findViewById(R.id.button_start_game);
-        bStartGame.setOnClickListener(v -> startGame());
+        bStartGame.setOnClickListener(v -> {
+            if (gameRunning) {
+                //TODO wenn grade ein spiel läuft vorher fragen!
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);//TODO hard coded strings
+                builder.setMessage("Wirklich das aktuelle Spiel verwerfen und ein neues starten?").setPositiveButton("Ja", this)
+                        .setNegativeButton("Nein", this).show();
+            } else {
+                startGame();
+            }
+        });
         bNextRound = findViewById(R.id.button_next_round);
         bNextRound.setOnClickListener(v ->
                 nextRound());
@@ -56,6 +78,17 @@ public class GameActivity extends AppCompatActivity {
         startGame();
 
     }
+
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        griddiBoard.getHeight();
+        griddiBoard.getMeasuredHeight();
+
+
+    }
+
 
     private void nextRound() {
         //dem game zum überprüfen die aktuelle reihe übergeben
@@ -82,6 +115,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void endGame(boolean won) {
+        gameRunning = false;
+
         bNextRound.setEnabled(false);
 
         PinColor[] solutionPinColors = gamei.getSolution();
@@ -108,6 +143,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startGame() {
+        gameRunning = true;
         gamei = new Game();
         resetView();
     }
@@ -178,7 +214,7 @@ public class GameActivity extends AppCompatActivity {
         boardCells = new BoardCell[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 2];
         indicators = new Indikator[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 4];
 
-        for (int i = griddiBoard.getRowCount()-1; i >= 0; i--) {
+        for (int i = griddiBoard.getRowCount() - 1; i >= 0; i--) {
             //gibt 10 rows
             for (int j = 0; j < griddiBoard.getColumnCount(); j++) {
                 //gibt 6 columns
@@ -237,4 +273,22 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        v.getWidth();
+//        init();
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        switch (which) {
+            case DialogInterface.BUTTON_POSITIVE:
+                startGame();
+                break;
+
+            case DialogInterface.BUTTON_NEGATIVE:
+                //No button clicked
+                break;
+        }
+    }
 }

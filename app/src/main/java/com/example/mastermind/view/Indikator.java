@@ -25,10 +25,10 @@ public class Indikator extends androidx.appcompat.widget.AppCompatTextView {
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
 //        params.setGravity(Gravity.CENTER);
 
-//        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-//        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-        params.height = (int)context.getResources().getDimension(R.dimen.board_cell);
-        params.width = (int)context.getResources().getDimension(R.dimen.board_cell);
+        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+//        params.height = (int)context.getResources().getDimension(R.dimen.board_cell);
+//        params.width = (int)context.getResources().getDimension(R.dimen.board_cell);
 //        params.height = 50;
 //        params.width = 50;
         this.setLayoutParams(params);
