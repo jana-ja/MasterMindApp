@@ -29,12 +29,12 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
 
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
 //        params.setGravity(Gravity.CENTER);
-//        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-//        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-//
-//
-        params.height = (int)context.getResources().getDimension(R.dimen.board_cell);
-        params.width = (int)context.getResources().getDimension(R.dimen.board_cell);
+        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+
+
+//        params.height = (int)context.getResources().getDimension(R.dimen.board_cell);
+//        params.width = (int)context.getResources().getDimension(R.dimen.board_cell);
         this.setLayoutParams(params);
         this.setScaleType(ImageView.ScaleType.CENTER);
 
@@ -56,6 +56,26 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
 //        displayColor(); //TODO wieder rein??
     }
 
+    public void setLayoutParams(int size){
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
+//        params.setGravity(Gravity.CENTER);
+//        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+//        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+
+
+        double dings = 0.95;
+
+
+
+        params.height = (int)(dings * size);
+        params.width = (int)(dings * size);
+
+        int margin = (int)((1 - dings) * size / 2);
+        params.setMargins(margin, margin, margin, margin);
+
+        this.setLayoutParams(params);
+        this.setScaleType(ImageView.ScaleType.CENTER);
+    }
     public void displayUnselected(Context context) {
 //        this.setBackgroundColor(pinColor.getColor());
         Drawable drawi = context.getDrawable(R.drawable.cell_unselected);
