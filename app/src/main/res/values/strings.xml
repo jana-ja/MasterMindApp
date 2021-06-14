@@ -11,4 +11,10 @@
     <string name="settings_button_text">Einstellungen</string>
     <string name="game_settings_text">Spiel Einstellungen</string>
     <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat.</string>
+
+    <string name="stats_preference_file_key">stats_preference</string>
+    <string name="stats_won_key">stats_won</string>
+    <string name="stats_lost_key">stats_lost</string>
+    <string name="stats_quit_key">stats_quit</string>
+    <string name="stats_started_key">stats_started</string>
 </resources>

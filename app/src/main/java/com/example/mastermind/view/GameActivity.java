@@ -1,5 +1,6 @@
 package com.example.mastermind.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -76,6 +77,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         bNextRound = findViewById(R.id.button_next_round);
         bNextRound.setOnClickListener(v ->
                 nextRound());
+        bNextRound.setEnabled(false);
 
 
         firstRound = true;
@@ -129,13 +131,27 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
             solutionCells.get(i).displayUnselected(this);
         }
 
-        //TODO cool machen
-        String dialogText;
-        if (won)
-            dialogText = "GEWONNEN";
-        else
-            dialogText = "VERLOREN";
+        //add to stats
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.stats_preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
+
+        String dialogText;
+        if (won) {
+            dialogText = "GEWONNEN";
+            int numberWon = sharedPref.getInt(getString(R.string.stats_won_key), 0);
+            editor.putInt(getString(R.string.stats_won_key), numberWon + 1);
+        }
+        else {
+            dialogText = "VERLOREN";
+            int numberLost = sharedPref.getInt(getString(R.string.stats_lost_key), 0);
+            editor.putInt(getString(R.string.stats_lost_key), numberLost + 1);
+        }
+
+        editor.apply();
+
+        //TODO cool machen
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(dialogText)
                 .setCancelable(false)
@@ -147,6 +163,14 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
     }
 
     private void startGame() {
+        //add to stats
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.stats_preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        int numberStarted = sharedPref.getInt(getString(R.string.stats_started_key), 0);
+        editor.putInt(getString(R.string.stats_started_key), numberStarted + 1);
+        editor.apply();
+
         gameRunning = true;
         gamei = new Game(settings);
         if(firstRound) {

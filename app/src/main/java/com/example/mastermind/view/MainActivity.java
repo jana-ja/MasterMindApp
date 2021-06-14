@@ -11,7 +11,7 @@ import com.example.mastermind.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnPlay, btnSettings;
+    Button btnPlay, btnSettings, btnStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +19,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         btnPlay = findViewById(R.id.button_play);
         btnSettings = findViewById(R.id.button_settings);
+        btnStats = findViewById(R.id.button_stats);
 
         btnPlay.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
+        btnStats.setOnClickListener(this);
     }
 
     @Override
@@ -34,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_settings:
                 Intent intiSettings = new Intent(this, SettingsActivity.class);
                 startActivity(intiSettings);
+                break;
+            case R.id.button_stats:
+                Intent intiStats = new Intent(this,StatsActivity.class);
+                startActivity(intiStats);
                 break;
         }
     }

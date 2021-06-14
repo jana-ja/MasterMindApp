@@ -52,9 +52,20 @@
         android:layout_height="wrap_content"
         android:text="@string/settings_button_text"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_main_2"
+        app:layout_constraintBottom_toTopOf="@+id/button_stats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_play" />
+
+    <Button
+        android:id="@+id/button_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="149dp"
+        android:text="Stats"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_main_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_settings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
