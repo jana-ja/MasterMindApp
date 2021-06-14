@@ -29,15 +29,12 @@ public class Indikator extends androidx.appcompat.widget.AppCompatTextView {
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
         params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
         this.setLayoutParams(params);
+        this.setGravity(Gravity.CENTER);
 
         TextViewCompat.setAutoSizeTextTypeWithDefaults(this, AUTO_SIZE_TEXT_TYPE_UNIFORM);
     }
     public void setLayoutParams(int width, int height){
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
-//        params.setGravity(Gravity.CENTER);
-//        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-//        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         double dings = 0.95;
 
         params.height = (int)(dings * height);

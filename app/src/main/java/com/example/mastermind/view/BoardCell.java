@@ -25,10 +25,24 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         this.xPos = xPos;
         this.yPos = yPos;
         this.pinColor = PinColor.EMPTY;
+
+
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+
+
+        this.setLayoutParams(params);
+        this.setScaleType(ImageView.ScaleType.CENTER);
+
     }
 
     public int getxPos() {
         return xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
     }
 
     public void setPinColor(PinColor pinColor) {

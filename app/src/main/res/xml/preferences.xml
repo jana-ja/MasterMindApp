@@ -21,7 +21,7 @@
             android:key="round_number"
             android:title="Anzahl der Versuche"
             android:summary="@string/round_number_text"
-            android:max="12"
+            android:max="10"
             app:min="5"
             android:defaultValue="10"
             app:showSeekBarValue="true"/>
