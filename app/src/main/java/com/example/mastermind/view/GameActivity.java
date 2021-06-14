@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
@@ -81,9 +80,6 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
         firstRound = true;
         loadSettings();
-//        init();
-//        startGame();
-
     }
 
     private void loadSettings() {
@@ -155,40 +151,34 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         gamei = new Game(settings);
         if(firstRound) {
             init();
-            initBoard();
+            initView();
             firstRound = false;
         }
         resetView();
     }
 
-    private void initBoard() {
+    private void initView() {
+        //hier die bidlschrimgröße ansehen, maße der indikatoren und boardcells berechnen, den dingern ihre größen geben
+
 
         int gesamtHeight = griddiBoard.getHeight() + griddiPins.getHeight() + griddiSolution.getHeight();
         //TODO testen ob die grids auch größen haben wenn ich keine dinge reinpacke
 
         //erst die pin palette, weil da am meisten bekannt ist:
-        //die palette
+        //höhe irrelevant, weil die höhe dieses grids zuerst festgelegt wird und weils halt so ist kB mehr
         int pinPaletteWidth = this.griddiPins.getWidth() - 2 * MARGIN_HORI;
-        int pinPaletteHeight = this.griddiPins.getHeight();
         int widthPerPin = pinPaletteWidth / griddiPins.getColumnCount();
-//        int heightPerPin = pinPaletteHeight / griddiPins.getRowCount();
-
-//        int[] dings2 = {widthPerPin, heightPerPin};
-//        Arrays.sort(dings2);
-//        int minSize2 = dings2[0];
-        int minSize2 = widthPerPin;
-
-        int pinGridHeight = minSize2 + 2 * MARGIN_VERT;
-
+        int pinGridHeight = widthPerPin + 2 * MARGIN_VERT;
+        //größe der boardcells in griddiPins
         for (BoardCell pinCell : this.pinCells) {
-            pinCell.setLayoutParams(minSize2);
+            pinCell.setLayoutParams(widthPerPin);
         }
-
-        //höhe des gridlayouts daran anpassen
+        //höhe von griddiPins daran anpassen
         setGridLayoutParams(griddiPins, pinGridHeight);
 
 
         //dann board und solution den platz zuweisen
+        //höhe
         //solution + board = solution alt + board alt
         // = gesamt - pinGridHeight
          int remainingVertSpace = gesamtHeight - pinGridHeight;
@@ -196,76 +186,38 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
          //das muss ich durch anzahl reihen + 1 teilen
         int heightPerCell = effectiveSpace / (settings.getNumberRounds() + 1);
 
-
-        //hier die bidlschrimgröße ansehen, maße der indikatoren und boardcells berechnen, den dingern ihre größen geben
-
+        //weite
         int boardWidth = this.griddiBoard.getWidth() - 2 * MARGIN_HORI;
-        int boardHeight = this.griddiBoard.getHeight();
         int widthPerBoardCell = boardWidth / griddiBoard.getColumnCount();
-//        int heightPerBoardCell = boardHeight / griddiBoard.getRowCount();
 
         int solutionWidth = this.griddiSolution.getWidth() - 2 * MARGIN_HORI;
-        int solutionHeight = this.griddiSolution.getHeight();
         int widthPerSolutionCell = solutionWidth / griddiSolution.getColumnCount(); //wird niemals kleiner als widthPerBoardCell sein -> wird niemals minCellSize sein
-//        int heightPerSolutionCell = solutionHeight / griddiSolution.getRowCount();
-        //TODO doof dann mit den guidelines und den prozenten das festzulegen?
 
-
-        //TODO den indikatoren weniger platz geben?
-        //TODO den indikatoren falls in der breite platz übrig ist den restlichen platz geben zum zentrieren?
 
         //schauen was kleiner ist und gleiche size für width und height nehmen damit es ein kreis wird
-//        int[] dings = {widthPerBoardCell,heightPerBoardCell,widthPerSolutionCell,heightPerSolutionCell};
         int[] dings = {widthPerBoardCell,heightPerCell,widthPerSolutionCell};
         Arrays.sort(dings);
         int minCellSize = dings[0];
-
         int indicatorWidth = minCellSize;
-
 
         if (minCellSize == widthPerBoardCell){
             //begrenzt durch breite des grids
-            //indikatoren weniger space geben um die länge mehr auszunutzen
-
-            //TODO das hier war ein müll versuch
-            //brauche size für die cells und die indikatoren separat
-            // 4/6 an die cells 0.6666        - vllt 0.8 = 4/5 : pro ding 1/5 weils 4 sind
-            // 2/6 an die indikatoren 0.333   - vllt 0.2 = 1/5 : pro ding 1/10 weils 2 sind
-            int widthBoardCell = minCellSize * 6 / 5;
-            int widthIndicator = (int)(minCellSize * 6 / 10);
-
+            //TODO den indikatoren weniger platz geben um die länge mehr auszunutzen?
         } else if (minCellSize == heightPerCell){
             //begrenzt durch höhe des grids / länge
+
             //rest des space an die indikatoren geben
-
             //restlicher space in der weite:
-            int remainingSpace = boardWidth - minCellSize * 6;
-            indicatorWidth += remainingSpace / 2;
-
-
+            int remainingHoriSpace = boardWidth - minCellSize * 6;
+            indicatorWidth += remainingHoriSpace / 2;
         }
-//        else if (minCellSize == heightPerBoardCell){
-//            //begrenzt durch höhe des grids / länge
-//            //rest des space an die indikatoren geben
-//
-//            //restlicher space in der weite:
-//            int remainingSpace = boardWidth - minCellSize * 6;
-//            indicatorWidth += remainingSpace / 2;
-//
-//
-//        } else if(minCellSize == heightPerSolutionCell){
-//            //begrenzt durch höhe der solution
-//            //TODO das wär halt doof ne
-//            //restlicher space in der weite:
-//            int remainingSpace = boardWidth - minCellSize * 6;
-//            indicatorWidth += remainingSpace / 2;
-//        }
     
 
         //für solutioncells setzen
         for (BoardCell solutionCell : solutionCells) {
             solutionCell.setLayoutParams(minCellSize);
         }
+        //TODO muss ich nicht auch für die indikatoren setzen die platzhalter im solution grid sind??
 
         //für alle boardcells und indikatoren setzen
         for (BoardCell[] boardCellRow : this.boardCells) {
@@ -279,12 +231,11 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
             }
         }
 
+        //den grids so viel size geben wie sie brauchen und dann zentrieren sie sich im constraing layout weil die gechained sind
         int griddiSolutionHeight = minCellSize + 2 * MARGIN_VERT;
-        // TODO board size so und dann zentriert sich das oder gebe ich dem rest der size (also remainingVert - griddiSolutionHeight)?
         int griddiBoardHeight = minCellSize * settings.getNumberRounds() + 2 * MARGIN_VERT;
         setGridLayoutParams(griddiBoard, griddiBoardHeight);
         setGridLayoutParams(griddiSolution, griddiSolutionHeight);
-
     }
 
     private void setGridLayoutParams(GridLayout griddi, int height) {
@@ -298,18 +249,11 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         //next round button
         this.bNextRound.setEnabled(true);
 
-
         //solution griddi
         this.solutionCells.forEach(celli -> {
             celli.setPinColor(PinColor.EMPTY);
             celli.displayUnselected(this);
         });
-//        //for debugging
-//        PinColor[] solutionPinColors = gamei.getSolution();
-//        for (int i = 0; i < solutionCells.size(); i++) {
-//            solutionCells.get(i).setPinColor(solutionPinColors[i]);
-//            solutionCells.get(i).displayUnselected(this);
-//        }
 
         //board cell griddi
         for (BoardCell[] boardCellRow : boardCells) {
@@ -328,6 +272,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         //pin palette
         this.pinCells.forEach(cell ->
                 cell.displayUnselected(this));
+
         //show current row
         highlightCurrentRow();
     }
@@ -338,10 +283,12 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         indicators[row][0].setText("->");
     }
 
+    /**
+     * inititalisiert Grids und fügt die BoardCells und Indikatoren hinzu
+     * speichert die benötigten Objekte in Variablen
+     */
     private void init() {
-
         //Solution Cells
-//        griddiSolution.setUseDefaultMargins(true);
         griddiSolution.setRowCount(1);
         griddiSolution.setColumnCount(6);
         solutionCells = new ArrayList<>();
@@ -363,7 +310,6 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
         //Game Board
         int numberRows = settings.getNumberRounds();
-//        griddiBoard.setUseDefaultMargins(true);
         griddiBoard.setRowCount(numberRows);
         griddiBoard.setColumnCount(6);
         boardCells = new BoardCell[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 2];
@@ -409,7 +355,6 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         else
             pinNumber = 8;
         pinCells = new ArrayList<>();
-//        griddiPins.setUseDefaultMargins(true);
         griddiPins.setForegroundGravity(1);
         griddiPins.setColumnCount(pinNumber);
         griddiPins.setRowCount(2);

@@ -23,15 +23,13 @@ public class Indikator extends androidx.appcompat.widget.AppCompatTextView {
         super(context);
         this.xPos = xPos;
         this.yPos = yPos;
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
-//        params.setGravity(Gravity.CENTER);
 
+        //TODO wenn ich das wegmache uentriert sich die solution nicht mehr, gute lösung finden oder so lassen?
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
         params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-//        params.height = (int)context.getResources().getDimension(R.dimen.board_cell);
-//        params.width = (int)context.getResources().getDimension(R.dimen.board_cell);
         this.setLayoutParams(params);
-        this.setGravity(Gravity.CENTER_HORIZONTAL);
+
         TextViewCompat.setAutoSizeTextTypeWithDefaults(this, AUTO_SIZE_TEXT_TYPE_UNIFORM);
     }
     public void setLayoutParams(int width, int height){
