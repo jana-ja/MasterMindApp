@@ -38,7 +38,7 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         this.setLayoutParams(params);
         this.setScaleType(ImageView.ScaleType.CENTER);
 
-        displayUnselected(context);
+//        displayUnselected(context);
 
 
     }
