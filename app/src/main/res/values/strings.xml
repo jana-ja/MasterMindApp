@@ -1,20 +1,36 @@
 <resources>
     <string name="app_name">MasterMind</string>
-    <string name="next_round">Nächste Runde</string>
-    <string name="start_game">Neues Spiel</string>
 
+    <!-- MainActivity -->
+    <string name="button_text_play">Spielen</string>
+    <string name="button_text_settings">Einstellungen</string>
+    <string name="button_text_stats">Statistiken</string>
+
+    <!-- GameActivity -->
+    <string name="button_text_next_round">Nächste Runde</string>
+    <string name="button_text_start_game">Neues Spiel</string>
+
+    <!-- SettingsActivity -->
+    <string name="text_title_settings">Einstellungen</string>
+    <string name="game_settings_text">Spiel Einstellungen</string>
     <string name="duplicate_pins_title">Farben mehrfach verwenden</string>
     <string name="duplicate_pins_text">Vom Computer kann eine Farbe beliebig oft in der Lösung verwendet werden.</string>
     <string name="empty_pins_title">Felder leer lassen</string>
     <string name="empty_pins_text">Vom Computer können Felder in der Lösung leer gelassen werden.</string>
-    <string name="play_button_text">Spielen</string>
-    <string name="settings_button_text">Einstellungen</string>
-    <string name="game_settings_text">Spiel Einstellungen</string>
     <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat.</string>
 
+    <!-- StatsActivity -->
+    <string name="text_title_stats">Statistiken</string>
+    <string name="stats_started_text">Gestartete Spiele:</string>
+    <string name="stats_won_text">Gewonnene Spiele:</string>
+    <string name="stats_lost_text">Verlorene Spiele:</string>
+    <string name="stats_quit_text">Nicht beendete Spiele:</string>
+    <string name="button_text_reset_stats">Statistiken zurücksetzen</string>
+
+    <!-- stats shared preference -->
     <string name="stats_preference_file_key">stats_preference</string>
+    <string name="stats_started_key">stats_started</string>
     <string name="stats_won_key">stats_won</string>
     <string name="stats_lost_key">stats_lost</string>
-    <string name="stats_quit_key">stats_quit</string>
-    <string name="stats_started_key">stats_started</string>
+
 </resources>

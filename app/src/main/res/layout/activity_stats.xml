@@ -4,87 +4,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.StatsActivity">
+    tools:context=".view.StatsActivity"
+    android:background="@color/background_color"
+    android:padding="20dp">
 
-    <TextView
-        android:id="@+id/value_won"
-        android:layout_width="wrap_content"
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="won"
-        app:layout_constraintBottom_toTopOf="@id/value_lost"
+        android:layout_margin="25dp"
+        app:columnCount="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/text_won"
-        app:layout_constraintTop_toBottomOf="@id/value_started" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:rowCount="4"
+        app:useDefaultMargins="true">
 
-    <TextView
-        android:id="@+id/value_lost"
+        <TextView
+            android:id="@+id/text_started"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:text="@string/stats_started_text"
+            android:textColor="@color/black"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/value_started"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:textColor="@color/black"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/text_won"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:text="@string/stats_won_text"
+            android:textColor="@color/black"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/value_won"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:textColor="@color/black"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/text_lost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:text="@string/stats_lost_text"
+            android:textColor="@color/black"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/value_lost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:textColor="@color/black"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/text_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:text="@string/stats_quit_text"
+            android:textColor="@color/black"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/value_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="lol"
+            android:textSize="@dimen/stats_text_size"
+            android:textColor="@color/black"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+    </androidx.gridlayout.widget.GridLayout>
+
+    <Button
+        android:id="@+id/button_reset_stats"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="lost"
-        app:layout_constraintBottom_toTopOf="@id/value_quit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/text_lost"
-        app:layout_constraintTop_toBottomOf="@id/value_won" />
 
-    <TextView
-        android:id="@+id/value_quit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="quit"
+        android:text="@string/button_text_reset_stats"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/text_quit"
-        app:layout_constraintTop_toBottomOf="@id/value_lost" />
-
-    <TextView
-        android:id="@+id/text_lost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lost"
-        app:layout_constraintBottom_toTopOf="@id/text_quit"
-        app:layout_constraintEnd_toStartOf="@+id/value_lost"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_won"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <TextView
-        android:id="@+id/text_won"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="won"
-        app:layout_constraintBottom_toTopOf="@id/text_lost"
-        app:layout_constraintEnd_toStartOf="@+id/value_won"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_started"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
 
-    <TextView
-        android:id="@+id/text_started"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="started"
-        app:layout_constraintBottom_toTopOf="@id/text_won"
-        app:layout_constraintEnd_toStartOf="@+id/value_started"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
 
     <TextView
-        android:id="@+id/value_started"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_small"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
-        android:text="started"
-        app:layout_constraintBottom_toTopOf="@id/value_won"
+        android:text="@string/text_title_stats"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/text_started"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_quit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="quit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/value_quit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_lost" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
