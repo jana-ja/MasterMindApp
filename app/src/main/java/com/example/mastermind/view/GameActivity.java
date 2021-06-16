@@ -18,6 +18,7 @@ import com.example.mastermind.model.Ergebnis;
 import com.example.mastermind.model.Game;
 import com.example.mastermind.model.PinColor;
 import com.example.mastermind.model.Settings;
+import com.example.mastermind.model.Stats;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +55,12 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO großer spiel starten knopf am anfang
+        //TODO trenn linien zw den dingern
+        //TODO fragezeichen auf die dinger
+        //TODO trennung brett und knöpfe
+        //TODO alert design
+        //TODO zeilenumbruch stats?
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -67,9 +74,9 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         bStartGame = findViewById(R.id.button_start_game);
         bStartGame.setOnClickListener(v -> {
             if (gameRunning) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);//TODO hard coded strings
-                builder.setMessage("Wirklich das aktuelle Spiel verwerfen und ein neues starten?").setPositiveButton("Ja", this)
-                        .setNegativeButton("Nein", this).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(getString(R.string.alert_text_start_game)).setPositiveButton(R.string.text_alert_positive, this)
+                        .setNegativeButton(R.string.text_alert_negative, this).show();
             } else {
                 startGame();
             }
@@ -109,6 +116,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
             indicators[currentRound][1].setText(String.valueOf(ergebi.getCorrectColors()));
 
             if (ergebi.getCorrectPlaces() == 4 || gamei.getCurrenRound() > settings.getNumberRounds()-1) {
+
                 //wenn daws true ist hat man gewonnen, sonst muss >9 true sein und dann hat man verloren
                 endGame(ergebi.getCorrectPlaces() == 4);
                 return;
@@ -132,24 +140,28 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         }
 
         //add to stats
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.stats_preference_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
+        Stats stats = StatsActivity.loadStatsFromPreferences(this);
 
         String dialogText;
         if (won) {
             dialogText = "GEWONNEN";
-            int numberWon = sharedPref.getInt(getString(R.string.stats_won_key), 0);
-            editor.putInt(getString(R.string.stats_won_key), numberWon + 1);
+            int numberWon = stats.getNumberWon();
+            //anzahl der rounds zu den avgRoundsPerWin dazu rechnen
+            int oldAvgRounds = stats.getAvgRoundsPerWin();
+            int newAvgRounds = (numberWon *  oldAvgRounds + 1 * gamei.getCurrenRound()) / (numberWon + 1); //gamei round von 0 - zB 9, beim beenden wird noch einmal erhöht also ist richtig die zahl
+
+            stats.setNumberWon(numberWon + 1);
+            stats.setAvgRoundsPerWin(newAvgRounds);
+
         }
         else {
             dialogText = "VERLOREN";
-            int numberLost = sharedPref.getInt(getString(R.string.stats_lost_key), 0);
-            editor.putInt(getString(R.string.stats_lost_key), numberLost + 1);
+            int numberLost = stats.getNumberLost();
+            stats.setNumberLost(numberLost);
         }
 
-        editor.apply();
+        StatsActivity.saveStatsToPreferences(this, stats);
+
 
         //TODO cool machen
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -186,7 +198,6 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
 
         int gesamtHeight = griddiBoard.getHeight() + griddiPins.getHeight() + griddiSolution.getHeight();
-        //TODO testen ob die grids auch größen haben wenn ich keine dinge reinpacke
 
         //erst die pin palette, weil da am meisten bekannt ist:
         //höhe irrelevant, weil die höhe dieses grids zuerst festgelegt wird und weils halt so ist kB mehr

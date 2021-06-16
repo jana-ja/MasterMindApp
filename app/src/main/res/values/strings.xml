@@ -25,12 +25,20 @@
     <string name="stats_won_text">Gewonnene Spiele:</string>
     <string name="stats_lost_text">Verlorene Spiele:</string>
     <string name="stats_quit_text">Nicht beendete Spiele:</string>
+    <string name="stats_avg_rounds_text">Durchschnittliche Versuche zum Gewinnen:</string>
     <string name="button_text_reset_stats">Statistiken zurücksetzen</string>
+    <string name="alert_text_reset_stats">Wirklich die Statistiken löschen?</string>
 
     <!-- stats shared preference -->
-    <string name="stats_preference_file_key">stats_preference</string>
+    <string name="stats_preference_file_key">stats_file</string>
     <string name="stats_started_key">stats_started</string>
     <string name="stats_won_key">stats_won</string>
     <string name="stats_lost_key">stats_lost</string>
+    <string name="stats_avg_rounds_key">stats_avg_rounds</string>
+
+    <!-- allgemein -->
+    <string name="text_alert_positive">Ja</string>
+    <string name="text_alert_negative">Nein</string>
+    <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein neues starten?</string>
 
 </resources>

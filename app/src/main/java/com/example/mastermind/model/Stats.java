@@ -9,9 +9,10 @@ import java.util.List;
 
 public class Stats {
 
+    private int numberStarted;
     private int numberWon;
     private int numberLost;
-    private int numberQuit;
+    private int avgRoundsPerWin;
 
 
     //TODO infos zu den einstellung (schwierigkeit) speichern?
@@ -21,10 +22,12 @@ public class Stats {
     public Stats() {
     }
 
-    public Stats(int numberWon, int numberLost, int numberQuit) {
-        this.numberWon = numberWon;
-        this.numberLost = numberLost;
-        this.numberQuit = numberQuit;
+    public int getNumberStarted() {
+        return numberStarted;
+    }
+
+    public void setNumberStarted(int numberStarted) {
+        this.numberStarted = numberStarted;
     }
 
     public int getNumberWon() {
@@ -43,22 +46,11 @@ public class Stats {
         this.numberLost = numberLost;
     }
 
-    public int getNumberQuit() {
-        return numberQuit;
+    public int getAvgRoundsPerWin() {
+        return avgRoundsPerWin;
     }
 
-    public void setNumberQuit(int numberQuit) {
-        this.numberQuit = numberQuit;
-    }
-
-    public static List<String> getAllStatsKeys(Context context){
-        ArrayList<String> allKeys = new ArrayList<>();
-
-        allKeys.add(context.getString(R.string.stats_started_key));
-        allKeys.add(context.getString(R.string.stats_won_key));
-        allKeys.add(context.getString(R.string.stats_lost_key));
-
-        return allKeys;
-
+    public void setAvgRoundsPerWin(int avgRoundsPerWin) {
+        this.avgRoundsPerWin = avgRoundsPerWin;
     }
 }

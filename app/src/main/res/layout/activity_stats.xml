@@ -21,13 +21,13 @@
         app:useDefaultMargins="true">
 
         <TextView
-            android:id="@+id/text_started"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:textSize="@dimen/stats_text_size"
             android:text="@string/stats_started_text"
             android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
@@ -38,17 +38,18 @@
             android:gravity="left"
             android:textSize="@dimen/stats_text_size"
             android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
         <TextView
-            android:id="@+id/text_won"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:textSize="@dimen/stats_text_size"
             android:text="@string/stats_won_text"
             android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
@@ -59,17 +60,18 @@
             android:gravity="left"
             android:textSize="@dimen/stats_text_size"
             android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
         <TextView
-            android:id="@+id/text_lost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:textSize="@dimen/stats_text_size"
             android:text="@string/stats_lost_text"
             android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
@@ -80,17 +82,18 @@
             android:gravity="left"
             android:textSize="@dimen/stats_text_size"
             android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
         <TextView
-            android:id="@+id/text_quit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:textSize="@dimen/stats_text_size"
             android:text="@string/stats_quit_text"
             android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
@@ -99,9 +102,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="lol"
             android:textSize="@dimen/stats_text_size"
             android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:text="@string/stats_avg_rounds_text"
+            android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/value_avg_rounds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/stats_text_size"
+            android:textColor="@color/black"
+            app:layout_gravity="fill_horizontal"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
     </androidx.gridlayout.widget.GridLayout>
