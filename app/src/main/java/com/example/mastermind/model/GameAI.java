@@ -145,17 +145,18 @@ public class GameAI {
         // sat vars are represented with integers, negative integer -> negated var
         // 0 not allowed so user index of colors array +1
         for(int i = 0; i < colorInSolution.length; i++){
-            if(colorInSolution[i] == null)
-                if (!checkIfPossible(newAllClauses, i+1)){
+            if(colorInSolution[i] == null) {
+                if (!checkIfPossible(newAllClauses, i + 1)) {
                     colorInSolution[i] = false;
                     //TODO dann kann ich klasuel mit (i+1) hinzufügen und nicht passende klasuseln löschen
 
+                } else
+                //TODO auch noch andersrum testen -> wenn -a nicht geht, muss a wahr sein
+                if (!checkIfPossible(newAllClauses, -(i + 1))) {
+                    colorInSolution[i] = true;
+                    //TODO dann kann ich klasuel mit -(i+1) hinzufügen und nicht passende klasuseln löschen
                 }
-            //TODO auch noch andersrum testen -> wenn -a nicht geht, muss a wahr sein
-//            if (!checkIfPossible(newAllClauses, -(i+1))){
-//                colorInSolution[i] = true;
-//                //TODO dann kann ich klasuel mit -(i+1) hinzufügen und nicht passende klasuseln löschen
-//            }
+            }
         }
 
         allClauses = newAllClauses;
@@ -191,24 +192,30 @@ public class GameAI {
         //sonst hab ich schon lösung
         if(indices.size() < guess.length) {
             // alle möglichen unbestimmten in liste packen, shufflen
-            ArrayList<Integer> list = new ArrayList<>();
+            ArrayList<Integer> remainingUnknown = new ArrayList<>();
             //TODO check if there are at least 4 possible colors in colorsPossible
             for (int i = 0; i < colorInSolution.length; i++) {
                 // unknown, might be in solution
                 if (colorInSolution[i] == null)
-                    list.add(i);
+                    remainingUnknown.add(i);
             }
-            Collections.shuffle(list);
+            Collections.shuffle(remainingUnknown);
             // wenn ich nich mehr genug unknown vars übrig hab ist was schief gelaufen
-            if(list.size() < guess.length - indices.size()){
+            if(remainingUnknown.size() < guess.length - indices.size()){
                 //TODO error
                 System.err.println("not enough possible colors left to make a guess, fatal");
             }
             // verbleibende auffüllen
             for (int i = indices.size(); i < guess.length; i++) {
-                guess[i] = colors.get(list.get(i));
+                guess[i] = colors.get(remainingUnknown.get(i));
             }
         }
+
+        //TODO guess gegen die klauseln vertoßen
+        //zB wenn ich weiß rot, gelb ... 1 richtig, aber alle sind noch unknown
+        //dann könnte AI die nochmal zsm wählenobwohl es keinen sinn macht
+        // vllt sowas heuristisches wie: 5 mal versuchen was ohne widerspruchzu finden, sonst einfach nehmen
+        // oder alle kombis der remaining unknown durchgehen bis man was ohne widerspruch findet
 
 //        return new PinColor[]{PinColor.BLUE, PinColor.PINK, PinColor.GREY, PinColor.WHITE};
 //        return new PinColor[]{PinColor.RED, PinColor.ORANGE, PinColor.YELLOW, PinColor.GREEN};
