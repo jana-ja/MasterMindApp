@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
@@ -14,17 +15,16 @@ import androidx.gridlayout.widget.GridLayout;
 import androidx.preference.PreferenceManager;
 
 import com.example.mastermind.R;
-import com.example.mastermind.model.Ergebnis;
 import com.example.mastermind.model.Game;
+import com.example.mastermind.model.NormalGame;
 import com.example.mastermind.model.PinColor;
 import com.example.mastermind.model.Settings;
-import com.example.mastermind.model.Stats;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GameActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
+abstract public class GameActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
 
     Game gamei;
 
@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
     private boolean gameRunning = false;
 
-    private Settings settings;
+    protected Settings settings;
 
     private boolean firstRound;
 
@@ -76,7 +76,9 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
             if (gameRunning) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(getString(R.string.alert_text_start_game)).setPositiveButton(R.string.text_alert_positive, this)
-                        .setNegativeButton(R.string.text_alert_negative, this).show();
+                        .setNegativeButton(R.string.text_alert_negative, (dialog, which) -> {
+
+                        }).show();
             } else {
                 startGame();
             }
@@ -102,89 +104,17 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
     }
 
 
-    private void nextRound() {
-        //dem game zum überprüfen die aktuelle reihe übergeben
-        int currentRound = gamei.getCurrenRound();
-        Ergebnis ergebi = gamei.nextRound(boardCells[currentRound]);
-        if (ergebi.isOkay()) {
-            //die zahlen wiedergeben
-            //richtige stellen
-            indicators[currentRound][0].setTextColor(Color.RED);
-            indicators[currentRound][0].setText(String.valueOf(ergebi.getCorrectPlaces()));
-            //richtige farben
-            indicators[currentRound][1].setTextColor(Color.BLACK);
-            indicators[currentRound][1].setText(String.valueOf(ergebi.getCorrectColors()));
+    abstract void nextRound();
 
-            if (ergebi.getCorrectPlaces() == 4 || gamei.getCurrenRound() > settings.getNumberRounds()-1) {
-
-                //wenn daws true ist hat man gewonnen, sonst muss >9 true sein und dann hat man verloren
-                endGame(ergebi.getCorrectPlaces() == 4);
-                return;
-            }
-
-            highlightCurrentRow();
-        } else {
-            //TODO fehlermeldung?
-        }
-    }
-
-    private void endGame(boolean won) {
+    // need to override in subclass
+    void endGame(boolean won){
         gameRunning = false;
-
         bNextRound.setEnabled(false);
-
-        PinColor[] solutionPinColors = gamei.getSolution();
-        for (int i = 0; i < solutionCells.size(); i++) {
-            solutionCells.get(i).setPinColor(solutionPinColors[i]);
-            solutionCells.get(i).displayUnselected(this);
-        }
-
-        //add to stats
-        Stats stats = StatsActivity.loadStatsFromPreferences(this);
-
-        String dialogText;
-        if (won) {
-            dialogText = "GEWONNEN";
-            int numberWon = stats.getNumberWon();
-            //anzahl der rounds zu den avgRoundsPerWin dazu rechnen
-            int oldAvgRounds = stats.getAvgRoundsPerWin();
-            int newAvgRounds = (numberWon *  oldAvgRounds + 1 * gamei.getCurrenRound()) / (numberWon + 1); //gamei round von 0 - zB 9, beim beenden wird noch einmal erhöht also ist richtig die zahl
-
-            stats.setNumberWon(numberWon + 1);
-            stats.setAvgRoundsPerWin(newAvgRounds);
-
-        }
-        else {
-            dialogText = "VERLOREN";
-            int numberLost = stats.getNumberLost();
-            stats.setNumberLost(numberLost);
-        }
-
-        StatsActivity.saveStatsToPreferences(this, stats);
-
-
-        //TODO cool machen
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(dialogText)
-                .setCancelable(false)
-                .setPositiveButton("OK", (dialog, id) -> {
-                    //do things
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
-    private void startGame() {
-        //add to stats
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.stats_preference_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        int numberStarted = sharedPref.getInt(getString(R.string.stats_started_key), 0);
-        editor.putInt(getString(R.string.stats_started_key), numberStarted + 1);
-        editor.apply();
-
+    void startGame() {
         gameRunning = true;
-        gamei = new Game(settings);
+
         if(firstRound) {
             init();
             initView();
@@ -193,7 +123,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         resetView();
     }
 
-    private void initView() {
+    void initView() {
         //hier die bidlschrimgröße ansehen, maße der indikatoren und boardcells berechnen, den dingern ihre größen geben
 
 
@@ -246,7 +176,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
             int remainingHoriSpace = boardWidth - minCellSize * 6;
             indicatorWidth += remainingHoriSpace / 2;
         }
-    
+
 
         //für solutioncells setzen
         for (BoardCell solutionCell : solutionCells) {
@@ -280,7 +210,8 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         griddi.setLayoutParams(griddiPinsParams);
     }
 
-    private void resetView() {
+    // when a new game is started
+    void resetView() {
         //next round button
         this.bNextRound.setEnabled(true);
 
@@ -308,14 +239,12 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
         this.pinCells.forEach(cell ->
                 cell.displayUnselected(this));
 
-        //show current row
-        highlightCurrentRow();
     }
 
-    private void highlightCurrentRow() {
+    void highlightCurrentRow() {
         int row = gamei.getCurrenRound();
         indicators[row][0].setTextColor(Color.BLACK);
-        indicators[row][0].setText("->");
+        indicators[row][0].setText("\u2192");
     }
 
     /**
@@ -336,6 +265,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
             } else {
                 BoardCell boardCell = new BoardCell(this, 0, j);
                 boardCell.setPinColor(PinColor.EMPTY);
+                boardCell.setOnClickListener(this::onClickSolutionCell);
 
                 griddiSolution.addView(boardCell);
                 solutionCells.add(boardCell);
@@ -364,17 +294,7 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
                 } else {
                     //über all anders in die mitte die board cells
                     BoardCell boardCell = new BoardCell(this, i, j);
-
-                    boardCell.setOnClickListener(v -> {
-                        BoardCell celli = (BoardCell) v;
-                        this.selectedBoardCell = celli;
-                        if (selectedPinColor != null && celli.getxPos() == gamei.getCurrenRound()) {
-                            this.selectedBoardCell.setPinColor(selectedPinColor);
-                            this.selectedBoardCell.displayUnselected(this);
-                        } else {
-                            //TODO fehlermeldung?
-                        }
-                    });
+                    boardCell.setOnClickListener(this::onClickBoardCell);
                     //j-1 wegen indizes vom array
                     boardCells[i][j - 1] = boardCell;
                     griddiBoard.addView(boardCell);
@@ -413,6 +333,15 @@ public class GameActivity extends AppCompatActivity implements DialogInterface.O
 
     }
 
+    protected abstract void onClickSolutionCell(View v);
+
+    protected abstract void onClickBoardCell(View v);
+
+    void onclickSolutionCell(){
+
+    }
+
+    // für dialog wenn man neues spiel macht obwohl grade eins läuft
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {

@@ -40,5 +40,6 @@
     <string name="text_alert_positive">Ja</string>
     <string name="text_alert_negative">Nein</string>
     <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein neues starten?</string>
+    <string name="button_text_play_ai">spielen KI</string>
 
 </resources>

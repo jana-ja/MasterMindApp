@@ -3,23 +3,32 @@ package com.example.mastermind.model;
 import com.example.mastermind.view.BoardCell;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class Game {
+abstract public class Game {
 
-    private int currenRound;
-    private final PinColor[] solution;
+    protected int currenRound;
+    protected PinColor[] solution; //TODO war final, vllt was kluges überlegen mit der vererbung
 
-    private Settings settings;
+    protected Settings settings;
 
     public Game(Settings settings){
         this.settings = settings;
         this.currenRound = 0;
-        this.solution = chooseSolution();
+    }
+
+    public boolean checkSettingConformity(PinColor[] pinColors) {
+        // TODO
+//        for (BoardCell boardCell : boardCellRow) {
+//            if (boardCell.getPinColor()==PinColor.EMPTY)
+//                return false;
+//        }
+        return true;
     }
 
     public int getCurrenRound() {
@@ -30,74 +39,13 @@ public class Game {
         return solution;
     }
 
-    private PinColor[] chooseSolution() {
-        //doppelt: ohne zurücklegen
-        boolean zuruecklegen = settings.isDuplicatePins();
-        //empty: aus 9 farben wählen
-        int bound;
-        if(settings.isEmptyPins())
-            bound = 9;
-        else
-            bound = 8;
 
+    abstract public Ergebnis nextRound(PinColor[] pinColors);
 
-        Random rand = new Random();
-        //ich brauche 4 int 0-bound
-
-        PinColor[] solution = new PinColor[4];
-        List<Integer> dings = new ArrayList<>();
-        while(dings.size() < 4){
-            int temp = rand.nextInt(bound);
-            if(zuruecklegen) {
-                //einfach nehmen
-                dings.add(temp);
-            } else {
-                //schauen ob die zahl schon drin ist, keine duplikate
-                if(!dings.contains(temp)){
-                    dings.add(temp);
-                }
-            }
-        }
-        Iterator<Integer> iti = dings.iterator();
-        for (int i = 0; i < solution.length; i++) {
-            solution[i] = PinColor.values()[iti.next()];
-        }
-        return solution;
-    }
-
-
-    public Ergebnis nextRound(BoardCell[] boardCellRow){
-        Ergebnis ergebi = new Ergebnis();
-
-        //checken ob alle plätze entsprechend der regeln besetzt sind
-        ergebi.setOkay(checkOkay(boardCellRow));
-        //checken wie viele farben richtig
-        ergebi.setCorrectColors(checkColors(boardCellRow));
-        //checken wie viele plätze richtig
-        ergebi.setCorrectPlaces(checkPlaces(boardCellRow));
-
-        if(ergebi.isOkay())
-            currenRound++;
-
-        return ergebi;
-    }
-
-
-    private boolean checkOkay(BoardCell[] boardCellRow) {
-//        for (BoardCell boardCell : boardCellRow) {
-//            if (boardCell.getPinColor()==PinColor.EMPTY)
-//                return false;
-//        }
-        return true;
-    }
-
-    private int checkColors(BoardCell[] boardCellRow) {
+    int checkColors(PinColor[] pinColors) {
         int dingsi = 0;
         //boardcellrow kopieren
-        List<PinColor> editRow = new ArrayList<>();
-        for (BoardCell boardCell : boardCellRow) {
-            editRow.add(boardCell.getPinColor());
-        }
+        List<PinColor> editRow = new ArrayList<>(Arrays.asList(pinColors));
 
         //alle solution colors abgleichen mit der aktuellen row
         for (PinColor pinColor : solution) {
@@ -113,14 +61,15 @@ public class Game {
         return dingsi;
     }
 
-    private int checkPlaces(BoardCell[] boardCellRow) {
+    int checkPlaces(PinColor[] pinColors) {
         int dingsi = 0;
-        for (int i = 0; i < boardCellRow.length; i++) {
-            if(boardCellRow[i].getPinColor() == solution[i])
+        for (int i = 0; i < pinColors.length; i++) {
+            if(pinColors[i] == solution[i])
                 dingsi++;
         }
         return dingsi;
     }
+
 
 
 }
