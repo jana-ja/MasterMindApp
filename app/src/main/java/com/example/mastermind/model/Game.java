@@ -1,13 +1,9 @@
 package com.example.mastermind.model;
 
-import com.example.mastermind.view.BoardCell;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 abstract public class Game {
@@ -22,12 +18,23 @@ abstract public class Game {
         this.currenRound = 0;
     }
 
+
     public boolean checkSettingConformity(PinColor[] pinColors) {
-        // TODO
-//        for (BoardCell boardCell : boardCellRow) {
-//            if (boardCell.getPinColor()==PinColor.EMPTY)
-//                return false;
-//        }
+        if(!settings.isEmptyPins()){
+            //check if there are empty pins
+            if(Arrays.asList(pinColors).contains(PinColor.EMPTY))
+                return false;
+        }
+        //check if there are duplicates
+        if(!settings.isDuplicatePins()){
+            Set<PinColor> lump = new HashSet<>();
+            for (PinColor c : pinColors)
+            {
+                if (lump.contains(c))
+                    return false;
+                lump.add(c);
+            }
+        }
         return true;
     }
 

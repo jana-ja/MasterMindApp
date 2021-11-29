@@ -58,7 +58,7 @@ public class NormalGameActivity extends GameActivity{
 
             highlightCurrentRow();
         } else {
-            //TODO fehlermeldung?
+            this.notOkayErrorMessage();
         }
     }
 

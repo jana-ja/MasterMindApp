@@ -1,6 +1,5 @@
 package com.example.mastermind.view;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -16,9 +15,9 @@ import androidx.preference.PreferenceManager;
 
 import com.example.mastermind.R;
 import com.example.mastermind.model.Game;
-import com.example.mastermind.model.NormalGame;
 import com.example.mastermind.model.PinColor;
 import com.example.mastermind.model.Settings;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,6 +102,19 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
     }
 
+
+    public void notOkayErrorMessage(){
+        String text = "Die Eingabe entspricht nicht den Einstellungen.";
+
+        final Snackbar snackBar = Snackbar.make(gameBackground, text, Snackbar.LENGTH_SHORT);
+        snackBar.setAction("ok", v -> {
+            snackBar.dismiss();
+        });
+        snackBar.show();
+
+//        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+//        toast.show();
+    }
 
     abstract void nextRound();
 
