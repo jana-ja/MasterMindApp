@@ -21,6 +21,10 @@ public class ReverseGameActivity extends GameActivity{
 
     @Override
     void startGame() {
+        //TODO später auch andere spiel modi implementieren?
+        settings.setDuplicatePins(false);
+        settings.setEmptyPins(false);
+
         gamei = new ReverseGame(settings);
 
         super.startGame();
@@ -40,7 +44,7 @@ public class ReverseGameActivity extends GameActivity{
                 pinColors[i] = solutionCells.get(i).getPinColor();
             }
             if (!gamei.checkSettingConformity(pinColors)) {
-                // iein dialog anzeigen
+                this.notOkayErrorMessage();
                 return;
             }
             //set solution of gamei
