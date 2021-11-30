@@ -221,6 +221,7 @@ public class GameAI {
         //TODO ja lol ich war leider dumm, wenn ich nur dinge probiere die noch möglich sind,
         // dann mache ich nie etwas das nicht geht und lerne nie etwas
         // lerne ich dadurch aber implizit?? kp ahhhhhhh
+        // hä der lernt dabei doch hääääää jetzt bin ich komplett verwirrt
 
         //guess kann gegen die klauseln vertoßen
         //zB wenn ich weiß rot, gelb ... 1 richtig, aber alle sind noch unknown
