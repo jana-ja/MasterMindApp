@@ -1,5 +1,7 @@
 package com.example.mastermind.model;
 
+import com.example.mastermind.view.ReverseGameActivity;
+
 import org.sat4j.core.Vec;
 import org.sat4j.core.VecInt;
 import org.sat4j.minisat.SolverFactory;
@@ -25,6 +27,7 @@ public class GameAI {
     Boolean[] colorInSolution;
     Vec<IVecInt> allClauses;
     PinColor[] lastGuess;
+    ReverseGameActivity gameActivity;
 
     public GameAI(Settings settings) {
         this.settings = settings;
@@ -39,6 +42,10 @@ public class GameAI {
         initWithRules();
         //TODO adapt to settings
 
+    }
+
+    public void setGameActivity(ReverseGameActivity gameActivity) {
+        this.gameActivity = gameActivity;
     }
 
     private void initWithRules() {
@@ -149,6 +156,7 @@ public class GameAI {
                 if (!checkIfPossible(newAllClauses, i + 1)) {
                     // die color nicht drin
                     colorInSolution[i] = false;
+                    gameActivity.makeToast(colors.get(i), false);
                     //TODO dann kann ich klasuel mit (i+1) hinzufügen und nicht passende klasuseln löschen
 
                 } else
@@ -156,7 +164,8 @@ public class GameAI {
                 if (!checkIfPossible(newAllClauses, -(i + 1))) {
                     // die color ist drin
                     colorInSolution[i] = true;
-                    //TODO dann kann ich klasuel mit -(i+1) hinzufügen und nicht passende klasuseln löschen
+                    gameActivity.makeToast(colors.get(i), true);
+//TODO dann kann ich klasuel mit -(i+1) hinzufügen und nicht passende klasuseln löschen
                 }
             }
         }

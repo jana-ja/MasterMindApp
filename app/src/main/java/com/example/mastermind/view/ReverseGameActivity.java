@@ -2,6 +2,7 @@ package com.example.mastermind.view;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -11,13 +12,23 @@ import com.example.mastermind.model.Ergebnis;
 import com.example.mastermind.model.GameAI;
 import com.example.mastermind.model.PinColor;
 import com.example.mastermind.model.ReverseGame;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Locale;
 
 
-public class ReverseGameActivity extends GameActivity{
+public class ReverseGameActivity extends GameActivity {
 
     boolean userSolutionReady;
     GameAI ai;
     Ergebnis lastErgebi;
+
+    public void makeToast(PinColor color, boolean positive){
+        String bla = positive? "" : "nicht ";
+        String text = color.toString().toLowerCase(Locale.ROOT) + " ist " + bla + "in der Lösung";
+        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     @Override
     void startGame() {
@@ -31,6 +42,7 @@ public class ReverseGameActivity extends GameActivity{
 
         userSolutionReady = false;
         ai = new GameAI(settings);
+        ai.setGameActivity(this);
     }
 
     @Override
