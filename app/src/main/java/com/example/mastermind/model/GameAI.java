@@ -147,12 +147,14 @@ public class GameAI {
         for(int i = 0; i < colorInSolution.length; i++){
             if(colorInSolution[i] == null) {
                 if (!checkIfPossible(newAllClauses, i + 1)) {
+                    // die color nicht drin
                     colorInSolution[i] = false;
                     //TODO dann kann ich klasuel mit (i+1) hinzufügen und nicht passende klasuseln löschen
 
                 } else
                 //TODO auch noch andersrum testen -> wenn -a nicht geht, muss a wahr sein
                 if (!checkIfPossible(newAllClauses, -(i + 1))) {
+                    // die color ist drin
                     colorInSolution[i] = true;
                     //TODO dann kann ich klasuel mit -(i+1) hinzufügen und nicht passende klasuseln löschen
                 }
@@ -191,35 +193,156 @@ public class GameAI {
         //aus unbestimmten random wählen
         //sonst hab ich schon lösung
         if(indices.size() < guess.length) {
-            // alle möglichen unbestimmten in liste packen, shufflen
-            ArrayList<Integer> remainingUnknown = new ArrayList<>();
-            //TODO check if there are at least 4 possible colors in colorsPossible
-            for (int i = 0; i < colorInSolution.length; i++) {
-                // unknown, might be in solution
-                if (colorInSolution[i] == null)
-                    remainingUnknown.add(i);
-            }
-            Collections.shuffle(remainingUnknown);
-            // wenn ich nich mehr genug unknown vars übrig hab ist was schief gelaufen
-            if(remainingUnknown.size() < guess.length - indices.size()){
-                //TODO error
-                System.err.println("not enough possible colors left to make a guess, fatal");
-            }
-            // verbleibende auffüllen
-            for (int i = indices.size(); i < guess.length; i++) {
-                guess[i] = colors.get(remainingUnknown.get(i));
-            }
+
+            //wählt random aus den unknown und packt in guess
+//            chooseFromUnknownSimple(guess, indices.size());
+
+            //wählt klug aus denunkown und packt in guess
+            chooseFromUnknownComplex(guess, indices.size());
         }
 
-        //TODO guess gegen die klauseln vertoßen
+
+
+//        return new PinColor[]{PinColor.BLUE, PinColor.PINK, PinColor.GREY, PinColor.WHITE};
+//        return new PinColor[]{PinColor.RED, PinColor.ORANGE, PinColor.YELLOW, PinColor.GREEN};
+        return guess;
+    }
+
+    private void chooseFromUnknownComplex(PinColor[] guess, int index) {
+        //TODO ja lol ich war leider dumm, wenn ich nur dinge probiere die noch möglich sind,
+        // dann mache ich nie etwas das nicht geht und lerne nie etwas
+        // lerne ich dadurch aber implizit?? kp ahhhhhhh
+
+        //guess kann gegen die klauseln vertoßen
         //zB wenn ich weiß rot, gelb ... 1 richtig, aber alle sind noch unknown
         //dann könnte AI die nochmal zsm wählenobwohl es keinen sinn macht
         // vllt sowas heuristisches wie: 5 mal versuchen was ohne widerspruchzu finden, sonst einfach nehmen
         // oder alle kombis der remaining unknown durchgehen bis man was ohne widerspruch findet
 
-//        return new PinColor[]{PinColor.BLUE, PinColor.PINK, PinColor.GREY, PinColor.WHITE};
-//        return new PinColor[]{PinColor.RED, PinColor.ORANGE, PinColor.YELLOW, PinColor.GREEN};
-        return guess;
+        // alle möglichen unbestimmten in liste packen
+        ArrayList<Integer> remainingUnknown = new ArrayList<>();
+        for (int i = 0; i < colorInSolution.length; i++) {
+            // unknown, might be in solution
+            if (colorInSolution[i] == null)
+                remainingUnknown.add(i);
+        }
+
+        //index = 2 -> ich habe schon 2 elem ausgewähl, brauche noch 4-2 = 2 elemente
+        int colorsNeeded = guess.length - index;
+
+        // indices der remaining unknown ansehen und die als satVars binary durchzählen,
+        // dabei die sicheren die schon im guess sind mit beachten!!
+        // also countbinary mit den satvars von remainingUnknown und ich will dass colorsneeded elemtente 1 sind
+        // ich will dann liste von int array, die länge colorsneeded haben wo die index kombis der farben drinstehen
+        List<int[]> indexArrays = countBinaryIndices(getSatVars4Guess(remainingUnknown), colorsNeeded);
+        // die liste shufflen damit er nicht so binär zählend durchgeht und es etwas random und glücks sache ist
+        Collections.shuffle(indexArrays);
+        // dann kann ich guess bauen mit den sicheren und den colors von dem index int array und für guess 4 klauseln bauen
+        for (int[] array : indexArrays) {
+            int[] indices = new int[guess.length];
+            //bis index mit guess color indices füllen
+            for (int i = 0; i < index; i++) {
+                indices[i] = colors.indexOf(guess[i]);
+            }
+            //ab index mit kandidaten aus array füllen
+            int arrayIndex = 0;
+            for (int i = index; i < indices.length; i++) {
+                indices[i] = array[arrayIndex];
+                arrayIndex++;
+            }
+            //klauseln bauen
+            int[] satVars = getSatVars4Guess(indices);
+            Vec<IVecInt> sat4GuessCandidate = new Vec<>(4);
+            for (int satVar : satVars) {
+                sat4GuessCandidate.push(new VecInt(new int[]{satVar}));
+            }
+            // dann jeweils schauen ob widerspruch zu aktuellem wissen hat
+            Vec<IVecInt> allClauses4GuessCandidate = new Vec<>(allClauses.size() + sat4GuessCandidate.size());
+            allClauses.copyTo(allClauses4GuessCandidate);
+            sat4GuessCandidate.copyTo(allClauses4GuessCandidate);
+
+            // wenn nicht widerspruch den guess returnen
+            if(checkIfPossible(allClauses4GuessCandidate)){
+                //guess bauen, füllen ab index
+                arrayIndex = 0;
+                for (int i = index; i < guess.length; i++) {
+                    guess[i] = colors.get(array[arrayIndex]);
+                    arrayIndex++;
+                }
+
+            }
+
+        }
+        if(Arrays.asList(guess).contains(null))
+            System.err.println("scheiße");
+        //return;
+
+
+        int lel = 1;
+        lel++;
+    }
+
+    private List<int[]> countBinaryIndices(int[] satVars, int ones){
+        if(ones == 1) {
+            int k = 3;
+            k++;
+        }
+
+        List<int[]> ints = new ArrayList<>();
+        // binär hochzählen mit size von satvars stellen, dabei immer schauen ob anzahl einsen = ones
+        int digits = satVars.length;
+        String binary = "";
+        for (int i = 0; i < digits; i++) {
+            binary = binary.concat("0");
+        }
+        //hochzählen
+        String binaryEnd;
+        for(int i = 0; i < Math.pow(2, digits); i++){
+            binaryEnd = Integer.toBinaryString(i);
+            if( binaryEnd.chars().filter(digit -> Character.valueOf((char) digit).equals('1')).count() == ones){
+                String newBinary = replaceEnd(binary, binaryEnd);
+
+                int[] intArray = new int[ones];
+                int arrayIndex = 0;
+                for (int j = 0; j < newBinary.length(); j++) {
+                    //vars negiert
+                    if(Character.valueOf(newBinary.charAt(j)).equals('1')){
+                        // sollte so passen weil array ist 'ones' groß und pro binary dürfen nur 'ones' stellen = 1 sein
+                        intArray[arrayIndex] = satVars[j] - 1; //wieder zu 0 index konvertieren
+                        //TODO FEHLER BEHOBEN: hier hatte ich intArray[arrayIndex] = j; und es hat nur manchmal nicht funktioniert, wenn man nur noch einen raten musste udn 3 schon sciher waren
+                        // aber hä ich mein wie konnte da überhaupt iwas gehen????
+                        // und es hat auch noch besser funktioniert weil er dann immer so einen variiert hat und durch total viel gelernt
+                        arrayIndex++;
+                    }
+                }
+                ints.add(intArray);
+            }
+        }
+        return ints;
+    }
+
+    private void chooseFromUnknownSimple(PinColor[] guess, int index) {
+        // alle möglichen unbestimmten in liste packen, shufflen
+        ArrayList<Integer> remainingUnknown = new ArrayList<>();
+        for (int i = 0; i < colorInSolution.length; i++) {
+            // unknown, might be in solution
+            if (colorInSolution[i] == null)
+                remainingUnknown.add(i);
+        }
+        Collections.shuffle(remainingUnknown);
+        // wenn ich nich mehr genug unknown vars übrig hab ist was schief gelaufen
+        if(remainingUnknown.size() < guess.length - index){
+            //TODO error
+            System.err.println("not enough possible colors left to make a guess, fatal");
+        }
+        // verbleibende auffüllen
+        int j = 0;
+        for (int i = index; i < guess.length; i++) {
+            guess[i] = colors.get(remainingUnknown.get(j));
+            j++;
+        }
+        int i = 3;
+        i++;
     }
 
     /**
@@ -234,6 +357,11 @@ public class GameAI {
         Vec<IVecInt> testClauses = new Vec<>(satClauses.size() + 1);
         satClauses.copyTo(testClauses);
         testClauses.push(new VecInt(new int[]{i}));
+        return checkIfPossible(testClauses);
+    }
+
+    private boolean checkIfPossible(Vec<IVecInt> testClauses) {
+
         solver = SolverFactory.newDefault();
 
         // now test for contradiction
@@ -323,6 +451,26 @@ public class GameAI {
         for (int i = 0; i < satVars.length; i++) {
             //0 not allowed
             satVars[i] = colors.indexOf(lastGuess[i]) + 1;
+        }
+        return satVars;
+    }
+
+    private int[] getSatVars4Guess(ArrayList<Integer> indices) {
+        //from last guess
+        int[] satVars = new int[indices.size()];
+        for (int i = 0; i < satVars.length; i++) {
+            //0 not allowed
+            satVars[i] = indices.get(i) + 1;
+        }
+        return satVars;
+    }
+
+    private int[] getSatVars4Guess(int[] indices) {
+        //from last guess
+        int[] satVars = new int[indices.length];
+        for (int i = 0; i < satVars.length; i++) {
+            //0 not allowed
+            satVars[i] = indices[i] + 1;
         }
         return satVars;
     }
