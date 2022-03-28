@@ -12,12 +12,15 @@
 
     <!-- SettingsActivity -->
     <string name="text_title_settings">Einstellungen</string>
-    <string name="game_settings_text">Spiel Einstellungen</string>
+    <string name="game_settings_category">Spiel Einstellungen</string>
     <string name="duplicate_pins_title">Farben mehrfach verwenden</string>
     <string name="duplicate_pins_text">In der Lösung können Farben mehrfach vorkommen.</string>
     <string name="empty_pins_title">Felder leer lassen</string>
     <string name="empty_pins_text">In der Lösung können Felder leer gelassen werden.</string>
     <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat.</string>
+    <string name="experimental_settings_category">Experimentelle Einstellungen</string>
+    <string name="ai_mode_title">AI Modus aktivieren</string>
+    <string name="ai_mode_text">Entsperrt den AI Spielmodus im Hauptmenü</string>
 
     <!-- StatsActivity -->
     <string name="text_title_stats">Statistiken</string>
@@ -41,5 +44,8 @@
     <string name="text_alert_negative">Nein</string>
     <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein Neues starten?</string>
     <string name="button_text_play_ai">spielen KI</string>
+
+    <!-- generated -->
+
 
 </resources>

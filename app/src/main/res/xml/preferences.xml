@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
     <PreferenceCategory
-
-        android:title="@string/game_settings_text">
+        android:title="@string/game_settings_category">
 
         <androidx.preference.SwitchPreference
             android:defaultValue="false"
@@ -26,5 +25,17 @@
             android:defaultValue="10"
             app:showSeekBarValue="true"/>
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/experimental_settings_category">
+
+        <androidx.preference.SwitchPreference
+            android:defaultValue="false"
+            android:key="ai_mode"
+            android:summary="@string/ai_mode_text"
+            android:title="@string/ai_mode_title" />
+
+    </PreferenceCategory>
+
 
 </PreferenceScreen>

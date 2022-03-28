@@ -1,8 +1,10 @@
 package com.example.mastermind.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,9 +25,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStats = findViewById(R.id.button_stats);
 
         btnPlay.setOnClickListener(this);
-        btnPlayAI.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnStats.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if(preferences.getBoolean("ai_mode", false)){
+            btnPlayAI.setOnClickListener(this);
+            btnPlayAI.setVisibility(View.VISIBLE);
+        } else {
+            btnPlayAI.setOnClickListener(null);
+            btnPlayAI.setVisibility(View.GONE);
+        }
     }
 
     @Override
