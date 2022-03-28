@@ -14,9 +14,9 @@
     <string name="text_title_settings">Einstellungen</string>
     <string name="game_settings_text">Spiel Einstellungen</string>
     <string name="duplicate_pins_title">Farben mehrfach verwenden</string>
-    <string name="duplicate_pins_text">Vom Computer kann eine Farbe beliebig oft in der Lösung verwendet werden.</string>
+    <string name="duplicate_pins_text">In der Lösung können Farben mehrfach vorkommen.</string>
     <string name="empty_pins_title">Felder leer lassen</string>
-    <string name="empty_pins_text">Vom Computer können Felder in der Lösung leer gelassen werden.</string>
+    <string name="empty_pins_text">In der Lösung können Felder leer gelassen werden.</string>
     <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat.</string>
 
     <!-- StatsActivity -->
@@ -39,7 +39,7 @@
     <!-- allgemein -->
     <string name="text_alert_positive">Ja</string>
     <string name="text_alert_negative">Nein</string>
-    <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein neues starten?</string>
+    <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein Neues starten?</string>
     <string name="button_text_play_ai">spielen KI</string>
 
 </resources>
