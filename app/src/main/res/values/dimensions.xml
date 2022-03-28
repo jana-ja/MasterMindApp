@@ -3,7 +3,10 @@
     <dimen name="board_cell">30dp</dimen>
     <dimen name="pin_palette">10dp</dimen>
 
-    <dimen name="stats_text_size">15sp</dimen>
+    <dimen name="stats_text_size">17sp</dimen>
     <dimen name="title_small">30sp</dimen>
     <dimen name="title_big">35sp</dimen>
+
+    <dimen name="table_vert_padding">7dp</dimen>
+    <dimen name="table_hor_padding">2dp</dimen>
 </resources>
