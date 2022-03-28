@@ -1,11 +1,5 @@
 package com.example.mastermind.model;
 
-import com.example.mastermind.view.BoardCell;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class ReverseGame extends Game{
 
     public ReverseGame(Settings settings) {
@@ -18,8 +12,8 @@ public class ReverseGame extends Game{
     }
 
     @Override
-    public Ergebnis nextRound(PinColor[] pinColors) {
-        Ergebnis ergebi = new Ergebnis();
+    public PinRow nextRound(PinColor[] pinColors) {
+        PinRow ergebi = new PinRow();
 
         //checken ob alle plätze entsprechend der regeln besetzt sind
         //TODO

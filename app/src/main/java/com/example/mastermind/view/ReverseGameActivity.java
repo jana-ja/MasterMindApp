@@ -8,11 +8,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.mastermind.R;
-import com.example.mastermind.model.Ergebnis;
+import com.example.mastermind.model.PinRow;
 import com.example.mastermind.model.GameAI;
 import com.example.mastermind.model.PinColor;
 import com.example.mastermind.model.ReverseGame;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
 
@@ -21,7 +20,7 @@ public class ReverseGameActivity extends GameActivity {
 
     boolean userSolutionReady;
     GameAI ai;
-    Ergebnis lastErgebi;
+    PinRow lastErgebi;
 
     public void makeToast(PinColor color, boolean positive){
         String bla = positive? "" : "nicht ";
@@ -74,7 +73,7 @@ public class ReverseGameActivity extends GameActivity {
         }
         //display step
         int currentRound = gamei.getCurrenRound();
-        Ergebnis ergebi = gamei.nextRound(step);
+        PinRow ergebi = gamei.nextRound(step);
         lastErgebi = ergebi;
         if (ergebi.isOkay()) { //TODO brauch ich hier?
             //display step

@@ -1,12 +1,12 @@
 package com.example.mastermind.model;
 
-public class Ergebnis {
+public class PinRow {
 
     private boolean okay;
     private int correctColors;
     private int correctPlaces;
 
-    public Ergebnis() {
+    public PinRow() {
     }
 
     public boolean isOkay() {

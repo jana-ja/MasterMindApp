@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.mastermind.R;
-import com.example.mastermind.model.Ergebnis;
+import com.example.mastermind.model.PinRow;
 import com.example.mastermind.model.NormalGame;
 import com.example.mastermind.model.PinColor;
 import com.example.mastermind.model.Stats;
@@ -39,7 +39,7 @@ public class NormalGameActivity extends GameActivity{
         for (int i = 0; i < pinColors.length; i++) {
             pinColors[i] = boardCells[currentRound][i].getPinColor();
         }
-        Ergebnis ergebi = gamei.nextRound(pinColors);
+        PinRow ergebi = gamei.nextRound(pinColors);
         if (ergebi.isOkay()) {
             //die zahlen wiedergeben
             //richtige stellen

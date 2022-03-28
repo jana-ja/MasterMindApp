@@ -133,14 +133,14 @@ public class GameAI {
      * (mit checkIfPossible)
      * dann nächsten guess bestimmen lassen
      * (mit nextGuess)
-     * @param ergebnis ergebnis feedback vom guess aus der runde vorher
+     * @param pinRow ergebnis feedback vom guess aus der runde vorher
      * @return nächster guess
      */
-    public PinColor[] nextStep(Ergebnis ergebnis) {
+    public PinColor[] nextStep(PinRow pinRow) {
         //TODO wenn 0 korrekte sind direkt die possible colors setzen und die formal hinzufügen? .. ne kA müsste ja eig gehen.
 
         // get current SAT formula(s)
-        Vec<IVecInt> sat4Colors = getSat4Colors(ergebnis.getCorrectColors());
+        Vec<IVecInt> sat4Colors = getSat4Colors(pinRow.getCorrectColors());
 
         // update sat formula
         Vec<IVecInt> newAllClauses = new Vec<>(allClauses.size() + sat4Colors.size());

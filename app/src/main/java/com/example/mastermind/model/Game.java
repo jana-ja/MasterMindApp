@@ -47,7 +47,7 @@ abstract public class Game {
     }
 
 
-    abstract public Ergebnis nextRound(PinColor[] pinColors);
+    abstract public PinRow nextRound(PinColor[] pinColors);
 
     int checkColors(PinColor[] pinColors) {
         int dingsi = 0;
