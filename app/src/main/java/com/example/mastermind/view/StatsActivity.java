@@ -84,6 +84,7 @@ public class StatsActivity extends AppCompatActivity implements DialogInterface.
         allStatsKeys.forEach(key -> editor.putInt(key, 0));
         editor.apply();
 
+        stats = loadStatsFromPreferences(this);
         loadStatsToView();
     }
 
@@ -103,8 +104,6 @@ public class StatsActivity extends AppCompatActivity implements DialogInterface.
 
 
         //TODO stats pro spielmodus??
-        //TODO warum gridlayout nicht vertikale trennung in der mitte????
-
 
     }
 
