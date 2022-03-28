@@ -55,9 +55,10 @@ public class NormalGame extends Game{
     public Ergebnis nextRound(PinColor[] pinColors){
         Ergebnis ergebi = new Ergebnis();
 
-        //checken ob alle plätze entsprechend der regeln besetzt sind
-        //TODO
-        ergebi.setOkay(checkSettingConformity(pinColors));
+//        das checke ich nicht, da es (zB zum testen) erlaubt sein soll falsche eingaben zu machen
+//        //checken ob alle plätze entsprechend der regeln besetzt sind
+//        ergebi.setOkay(checkSettingConformity(pinColors));
+        ergebi.setOkay(true);
         //checken wie viele farben richtig
         ergebi.setCorrectColors(checkColors(pinColors));
         //checken wie viele plätze richtig
@@ -68,6 +69,7 @@ public class NormalGame extends Game{
 
         return ergebi;
     }
+
 
 
 }
