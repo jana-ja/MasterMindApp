@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.StatsActivity"
     android:background="@color/background_color"
-    android:padding="20dp">
+    android:paddingHorizontal="20dp">
 
     <TableLayout
         android:id="@+id/gridLayout"
