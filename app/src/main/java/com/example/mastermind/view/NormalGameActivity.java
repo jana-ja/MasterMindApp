@@ -43,9 +43,9 @@ public class NormalGameActivity extends GameActivity{
         if (ergebi.isOkay()) {
             //die zahlen wiedergeben
             //richtige stellen
-            indicators[currentRound][0].setNumber(ergebi.getCorrectPlaces(), Color.RED);
+            indicators[currentRound][0].setNumber(ergebi.getCorrectPlaces(), false);
             //richtige farben
-            indicators[currentRound][1].setNumber(ergebi.getCorrectColors(), Color.BLACK);
+            indicators[currentRound][1].setNumber(ergebi.getCorrectColors(), true);
 
             if (ergebi.getCorrectPlaces() == 4 || gamei.getCurrenRound() > settings.getNumberRounds()-1) {
 
