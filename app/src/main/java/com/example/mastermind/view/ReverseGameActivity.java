@@ -89,8 +89,7 @@ public class ReverseGameActivity extends GameActivity {
 //            indicators[currentRound][0].setTextColor(Color.RED);
 //            indicators[currentRound][0].setText(String.valueOf(ergebi.getCorrectPlaces()));
             //richtige farben
-            indicators[currentRound][1].setTextColor(Color.BLACK);
-            indicators[currentRound][1].setText(String.valueOf(ergebi.getCorrectColors()));
+            indicators[currentRound][1].setNumber(ergebi.getCorrectColors(), Color.BLACK);
 
 
 

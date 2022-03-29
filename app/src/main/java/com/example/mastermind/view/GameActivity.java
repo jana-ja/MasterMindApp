@@ -2,7 +2,6 @@ package com.example.mastermind.view;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +36,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
     List<BoardCell> solutionCells;
     BoardCell[][] boardCells;
-    Indikator[][] indicators;
+    Indicator[][] indicators;
     List<BoardCell> pinCells;
 
     BoardCell selectedBoardCell;
@@ -148,7 +147,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         int pinGridHeight = widthPerPin + 2 * MARGIN_VERT;
         //größe der boardcells in griddiPins
         for (BoardCell pinCell : this.pinCells) {
-            pinCell.setLayoutParams(widthPerPin);
+            pinCell.setLayoutParams(widthPerPin, widthPerPin);
         }
         //höhe von griddiPins daran anpassen
         setGridLayoutParams(griddiPins, pinGridHeight);
@@ -192,19 +191,19 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
         //für solutioncells setzen
         for (BoardCell solutionCell : solutionCells) {
-            solutionCell.setLayoutParams(minCellSize);
+            solutionCell.setLayoutParams(minCellSize, minCellSize);
         }
         //TODO muss ich nicht auch für die indikatoren setzen die platzhalter im solution grid sind??
 
         //für alle boardcells und indikatoren setzen
         for (BoardCell[] boardCellRow : this.boardCells) {
             for (BoardCell boardCell : boardCellRow) {
-                boardCell.setLayoutParams(minCellSize);
+                boardCell.setLayoutParams(minCellSize, minCellSize);
             }
         }
-        for (Indikator[] indicatorRow : this.indicators) {
-            for (Indikator indikator : indicatorRow) {
-                indikator.setLayoutParams(indicatorWidth, minCellSize);
+        for (Indicator[] indicatorRow : this.indicators) {
+            for (Indicator indicator : indicatorRow) {
+                indicator.setLayoutParams(indicatorWidth, minCellSize);
             }
         }
 
@@ -242,11 +241,11 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
             }
         }
         //indicators
-        for (Indikator[] indicatorRow : indicators) {
-            for (Indikator indikator : indicatorRow) {
-                indikator.setText(""); //TODO
-            }
-        }
+//        for (Indikator[] indicatorRow : indicators) {
+//            for (Indikator indikator : indicatorRow) {
+//                indikator.setNumber(""); //TODO
+//            }
+//        }
         //pin palette
         this.pinCells.forEach(cell ->
                 cell.displayUnselected(this));
@@ -255,8 +254,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
     void highlightCurrentRow() {
         int row = gamei.getCurrenRound();
-        indicators[row][0].setTextColor(Color.BLACK);
-        indicators[row][0].setText("\u2192");
+        indicators[row][0].highlight();
     }
 
     /**
@@ -272,7 +270,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         for (int j = 0; j < griddiSolution.getColumnCount(); j++) {
             if (j == 0 || j == 5) {
                 //dummy damit so breit ist wie board dadrunter
-                Indikator indi = new Indikator(this, 0, j);
+                Indicator indi = new Indicator(this, 0, j);
                 griddiSolution.addView(indi);
             } else {
                 BoardCell boardCell = new BoardCell(this, 0, j);
@@ -290,7 +288,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         griddiBoard.setRowCount(numberRows);
         griddiBoard.setColumnCount(6);
         boardCells = new BoardCell[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 2];
-        indicators = new Indikator[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 4];
+        indicators = new Indicator[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 4];
 
         for (int i = griddiBoard.getRowCount() - 1; i >= 0; i--) {
             //gibt 10 rows
@@ -298,7 +296,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
                 //gibt 6 columns
                 if (j == 0 || j == 5) {
                     //nach links und rechts müssen text für die indikatoren
-                    Indikator indi = new Indikator(this, i, j);
+                    Indicator indi = new Indicator(this, i, j);
                     //%4 für indizierung des indikator arrays
                     indicators[i][j % 4] = indi;
 
