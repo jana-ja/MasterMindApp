@@ -1,6 +1,7 @@
 package com.example.mastermind.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
@@ -31,9 +32,13 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
         params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
 
-
         this.setLayoutParams(params);
-        this.setScaleType(ImageView.ScaleType.CENTER);
+
+        // to use image resources
+        this.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        this.setAdjustViewBounds(true);
+        this.setPadding(0,0,0,0);
+        this.setBackgroundColor(Color.TRANSPARENT);
 
     }
 
@@ -47,19 +52,12 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
 
     public void setPinColor(PinColor pinColor) {
         this.pinColor = pinColor;
-//        displayColor(); //TODO wieder rein??
     }
 
     public void setLayoutParams(int size){
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();//GridLayout.LayoutParams) boardCell.getLayoutParams();
-//        params.setGravity(Gravity.CENTER);
-//        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-//        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
 
         double dings = 0.95;
-
-
 
         params.height = (int)(dings * size);
         params.width = (int)(dings * size);
@@ -68,13 +66,10 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
         params.setMargins(margin, margin, margin, margin);
 
         this.setLayoutParams(params);
-        this.setScaleType(ImageView.ScaleType.CENTER);
     }
+
     public void displayUnselected(Context context) {
-//        this.setBackgroundColor(pinColor.getColor());
-        Drawable drawi = context.getDrawable(R.drawable.cell_unselected);
-        drawi.setColorFilter(new LightingColorFilter(0xFFFFFFFF, pinColor.getColor(context)));
-        this.setBackground(drawi);
+        this.setImageResource(pinColor.getImageName());
     }
 
     public PinColor getPinColor() {
@@ -82,8 +77,7 @@ public class BoardCell extends androidx.appcompat.widget.AppCompatImageButton {
     }
 
     public void displaySelected(Context context) {
-        Drawable drawi = context.getDrawable(R.drawable.cell_selected);
-        drawi.setColorFilter(new LightingColorFilter(0xFFFFFFFF, pinColor.getColor(context)));
-        this.setBackground(drawi);
+        // TODO was überlegen wie ich die selected darstellen will, vermutlich son shine dahinter
+        displayUnselected(context);
     }
 }

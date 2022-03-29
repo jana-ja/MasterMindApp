@@ -34,4 +34,29 @@ public enum PinColor {
                 return Color.TRANSPARENT;
         }
     }
+
+    public int getImageName(){
+        switch(this){
+            case BLUE:
+                return R.drawable.merkur;
+            case GREEN:
+                return R.drawable.venus;
+            case ORANGE:
+                return R.drawable.erde;
+            case PINK:
+                return R.drawable.mars;
+            case RED:
+                return R.drawable.jupiter;
+            case WHITE:
+                return R.drawable.saturn;
+            case GREY:
+                return R.drawable.uranus;
+            case YELLOW:
+                return R.drawable.neptun;
+            case EMPTY:
+                return R.drawable.empty; //TODO für empty, schwrazes loch oder so?
+            default:
+                return R.drawable.empty; //TODO iwas kluges machen
+        }
+    }
 }
