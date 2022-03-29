@@ -12,12 +12,8 @@ import com.example.mastermind.R;
 
 public class Indicator extends Cell {
 
-    private int xPos, yPos;
-
     public Indicator(Context context, int xPos, int yPos) {
         super(context, xPos, yPos);
-
-        // TODO sind hier anpassungen für image view notwendig? rakete und zahlen vs planeten
     }
 
     public void setNumber(int number, boolean black){

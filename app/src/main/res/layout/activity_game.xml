@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:layout_gravity="fill_horizontal"
     android:background="@color/wood"
-    android:padding="10dp"
     app:layout_gravity="fill_horizontal"
     tools:context=".view.GameActivity">
 
@@ -15,6 +14,7 @@
         android:id="@+id/solution_cells"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/board_cells"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +25,7 @@
         android:id="@+id/board_cells"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toTopOf="@+id/pincolor_palette"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +36,7 @@
         android:id="@+id/pincolor_palette"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline90"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,14 +48,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
+        app:layout_constraintGuide_percent="0.92" />
 
     <Button
         android:id="@+id/button_start_game"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
         android:text="@string/button_text_start_game"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +67,6 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
         android:text="@string/button_text_next_round"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

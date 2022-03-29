@@ -2,7 +2,6 @@ package com.example.mastermind.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -67,7 +66,7 @@ public class NormalGameActivity extends GameActivity{
         PinColor[] solutionPinColors = gamei.getSolution();
         for (int i = 0; i < solutionCells.size(); i++) {
             solutionCells.get(i).setPinColor(solutionPinColors[i]);
-            solutionCells.get(i).displayUnselected(this);
+            solutionCells.get(i).display();
         }
 
         //add to stats
@@ -124,7 +123,7 @@ public class NormalGameActivity extends GameActivity{
         this.selectedBoardCell = celli;
         if (selectedPinColor != null && celli.getxPos() == gamei.getCurrenRound()) {
             this.selectedBoardCell.setPinColor(selectedPinColor);
-            this.selectedBoardCell.displayUnselected(this);
+            this.selectedBoardCell.display();
         } else {
             //TODO fehlermeldung?
         }

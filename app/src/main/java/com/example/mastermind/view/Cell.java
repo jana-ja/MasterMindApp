@@ -23,13 +23,12 @@ public abstract class Cell extends androidx.appcompat.widget.AppCompatImageButto
 
         this.setLayoutParams(params);
 
-        // TODO das hier war spezifisch für boardcell, passt das auch für allgemien cell oder zu boardcel rüber packen?
+
         // to use image resources
         this.setScaleType(ImageView.ScaleType.FIT_CENTER);
         this.setAdjustViewBounds(true);
         this.setPadding(0,0,0,0);
         this.setBackgroundColor(Color.TRANSPARENT);
-
     }
 
     public int getxPos() {

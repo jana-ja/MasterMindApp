@@ -1,6 +1,5 @@
 package com.example.mastermind.view;
 
-import android.graphics.Color;
 import android.view.View;
 import android.widget.Toast;
 
@@ -79,7 +78,7 @@ public class ReverseGameActivity extends GameActivity {
             //display step
             for (int i = 0; i < boardCells[currentRound].length; i++) {
                 boardCells[currentRound][i].setPinColor(step[i]);
-                boardCells[currentRound][i].displayUnselected(this);
+                boardCells[currentRound][i].display();
             }
 
 
@@ -139,7 +138,7 @@ public class ReverseGameActivity extends GameActivity {
         this.selectedBoardCell = (BoardCell) v;
         if (selectedPinColor != null && !userSolutionReady) {
             this.selectedBoardCell.setPinColor(selectedPinColor);
-            this.selectedBoardCell.displayUnselected(this);
+            this.selectedBoardCell.display();
         } else {
             //TODO fehlermeldung?
         }
