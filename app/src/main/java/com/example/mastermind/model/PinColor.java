@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat;
 import com.example.mastermind.R;
 
 public enum PinColor {
-    RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, EMPTY;
+    RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, EMPTY, SOLUTION;
 
     public int getColor(Context context){
         switch(this){
@@ -54,7 +54,7 @@ public enum PinColor {
             case YELLOW:
                 return R.drawable.neptun;
             case EMPTY:
-                return R.drawable.empty; //TODO für empty, schwrazes loch oder so?
+                return R.drawable.empty2; //TODO für empty, schwrazes loch oder so?
             default:
                 return R.drawable.empty; //TODO iwas kluges machen
         }

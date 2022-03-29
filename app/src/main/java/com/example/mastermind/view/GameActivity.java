@@ -228,7 +228,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
         //solution griddi
         this.solutionCells.forEach(celli -> {
-            celli.setPinColor(PinColor.EMPTY);
+            celli.setPinColor(PinColor.SOLUTION);
             celli.displayUnselected(this);
         });
 
