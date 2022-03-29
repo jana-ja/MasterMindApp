@@ -254,11 +254,11 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
             }
         }
         //indicators
-//        for (Indikator[] indicatorRow : indicators) {
-//            for (Indikator indikator : indicatorRow) {
-//                indikator.setNumber(""); //TODO
-//            }
-//        }
+        for (Indicator[] indicatorRow : indicators) {
+            for (Indicator indikator : indicatorRow) {
+                indikator.setNumber(-1,true); //-1 is invalid, default value is transparent
+            }
+        }
         //pin palette
         this.pinCells.forEach(cell ->
                 cell.display());

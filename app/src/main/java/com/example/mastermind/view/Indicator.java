@@ -32,7 +32,7 @@ public class Indicator extends Cell {
                 case 2: return R.drawable.black_2;
                 case 3: return R.drawable.black_3;
                 case 4: return R.drawable.black_4;
-                default: return R.drawable.empty; //TODO
+                default: return android.R.color.transparent;
             }
         } else {
             switch(number){
@@ -40,7 +40,7 @@ public class Indicator extends Cell {
                 case 2: return R.drawable.red_2;
                 case 3: return R.drawable.red_3;
                 case 4: return R.drawable.red_4;
-                default: return R.drawable.empty; //TODO
+                default: return android.R.color.transparent;
             }
         }
     }
