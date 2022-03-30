@@ -219,10 +219,14 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
 
         // highlight image view x prozent größer machen als die minCellSize damit planeten einen schönen rahmen bekommen
-        float dingsprozent = 0.05f;
+        float dingsprozent = 1.3f;
         highlightView.setImageResource(R.drawable.aura);
         highlightView.setMaxWidth((int)(minCellSize * dingsprozent));
+        highlightView.setMinimumWidth((int)(minCellSize * dingsprozent));
         highlightView.setMaxHeight((int)(minCellSize * dingsprozent));
+        highlightView.setMinimumHeight((int)(minCellSize * dingsprozent));
+        highlightView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        highlightView.setAdjustViewBounds(true);
         gameBackground.addView(highlightView);
         griddiPins.bringToFront();
     }

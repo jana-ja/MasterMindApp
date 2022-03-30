@@ -13,6 +13,8 @@
 
     <color name="wood">#a47449</color>
     <color name="dark_wood">#63462D</color>
+    <color name="game_background">#111111</color>
+    <color name="game_button_text">#DDDDDD</color>
 
     <color name="background_color">#8CC8C6</color>
     <color name="accent_color">#FF000000</color>
