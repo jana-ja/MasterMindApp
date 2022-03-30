@@ -6,10 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="fill_horizontal"
-    android:background="@color/game_background"
     app:layout_gravity="fill_horizontal"
     tools:context=".view.GameActivity">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_img"
+        android:scaleType="centerCrop" />
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/solution_cells"
         android:layout_width="match_parent"
