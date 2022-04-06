@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/background_img"
+        android:src="@drawable/background"
         android:scaleType="centerCrop" />
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/solution_cells"

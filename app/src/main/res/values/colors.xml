@@ -29,4 +29,7 @@
     <color name="white_pin">#FFFFFFFF</color>
     <color name="empty_pin">#FF000000</color>
 
+    <color name="textcolor">#DDDDDD</color>
+    <color name="buttonborder">#DDDDDD</color>
+
 </resources>
