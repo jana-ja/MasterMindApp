@@ -29,10 +29,12 @@
             android:configChanges="orientation|keyboardHidden"/>
         <activity
             android:name=".view.SettingsActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             />
         <activity
             android:exported="false"
+            android:screenOrientation="portrait"
             android:name=".view.StatsActivity"/>
     </application>
 
