@@ -54,9 +54,11 @@ public enum PinColor {
             case WHITE:
                 return R.drawable.neptun;
             case EMPTY:
-                return R.drawable.empty2; //TODO für empty, schwrazes loch oder so?
+                return R.drawable.empty;
+            case SOLUTION:
+                return R.drawable.black_hole;
             default:
-                return R.drawable.empty; //TODO iwas kluges machen
+                return R.drawable.empty; //TODO default image?
         }
     }
 }
