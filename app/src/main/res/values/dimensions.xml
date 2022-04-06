@@ -3,9 +3,14 @@
     <dimen name="board_cell">30dp</dimen>
     <dimen name="pin_palette">10dp</dimen>
 
-    <dimen name="stats_text_size">15sp</dimen>
-    <dimen name="title_small">30sp</dimen>
-    <dimen name="title_big">35sp</dimen>
+    <dimen name="text_size_small_title">30sp</dimen>
+    <dimen name="text_size_big_title">50sp</dimen>
+    <dimen name="text_size_preference_category">20sp</dimen>
+    <dimen name="text_size_preference_title">18sp</dimen>
+    <dimen name="text_size_preference_summary">15sp</dimen>
+    <dimen name="text_size_stats">18sp</dimen>
+    <dimen name="text_size_button">15sp</dimen>
+    <dimen name="text_size_game_button">15sp</dimen>
 
     <dimen name="table_vert_padding">7dp</dimen>
     <dimen name="table_hor_padding">2dp</dimen>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MasterMind</string>
+    <string name="app_name">MasterMind\u00A0</string>
 
     <!-- MainActivity -->
     <string name="button_text_play">Spielen</string>

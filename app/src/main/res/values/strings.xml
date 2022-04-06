@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MasterMind</string>
+    <string name="app_name">MasterMind\u00A0</string>
 
     <!-- MainActivity -->
     <string name="button_text_play">Play</string>
