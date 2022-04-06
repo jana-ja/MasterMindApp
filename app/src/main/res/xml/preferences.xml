@@ -4,18 +4,23 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
     <PreferenceCategory
-        android:title="@string/game_settings_category">
+        android:title="@string/game_settings_category"
+        android:layout="@layout/preference_category_layout">
 
         <androidx.preference.SwitchPreference
             android:defaultValue="false"
             android:key="duplicate_pins"
             android:summary="@string/duplicate_pins_text"
-            android:title="@string/duplicate_pins_title" />
+            android:title="@string/duplicate_pins_title"
+            android:layout="@layout/preference_layout"
+            />
         <androidx.preference.SwitchPreference
             android:defaultValue="false"
             android:key="empty_pins"
             android:summary="@string/empty_pins_text"
-            android:title="@string/empty_pins_title" />
+            android:title="@string/empty_pins_title"
+            android:layout="@layout/preference_layout"
+            />
         <androidx.preference.SeekBarPreference
             android:key="round_number"
             android:title="Anzahl der Versuche"
@@ -23,17 +28,21 @@
             android:max="10"
             app:min="5"
             android:defaultValue="10"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true"
+            android:layout="@layout/preference_layout_seekbar"
+            />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/experimental_settings_category">
+        android:title="@string/experimental_settings_category"
+        android:layout="@layout/preference_category_layout">
 
         <androidx.preference.SwitchPreference
             android:defaultValue="false"
             android:key="ai_mode"
             android:summary="@string/ai_mode_text"
-            android:title="@string/ai_mode_title" />
+            android:title="@string/ai_mode_title"
+            android:layout="@layout/preference_layout"/>
 
     </PreferenceCategory>
 
