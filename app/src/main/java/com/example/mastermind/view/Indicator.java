@@ -28,6 +28,7 @@ public class Indicator extends Cell {
     private int getNumberImageResource(int number, boolean black){
         if(black){
             switch(number){
+                case 0: return R.drawable.black_0;
                 case 1: return R.drawable.black_1;
                 case 2: return R.drawable.black_2;
                 case 3: return R.drawable.black_3;
@@ -36,6 +37,7 @@ public class Indicator extends Cell {
             }
         } else {
             switch(number){
+                case 0: return R.drawable.red_0;
                 case 1: return R.drawable.red_1;
                 case 2: return R.drawable.red_2;
                 case 3: return R.drawable.red_3;
