@@ -1,0 +1,62 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<!--    android:background="@color/galaxy_2">-->
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/background_blank"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/dialog_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_dialog_message"
+        android:textColor="@color/textcolor"
+        android:text="bsp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+
+        android:id="@+id/button_positive"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_alert_positive"
+        android:layout_marginTop="20dp"
+        android:paddingVertical="20dp"
+        android:paddingEnd="20dp"
+        android:textSize="@dimen/text_size_dialog_buttons"
+        android:textColor="@color/textcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_message" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_negative"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_alert_negative"
+        android:layout_marginTop="20dp"
+        android:paddingVertical="20dp"
+        android:paddingStart="20dp"
+        android:textSize="@dimen/text_size_dialog_buttons"
+        android:textColor="@color/textcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_positive"
+        app:layout_constraintTop_toBottomOf="@id/dialog_message" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

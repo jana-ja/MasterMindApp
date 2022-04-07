@@ -11,6 +11,8 @@
     <dimen name="text_size_stats">18sp</dimen>
     <dimen name="text_size_button">15sp</dimen>
     <dimen name="text_size_game_button">15sp</dimen>
+    <dimen name="text_size_dialog_message">20sp</dimen>
+    <dimen name="text_size_dialog_buttons">15sp</dimen>
 
     <dimen name="table_vert_padding">7dp</dimen>
     <dimen name="table_hor_padding">2dp</dimen>

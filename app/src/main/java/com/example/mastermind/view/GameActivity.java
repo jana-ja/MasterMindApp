@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-abstract public class GameActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
+abstract public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     Game gamei;
 
@@ -72,11 +72,8 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         bStartGame = findViewById(R.id.button_start_game);
         bStartGame.setOnClickListener(v -> {
             if (gameRunning) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(getString(R.string.alert_text_start_game)).setPositiveButton(R.string.text_alert_positive, this)
-                        .setNegativeButton(R.string.text_alert_negative, (dialog, which) -> {
-
-                        }).show();
+                CustomAlertDialog dialog = new CustomAlertDialog(getString(R.string.alert_text_start_game), this);
+                dialog.show(getSupportFragmentManager(), "new_game_alert");
             } else {
                 startGame();
             }
@@ -373,15 +370,9 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
     // für dialog wenn man neues spiel macht obwohl grade eins läuft
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-        switch (which) {
-            case DialogInterface.BUTTON_POSITIVE:
-                startGame();
-                break;
-
-            case DialogInterface.BUTTON_NEGATIVE:
-                //No button clicked
-                break;
+    public void onClick(View view) {
+        if (view.getId() == DialogInterface.BUTTON_POSITIVE) {
+            startGame();
         }
     }
 }
