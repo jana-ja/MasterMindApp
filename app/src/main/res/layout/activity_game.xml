@@ -9,6 +9,7 @@
     app:layout_gravity="fill_horizontal"
     tools:context=".view.GameActivity">
     <ImageView
+        android:id="@+id/background_imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/background"
