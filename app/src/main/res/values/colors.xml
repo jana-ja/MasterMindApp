@@ -19,16 +19,6 @@
     <color name="background_color">#8CC8C6</color>
     <color name="accent_color">#FF000000</color>
 
-    <color name="red_pin">#FFFF0000</color>
-    <color name="orange_pin">#FFFF7700</color>
-    <color name="yellow_pin">#FFFFDD00</color>
-    <color name="green_pin">#FF00FF00</color>
-    <color name="blue_pin">#FF0000FF</color>
-    <color name="pink_pin">#FFFF50B0</color>
-    <color name="grey_pin">#FF808080</color>
-    <color name="white_pin">#FFFFFFFF</color>
-    <color name="empty_pin">#FF000000</color>
-
     <color name="textcolor">#DDDDDD</color>
     <color name="buttonborder">#DDDDDD</color>
 
