@@ -4,12 +4,15 @@
 
     <!-- MainActivity -->
     <string name="button_text_play">Spielen</string>
+    <string name="button_text_play_ai">Spielen KI</string>
     <string name="button_text_settings">Einstellungen</string>
     <string name="button_text_stats">Statistiken</string>
 
     <!-- GameActivity -->
     <string name="button_text_next_round">Nächste Runde</string>
     <string name="button_text_start_game">Neues Spiel</string>
+    <string name="game_won_text">Gewonnen!</string>
+    <string name="game_lost_text">Verloren</string>
 
     <!-- SettingsActivity -->
     <string name="text_title_settings">Einstellungen</string>
@@ -36,8 +39,8 @@
     <!-- allgemein -->
     <string name="text_alert_positive">Ja</string>
     <string name="text_alert_negative">Nein</string>
+    <string name="text_alert_okay">Okay</string>
     <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein Neues starten?</string>
-    <string name="button_text_play_ai">spielen KI</string>
 
     <!-- generated -->
 </resources>

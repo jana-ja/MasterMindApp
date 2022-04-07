@@ -72,9 +72,7 @@ public class NormalGameActivity extends GameActivity{
         //add to stats
         Stats stats = StatsActivity.loadStatsFromPreferences(this);
 
-        String dialogText;
         if (won) {
-            dialogText = "GEWONNEN";
             int numberWon = stats.getNumberWon();
             //anzahl der rounds zu den avgRoundsPerWin dazu rechnen
             int oldAvgRounds = stats.getAvgRoundsPerWin();
@@ -85,23 +83,15 @@ public class NormalGameActivity extends GameActivity{
 
         }
         else {
-            dialogText = "VERLOREN";
             int numberLost = stats.getNumberLost();
             stats.setNumberLost(numberLost);
         }
 
         StatsActivity.saveStatsToPreferences(this, stats);
 
+        GameEndDialog dialog = new GameEndDialog(won);
+        dialog.show(getSupportFragmentManager(), "game_end_alert");
 
-        //TODO cool machen
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(dialogText)
-                .setCancelable(false)
-                .setPositiveButton("OK", (dialog, id) -> {
-                    //do things
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
     @Override
@@ -124,8 +114,9 @@ public class NormalGameActivity extends GameActivity{
         if (selectedPinColor != null && celli.getxPos() == gamei.getCurrenRound()) {
             this.selectedBoardCell.setPinColor(selectedPinColor);
             this.selectedBoardCell.display();
-        } else {
-            //TODO fehlermeldung?
         }
+//        else {
+//            //TODO fehlermeldung?
+//        }
     }
 }
