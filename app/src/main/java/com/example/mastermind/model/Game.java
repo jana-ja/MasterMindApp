@@ -9,7 +9,7 @@ import java.util.Set;
 abstract public class Game {
 
     protected int currenRound;
-    protected PinColor[] solution; //TODO war final, vllt was kluges überlegen mit der vererbung
+    protected PinColor[] solution;
 
     protected Settings settings;
 

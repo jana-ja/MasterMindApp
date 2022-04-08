@@ -34,7 +34,7 @@ public enum PinColor {
             case SOLUTION:
                 return R.drawable.black_hole;
             default:
-                return R.drawable.empty; //TODO default image?
+                return R.drawable.empty;
         }
     }
 

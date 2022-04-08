@@ -53,12 +53,7 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //TODO großer spiel starten knopf am anfang
-        //TODO trenn linien zw den dingern
-        //TODO fragezeichen auf die dinger
-        //TODO trennung brett und knöpfe
-        //TODO alert design
-        //TODO zeilenumbruch stats?
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
