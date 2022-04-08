@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.preference.PreferenceManager;
 
@@ -104,9 +104,7 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
         String text = "Die Eingabe entspricht nicht den Einstellungen.";
 
         final Snackbar snackBar = Snackbar.make(gameBackground, text, Snackbar.LENGTH_SHORT);
-        snackBar.setAction("ok", v -> {
-            snackBar.dismiss();
-        });
+        snackBar.setAction("ok", v -> snackBar.dismiss());
         snackBar.show();
 
 //        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
@@ -136,9 +134,21 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
      * berechnungen hier sind jetzt abhängig vom in XML angegebenem padding. sollte alles automatisch daran angepasst werden. kann für alle 3 grids beliebig gewählt werden.
      */
     void initView() {
+        // put start game button in the right place
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(gameBackground);
+        // put start game button in its place
+        constraintSet.connect(R.id.button_start_game, ConstraintSet.END, R.id.guideline_vertical, ConstraintSet.START);
+        constraintSet.connect(R.id.button_start_game, ConstraintSet.TOP, R.id.guideline90, ConstraintSet.BOTTOM);
+        // start game button right text size
+        //divide by density to get dp instead of pixels
+        bStartGame.setTextSize(getResources().getDimension(R.dimen.text_size_game_buttons) / getResources().getDisplayMetrics().density);
+        // make next round button visible
+        constraintSet.setVisibility(R.id.button_next_round, View.VISIBLE);
+        constraintSet.applyTo(gameBackground);
+
+
         //hier die bidlschrimgröße ansehen, maße der indikatoren und boardcells berechnen, den dingern ihre größen geben
-
-
         int gesamtHeight = griddiBoard.getHeight() + griddiPins.getHeight() + griddiSolution.getHeight();
 
         //erst die pin palette, weil da am meisten bekannt ist:
@@ -261,8 +271,7 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
             }
         }
         //pin palette
-        this.pinCells.forEach(cell ->
-                cell.display());
+        this.pinCells.forEach(BoardCell::display);
 
         // TODO ugly
         highlightView.setX(-1000);
