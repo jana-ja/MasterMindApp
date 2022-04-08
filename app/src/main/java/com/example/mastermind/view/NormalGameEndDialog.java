@@ -13,11 +13,11 @@ import androidx.fragment.app.DialogFragment;
 import com.example.mastermind.R;
 import com.google.android.material.button.MaterialButton;
 
-public class GameEndDialog extends DialogFragment {
+public class NormalGameEndDialog extends DialogFragment {
 
     private boolean won;
 
-    public GameEndDialog(boolean won) {
+    public NormalGameEndDialog(boolean won) {
 
         this.won = won;
     }

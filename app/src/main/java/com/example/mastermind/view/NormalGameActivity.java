@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
-
 import com.example.mastermind.R;
 import com.example.mastermind.model.PinRow;
 import com.example.mastermind.model.NormalGame;
@@ -89,7 +87,7 @@ public class NormalGameActivity extends GameActivity{
 
         StatsActivity.saveStatsToPreferences(this, stats);
 
-        GameEndDialog dialog = new GameEndDialog(won);
+        NormalGameEndDialog dialog = new NormalGameEndDialog(won);
         dialog.show(getSupportFragmentManager(), "game_end_alert");
 
     }
