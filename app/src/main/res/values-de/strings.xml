@@ -13,6 +13,11 @@
     <string name="button_text_start_game">Neues Spiel</string>
     <string name="game_won_text">Gewonnen!</string>
     <string name="game_lost_text">Verloren</string>
+    <string name="reverse_game_won_text">Dein Code wurde gefunden!</string>
+    <string name="reverse_game_lost_text">Dein Code wurde nicht gelöst</string>
+    <string name="is_in_solution">ist in der Lösung</string>
+    <string name="is_not_in_solution">ist nicht in der Lösung</string>
+
 
     <!-- SettingsActivity -->
     <string name="text_title_settings">Einstellungen</string>
@@ -41,6 +46,16 @@
     <string name="text_alert_negative">Nein</string>
     <string name="text_alert_okay">Okay</string>
     <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein Neues starten?</string>
+
+    <!-- planets -->
+    <string name="merkur">Mercury</string>
+    <string name="venus">Venus</string>
+    <string name="erde">Earth</string>
+    <string name="mars">Mars</string>
+    <string name="jupiter">Jupiter</string>
+    <string name="saturn">Saturn</string>
+    <string name="uranus">Uranus</string>
+    <string name="neptun">Neptune</string>
 
     <!-- generated -->
 </resources>

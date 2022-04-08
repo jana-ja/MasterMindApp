@@ -37,4 +37,27 @@ public enum PinColor {
                 return R.drawable.empty; //TODO default image?
         }
     }
+
+    public int getStringId(){
+        switch(this) {
+            case RED:
+                return R.string.merkur;
+            case ORANGE:
+                return R.string.venus;
+            case YELLOW:
+                return R.string.erde;
+            case GREEN:
+                return R.string.mars;
+            case BLUE:
+                return R.string.jupiter;
+            case PINK:
+                return R.string.saturn;
+            case GREY:
+                return R.string.uranus;
+            case WHITE:
+                return R.string.neptun;
+            default:
+                return 0;
+        }
+    }
 }

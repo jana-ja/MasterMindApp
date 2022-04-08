@@ -12,6 +12,10 @@
     <string name="button_text_start_game">New Game</string>
     <string name="game_won_text">You won!</string>
     <string name="game_lost_text">You lost</string>
+    <string name="reverse_game_won_text">Your code was found!</string>
+    <string name="reverse_game_lost_text">Your code was not found</string>
+    <string name="is_in_solution">is in the solution</string>
+    <string name="is_not_in_solution">is not in the solution</string>
 
     <!-- SettingsActivity -->
     <string name="text_title_settings">Settings</string>
@@ -47,6 +51,16 @@
     <string name="text_alert_negative">No</string>
     <string name="text_alert_okay">Okay</string>
     <string name="alert_text_start_game">Do your really want to discard the current game and start a new one?</string>
+
+    <!-- planets -->
+    <string name="merkur">Merkur</string>
+    <string name="venus">Venus</string>
+    <string name="erde">Erde</string>
+    <string name="mars">Mars</string>
+    <string name="jupiter">Jupiter</string>
+    <string name="saturn">Saturn</string>
+    <string name="uranus">Uranus</string>
+    <string name="neptun">Neptun</string>
 
     <!-- generated -->
 

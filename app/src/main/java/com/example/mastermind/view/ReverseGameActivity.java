@@ -3,7 +3,6 @@ package com.example.mastermind.view;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.mastermind.R;
@@ -22,8 +21,9 @@ public class ReverseGameActivity extends GameActivity {
     PinRow lastErgebi;
 
     public void makeToast(PinColor color, boolean positive){
-        String bla = positive? "" : "nicht ";
-        String text = color.toString().toLowerCase(Locale.ROOT) + " ist " + bla + "in der Lösung";
+        String bla = positive? getString(R.string.is_in_solution) : getString(R.string.is_not_in_solution);
+        String text =
+                getString(color.getStringId()) + " " + bla;
         Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
         toast.show();
     }
@@ -105,15 +105,10 @@ public class ReverseGameActivity extends GameActivity {
     @Override
     void endGame(boolean won) {
         super.endGame(won);
-        //TODO
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("lel")
-                .setCancelable(false)
-                .setPositiveButton("OK", (dialog, id) -> {
-                    //do things
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+
+        ReverseGameEndDialog dialog = new ReverseGameEndDialog(won);
+        dialog.show(getSupportFragmentManager(), "game_end_alert");
+
     }
 
     @Override
