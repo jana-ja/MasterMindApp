@@ -1,10 +1,8 @@
 package com.example.mastermind.view;
 
-import android.graphics.Color;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.mastermind.R;
@@ -23,8 +21,9 @@ public class ReverseGameActivity extends GameActivity {
     PinRow lastErgebi;
 
     public void makeToast(PinColor color, boolean positive){
-        String bla = positive? "" : "nicht ";
-        String text = color.toString().toLowerCase(Locale.ROOT) + " ist " + bla + "in der Lösung";
+        String bla = positive? getString(R.string.is_in_solution) : getString(R.string.is_not_in_solution);
+        String text =
+                getString(color.getStringId()) + " " + bla;
         Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
         toast.show();
     }
@@ -63,8 +62,6 @@ public class ReverseGameActivity extends GameActivity {
 
             userSolutionReady = true;
 
-            //TODO vllt pin palette deaktivieren?
-
             step = ai.firstStep();
         } else {
             // user input is set as solution and is okay with settings
@@ -79,7 +76,7 @@ public class ReverseGameActivity extends GameActivity {
             //display step
             for (int i = 0; i < boardCells[currentRound].length; i++) {
                 boardCells[currentRound][i].setPinColor(step[i]);
-                boardCells[currentRound][i].displayUnselected(this);
+                boardCells[currentRound][i].display();
             }
 
 
@@ -89,8 +86,7 @@ public class ReverseGameActivity extends GameActivity {
 //            indicators[currentRound][0].setTextColor(Color.RED);
 //            indicators[currentRound][0].setText(String.valueOf(ergebi.getCorrectPlaces()));
             //richtige farben
-            indicators[currentRound][1].setTextColor(Color.BLACK);
-            indicators[currentRound][1].setText(String.valueOf(ergebi.getCorrectColors()));
+            indicators[currentRound][1].setNumber(ergebi.getCorrectColors(), true);
 
 
 
@@ -107,15 +103,10 @@ public class ReverseGameActivity extends GameActivity {
     @Override
     void endGame(boolean won) {
         super.endGame(won);
-        //TODO
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("lel")
-                .setCancelable(false)
-                .setPositiveButton("OK", (dialog, id) -> {
-                    //do things
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+
+        ReverseGameEndDialog dialog = new ReverseGameEndDialog(won);
+        dialog.show(getSupportFragmentManager(), "game_end_alert");
+
     }
 
     @Override
@@ -138,11 +129,16 @@ public class ReverseGameActivity extends GameActivity {
     @Override
     protected void onClickSolutionCell(View v) {
         this.selectedBoardCell = (BoardCell) v;
+        // only do something when a pin color is selected and the board cell is in the currently active row
         if (selectedPinColor != null && !userSolutionReady) {
-            this.selectedBoardCell.setPinColor(selectedPinColor);
-            this.selectedBoardCell.displayUnselected(this);
-        } else {
-            //TODO fehlermeldung?
+            // when the specific pin color is already set -> remove it
+            if(selectedBoardCell.getPinColor() == selectedPinColor)
+                this.selectedBoardCell.setPinColor(PinColor.EMPTY);
+                // else set this pin color
+            else
+                this.selectedBoardCell.setPinColor(selectedPinColor);
+
+            this.selectedBoardCell.display();
         }
     }
 

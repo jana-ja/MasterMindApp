@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MasterMind\u00A0</string>
+
+    <!-- MainActivity -->
+    <string name="button_text_play">Spielen</string>
+    <string name="button_text_play_ai">Spielen KI</string>
+    <string name="button_text_settings">Einstellungen</string>
+    <string name="button_text_stats">Statistiken</string>
+
+    <!-- GameActivity -->
+    <string name="button_text_next_round">Nächste Runde</string>
+    <string name="button_text_start_game">Neues Spiel</string>
+    <string name="game_won_text">Gewonnen!</string>
+    <string name="game_lost_text">Verloren</string>
+    <string name="reverse_game_won_text">Dein Code wurde gefunden!</string>
+    <string name="reverse_game_lost_text">Dein Code wurde nicht gelöst</string>
+    <string name="is_in_solution">ist in der Lösung</string>
+    <string name="is_not_in_solution">ist nicht in der Lösung</string>
+
+
+    <!-- SettingsActivity -->
+    <string name="text_title_settings">Einstellungen</string>
+    <string name="game_settings_category">Spiel Einstellungen</string>
+    <string name="duplicate_pins_title">Farben mehrfach verwenden</string>
+    <string name="duplicate_pins_text">In der Lösung können Farben mehrfach vorkommen.</string>
+    <string name="empty_pins_title">Felder leer lassen</string>
+    <string name="empty_pins_text">In der Lösung können Felder leer gelassen werden.</string>
+    <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat.</string>
+    <string name="experimental_settings_category">Experimentelle Einstellungen</string>
+    <string name="ai_mode_title">AI Modus aktivieren</string>
+    <string name="ai_mode_text">Entsperrt den AI Spielmodus im Hauptmenü</string>
+
+    <!-- StatsActivity -->
+    <string name="text_title_stats">Statistiken</string>
+    <string name="stats_started_text">Gestartete Spiele:</string>
+    <string name="stats_won_text">Gewonnene Spiele:</string>
+    <string name="stats_lost_text">Verlorene Spiele:</string>
+    <string name="stats_quit_text">Nicht beendete Spiele:</string>
+    <string name="stats_avg_rounds_text">Durchschnittliche Versuche zum Gewinnen:</string>
+    <string name="button_text_reset_stats">Statistiken zurücksetzen</string>
+    <string name="alert_text_reset_stats">Wirklich die Statistiken löschen?</string>
+
+    <!-- allgemein -->
+    <string name="text_alert_positive">Ja</string>
+    <string name="text_alert_negative">Nein</string>
+    <string name="text_alert_okay">Okay</string>
+    <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein Neues starten?</string>
+
+    <!-- planets -->
+    <string name="merkur">Mercury</string>
+    <string name="venus">Venus</string>
+    <string name="erde">Earth</string>
+    <string name="mars">Mars</string>
+    <string name="jupiter">Jupiter</string>
+    <string name="saturn">Saturn</string>
+    <string name="uranus">Uranus</string>
+    <string name="neptun">Neptune</string>
+
+    <!-- generated -->
+</resources>

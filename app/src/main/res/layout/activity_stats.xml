@@ -6,8 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".view.StatsActivity"
     android:background="@color/background_color"
-    android:paddingHorizontal="20dp">
-
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_blank"
+        android:scaleType="centerCrop" />
     <TableLayout
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
@@ -22,17 +26,17 @@
         <TableRow>
             <TextView
                 android:gravity="start"
-                android:textSize="@dimen/stats_text_size"
+                android:textSize="@dimen/text_size_stats"
                 android:text="@string/stats_started_text"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
 
             <TextView
                 android:id="@+id/value_started"
                 android:gravity="end"
-                android:textSize="@dimen/stats_text_size"
-                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_stats"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
         </TableRow>
@@ -40,34 +44,34 @@
         <TableRow>
             <TextView
                 android:gravity="start"
-                android:textSize="@dimen/stats_text_size"
+                android:textSize="@dimen/text_size_stats"
                 android:text="@string/stats_won_text"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
 
             <TextView
                 android:id="@+id/value_won"
                 android:gravity="end"
-                android:textSize="@dimen/stats_text_size"
-                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_stats"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
         </TableRow>
         <TableRow>
             <TextView
                 android:gravity="start"
-                android:textSize="@dimen/stats_text_size"
+                android:textSize="@dimen/text_size_stats"
                 android:text="@string/stats_lost_text"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
 
             <TextView
                 android:id="@+id/value_lost"
                 android:gravity="end"
-                android:textSize="@dimen/stats_text_size"
-                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_stats"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
         </TableRow>
@@ -75,17 +79,17 @@
         <TableRow>
             <TextView
                 android:gravity="start"
-                android:textSize="@dimen/stats_text_size"
+                android:textSize="@dimen/text_size_stats"
                 android:text="@string/stats_quit_text"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
 
             <TextView
                 android:id="@+id/value_quit"
                 android:gravity="end"
-                android:textSize="@dimen/stats_text_size"
-                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_stats"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
         </TableRow>
@@ -93,17 +97,17 @@
         <TableRow>
             <TextView
                 android:gravity="start"
-                android:textSize="@dimen/stats_text_size"
+                android:textSize="@dimen/text_size_stats"
                 android:text="@string/stats_avg_rounds_text"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
 
             <TextView
                 android:id="@+id/value_avg_rounds"
                 android:gravity="end"
-                android:textSize="@dimen/stats_text_size"
-                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_stats"
+                android:textColor="@color/textcolor"
                 android:paddingVertical="@dimen/table_vert_padding"
                 android:paddingHorizontal="@dimen/table_hor_padding"/>
         </TableRow>
@@ -126,14 +130,15 @@
 <!--        -->
 <!--    </androidx.gridlayout.widget.GridLayout>-->
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_reset_stats"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="@string/button_text_reset_stats"
-        android:textColor="@color/black"
+        android:textColor="@color/textcolor"
+        app:strokeColor="@color/buttonborder"
+        android:textSize="@dimen/text_size_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,8 +160,8 @@
 
     <TextView
         android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/title_small"
+        android:textColor="@color/textcolor"
+        android:textSize="@dimen/text_size_small_title"
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

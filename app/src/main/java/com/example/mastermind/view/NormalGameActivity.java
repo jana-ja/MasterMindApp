@@ -2,10 +2,7 @@ package com.example.mastermind.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.view.View;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.example.mastermind.R;
 import com.example.mastermind.model.PinRow;
@@ -43,11 +40,9 @@ public class NormalGameActivity extends GameActivity{
         if (ergebi.isOkay()) {
             //die zahlen wiedergeben
             //richtige stellen
-            indicators[currentRound][0].setTextColor(Color.RED);
-            indicators[currentRound][0].setText(String.valueOf(ergebi.getCorrectPlaces()));
+            indicators[currentRound][0].setNumber(ergebi.getCorrectPlaces(), false);
             //richtige farben
-            indicators[currentRound][1].setTextColor(Color.BLACK);
-            indicators[currentRound][1].setText(String.valueOf(ergebi.getCorrectColors()));
+            indicators[currentRound][1].setNumber(ergebi.getCorrectColors(), true);
 
             if (ergebi.getCorrectPlaces() == 4 || gamei.getCurrenRound() > settings.getNumberRounds()-1) {
 
@@ -69,15 +64,13 @@ public class NormalGameActivity extends GameActivity{
         PinColor[] solutionPinColors = gamei.getSolution();
         for (int i = 0; i < solutionCells.size(); i++) {
             solutionCells.get(i).setPinColor(solutionPinColors[i]);
-            solutionCells.get(i).displayUnselected(this);
+            solutionCells.get(i).display();
         }
 
         //add to stats
         Stats stats = StatsActivity.loadStatsFromPreferences(this);
 
-        String dialogText;
         if (won) {
-            dialogText = "GEWONNEN";
             int numberWon = stats.getNumberWon();
             //anzahl der rounds zu den avgRoundsPerWin dazu rechnen
             int oldAvgRounds = stats.getAvgRoundsPerWin();
@@ -88,23 +81,15 @@ public class NormalGameActivity extends GameActivity{
 
         }
         else {
-            dialogText = "VERLOREN";
             int numberLost = stats.getNumberLost();
             stats.setNumberLost(numberLost);
         }
 
         StatsActivity.saveStatsToPreferences(this, stats);
 
+        NormalGameEndDialog dialog = new NormalGameEndDialog(won);
+        dialog.show(getSupportFragmentManager(), "game_end_alert");
 
-        //TODO cool machen
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(dialogText)
-                .setCancelable(false)
-                .setPositiveButton("OK", (dialog, id) -> {
-                    //do things
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
     @Override
@@ -124,11 +109,16 @@ public class NormalGameActivity extends GameActivity{
 
         BoardCell celli = (BoardCell) v;
         this.selectedBoardCell = celli;
+        // only do something when a pin color is selected and the board cell is in the currently active row
         if (selectedPinColor != null && celli.getxPos() == gamei.getCurrenRound()) {
-            this.selectedBoardCell.setPinColor(selectedPinColor);
-            this.selectedBoardCell.displayUnselected(this);
-        } else {
-            //TODO fehlermeldung?
+            // when the specific pin color is already set -> remove it
+            if(selectedBoardCell.getPinColor() == selectedPinColor)
+                this.selectedBoardCell.setPinColor(PinColor.EMPTY);
+            // else set this pin color
+            else
+                this.selectedBoardCell.setPinColor(selectedPinColor);
+
+            this.selectedBoardCell.display();
         }
     }
 }

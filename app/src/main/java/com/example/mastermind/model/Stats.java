@@ -17,8 +17,6 @@ public class Stats {
 
     //TODO infos zu den einstellung (schwierigkeit) speichern?
 
-    //TODO das hier richtig machen
-
     public Stats() {
     }
 

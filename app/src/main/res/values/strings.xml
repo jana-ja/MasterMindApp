@@ -1,49 +1,66 @@
 <resources>
-    <string name="app_name">MasterMind</string>
+    <string name="app_name">MasterMind\u00A0</string>
 
     <!-- MainActivity -->
-    <string name="button_text_play">Spielen</string>
-    <string name="button_text_settings">Einstellungen</string>
-    <string name="button_text_stats">Statistiken</string>
+    <string name="button_text_play">Play</string>
+    <string name="button_text_play_ai">Play AI</string>
+    <string name="button_text_settings">Settings</string>
+    <string name="button_text_stats">Statistics</string>
 
     <!-- GameActivity -->
-    <string name="button_text_next_round">Nächste Runde</string>
-    <string name="button_text_start_game">Neues Spiel</string>
+    <string name="button_text_next_round">Next Round</string>
+    <string name="button_text_start_game">New Game</string>
+    <string name="game_won_text">You won!</string>
+    <string name="game_lost_text">You lost</string>
+    <string name="reverse_game_won_text">Your code was found!</string>
+    <string name="reverse_game_lost_text">Your code was not found</string>
+    <string name="is_in_solution">is in the solution</string>
+    <string name="is_not_in_solution">is not in the solution</string>
 
     <!-- SettingsActivity -->
-    <string name="text_title_settings">Einstellungen</string>
-    <string name="game_settings_category">Spiel Einstellungen</string>
-    <string name="duplicate_pins_title">Farben mehrfach verwenden</string>
-    <string name="duplicate_pins_text">In der Lösung können Farben mehrfach vorkommen.</string>
-    <string name="empty_pins_title">Felder leer lassen</string>
-    <string name="empty_pins_text">In der Lösung können Felder leer gelassen werden.</string>
-    <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat.</string>
-    <string name="experimental_settings_category">Experimentelle Einstellungen</string>
-    <string name="ai_mode_title">AI Modus aktivieren</string>
-    <string name="ai_mode_text">Entsperrt den AI Spielmodus im Hauptmenü</string>
+    <string name="text_title_settings">Settings</string>
+    <string name="game_settings_category">Game Settings</string>
+    <string name="duplicate_pins_title">Use duplicate colors</string>
+    <string name="duplicate_pins_text">Colors can occur multiple times in the solution.</string>
+    <string name="empty_pins_title">Leave fields empty</string>
+    <string name="empty_pins_text">Fields can be left empty in the solution.</string>
+    <string name="round_number_text">Number of tries you got in the game.</string>
+    <string name="experimental_settings_category">Experimental Settings</string>
+    <string name="ai_mode_title">Activate AI game mode</string>
+    <string name="ai_mode_text">Unlocks AI game mode in main menu (alpha).</string>
 
     <!-- StatsActivity -->
-    <string name="text_title_stats">Statistiken</string>
-    <string name="stats_started_text">Gestartete Spiele:</string>
-    <string name="stats_won_text">Gewonnene Spiele:</string>
-    <string name="stats_lost_text">Verlorene Spiele:</string>
-    <string name="stats_quit_text">Nicht beendete Spiele:</string>
-    <string name="stats_avg_rounds_text">Durchschnittliche Versuche zum Gewinnen:</string>
-    <string name="button_text_reset_stats">Statistiken zurücksetzen</string>
-    <string name="alert_text_reset_stats">Wirklich die Statistiken löschen?</string>
+    <string name="text_title_stats">Statistics</string>
+    <string name="stats_started_text">Games started:</string>
+    <string name="stats_won_text">Games won:</string>
+    <string name="stats_lost_text">Games lost:</string>
+    <string name="stats_quit_text">Games not finished:</string>
+    <string name="stats_avg_rounds_text">Average tries to win:</string>
+    <string name="button_text_reset_stats">Reset statistics</string>
+    <string name="alert_text_reset_stats">Do you really want to reset your statistics?</string>
 
-    <!-- stats shared preference -->
-    <string name="stats_preference_file_key">stats_file</string>
-    <string name="stats_started_key">stats_started</string>
-    <string name="stats_won_key">stats_won</string>
-    <string name="stats_lost_key">stats_lost</string>
-    <string name="stats_avg_rounds_key">stats_avg_rounds</string>
+    <!-- keys stats shared preference -->
+    <string name="stats_preference_file_key" translatable="false">stats_file</string>
+    <string name="stats_started_key" translatable="false">stats_started</string>
+    <string name="stats_won_key" translatable="false">stats_won</string>
+    <string name="stats_lost_key" translatable="false">stats_lost</string>
+    <string name="stats_avg_rounds_key" translatable="false">stats_avg_rounds</string>
 
     <!-- allgemein -->
-    <string name="text_alert_positive">Ja</string>
-    <string name="text_alert_negative">Nein</string>
-    <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein Neues starten?</string>
-    <string name="button_text_play_ai">spielen KI</string>
+    <string name="text_alert_positive">Yes</string>
+    <string name="text_alert_negative">No</string>
+    <string name="text_alert_okay">Okay</string>
+    <string name="alert_text_start_game">Do your really want to discard the current game and start a new one?</string>
+
+    <!-- planets -->
+    <string name="merkur">Merkur</string>
+    <string name="venus">Venus</string>
+    <string name="erde">Erde</string>
+    <string name="mars">Mars</string>
+    <string name="jupiter">Jupiter</string>
+    <string name="saturn">Saturn</string>
+    <string name="uranus">Uranus</string>
+    <string name="neptun">Neptun</string>
 
     <!-- generated -->
 

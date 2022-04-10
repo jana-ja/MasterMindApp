@@ -2,14 +2,14 @@ package com.example.mastermind.view;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.preference.PreferenceManager;
 
@@ -23,25 +23,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-abstract public class GameActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
+abstract public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     Game gamei;
 
+//  view components
     ConstraintLayout gameBackground;
-
     GridLayout griddiSolution;
     GridLayout griddiBoard;
     GridLayout griddiPins;
     Button bStartGame;
     Button bNextRound;
+    ImageView highlightView;
 
     List<BoardCell> solutionCells;
     BoardCell[][] boardCells;
-    Indikator[][] indicators;
+    Indicator[][] indicators;
     List<BoardCell> pinCells;
 
     BoardCell selectedBoardCell;
     PinColor selectedPinColor;
+
 
     private boolean gameRunning = false;
 
@@ -49,17 +51,9 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
     private boolean firstRound;
 
-    private final int MARGIN_VERT = 10;
-    private final int MARGIN_HORI = 10;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //TODO großer spiel starten knopf am anfang
-        //TODO trenn linien zw den dingern
-        //TODO fragezeichen auf die dinger
-        //TODO trennung brett und knöpfe
-        //TODO alert design
-        //TODO zeilenumbruch stats?
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -73,11 +67,8 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         bStartGame = findViewById(R.id.button_start_game);
         bStartGame.setOnClickListener(v -> {
             if (gameRunning) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(getString(R.string.alert_text_start_game)).setPositiveButton(R.string.text_alert_positive, this)
-                        .setNegativeButton(R.string.text_alert_negative, (dialog, which) -> {
-
-                        }).show();
+                CustomAlertDialog dialog = new CustomAlertDialog(getString(R.string.alert_text_start_game), this);
+                dialog.show(getSupportFragmentManager(), "new_game_alert");
             } else {
                 startGame();
             }
@@ -87,6 +78,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
                 nextRound());
         bNextRound.setEnabled(false);
 
+        highlightView = new ImageView(this);
 
         firstRound = true;
         loadSettings();
@@ -107,9 +99,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         String text = "Die Eingabe entspricht nicht den Einstellungen.";
 
         final Snackbar snackBar = Snackbar.make(gameBackground, text, Snackbar.LENGTH_SHORT);
-        snackBar.setAction("ok", v -> {
-            snackBar.dismiss();
-        });
+        snackBar.setAction("ok", v -> snackBar.dismiss());
         snackBar.show();
 
 //        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
@@ -135,20 +125,35 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         resetView();
     }
 
+    /**
+     * berechnungen hier sind jetzt abhängig vom in XML angegebenem padding. sollte alles automatisch daran angepasst werden. kann für alle 3 grids beliebig gewählt werden.
+     */
     void initView() {
+        // put start game button in the right place
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(gameBackground);
+        // put start game button in its place
+        constraintSet.connect(R.id.button_start_game, ConstraintSet.END, R.id.guideline_vertical, ConstraintSet.START);
+        constraintSet.connect(R.id.button_start_game, ConstraintSet.TOP, R.id.guideline90, ConstraintSet.BOTTOM);
+        // start game button right text size
+        //divide by density to get dp instead of pixels
+        bStartGame.setTextSize(getResources().getDimension(R.dimen.text_size_game_buttons) / getResources().getDisplayMetrics().density);
+        // make next round button visible
+        constraintSet.setVisibility(R.id.button_next_round, View.VISIBLE);
+        constraintSet.applyTo(gameBackground);
+
+
         //hier die bidlschrimgröße ansehen, maße der indikatoren und boardcells berechnen, den dingern ihre größen geben
-
-
         int gesamtHeight = griddiBoard.getHeight() + griddiPins.getHeight() + griddiSolution.getHeight();
 
         //erst die pin palette, weil da am meisten bekannt ist:
         //höhe irrelevant, weil die höhe dieses grids zuerst festgelegt wird und weils halt so ist kB mehr
-        int pinPaletteWidth = this.griddiPins.getWidth() - 2 * MARGIN_HORI;
+        int pinPaletteWidth = this.griddiPins.getWidth() - griddiPins.getPaddingStart() - griddiPins.getPaddingEnd();
         int widthPerPin = pinPaletteWidth / griddiPins.getColumnCount();
-        int pinGridHeight = widthPerPin + 2 * MARGIN_VERT;
+        int pinGridHeight = widthPerPin + griddiPins.getPaddingTop() + griddiPins.getPaddingBottom();
         //größe der boardcells in griddiPins
         for (BoardCell pinCell : this.pinCells) {
-            pinCell.setLayoutParams(widthPerPin);
+            pinCell.setLayoutParams(widthPerPin, widthPerPin);
         }
         //höhe von griddiPins daran anpassen
         setGridLayoutParams(griddiPins, pinGridHeight);
@@ -159,15 +164,15 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         //solution + board = solution alt + board alt
         // = gesamt - pinGridHeight
          int remainingVertSpace = gesamtHeight - pinGridHeight;
-         int effectiveSpace = remainingVertSpace - 4 * MARGIN_VERT;
+         int effectiveSpace = remainingVertSpace - griddiBoard.getPaddingTop() - griddiBoard.getPaddingBottom() - griddiSolution.getPaddingTop() - griddiSolution.getPaddingBottom();
          //das muss ich durch anzahl reihen + 1 teilen
         int heightPerCell = effectiveSpace / (settings.getNumberRounds() + 1);
 
         //weite
-        int boardWidth = this.griddiBoard.getWidth() - 2 * MARGIN_HORI;
+        int boardWidth = this.griddiBoard.getWidth() - griddiBoard.getPaddingStart() - griddiBoard.getPaddingEnd();
         int widthPerBoardCell = boardWidth / griddiBoard.getColumnCount();
 
-        int solutionWidth = this.griddiSolution.getWidth() - 2 * MARGIN_HORI;
+        int solutionWidth = this.griddiSolution.getWidth() - griddiSolution.getPaddingStart() - griddiSolution.getPaddingEnd();
         int widthPerSolutionCell = solutionWidth / griddiSolution.getColumnCount(); //wird niemals kleiner als widthPerBoardCell sein -> wird niemals minCellSize sein
 
 
@@ -183,7 +188,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         } else if (minCellSize == heightPerCell){
             //begrenzt durch höhe des grids / länge
 
-            //rest des space an die indikatoren geben
+            //rest des horizontalen space an die indikatoren geben
             //restlicher space in der weite:
             int remainingHoriSpace = boardWidth - minCellSize * 6;
             indicatorWidth += remainingHoriSpace / 2;
@@ -192,33 +197,46 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
         //für solutioncells setzen
         for (BoardCell solutionCell : solutionCells) {
-            solutionCell.setLayoutParams(minCellSize);
+            solutionCell.setLayoutParams(minCellSize, minCellSize);
         }
         //TODO muss ich nicht auch für die indikatoren setzen die platzhalter im solution grid sind??
 
         //für alle boardcells und indikatoren setzen
         for (BoardCell[] boardCellRow : this.boardCells) {
             for (BoardCell boardCell : boardCellRow) {
-                boardCell.setLayoutParams(minCellSize);
+                boardCell.setLayoutParams(minCellSize, minCellSize);
             }
         }
-        for (Indikator[] indicatorRow : this.indicators) {
-            for (Indikator indikator : indicatorRow) {
-                indikator.setLayoutParams(indicatorWidth, minCellSize);
+        for (Indicator[] indicatorRow : this.indicators) {
+            for (Indicator indicator : indicatorRow) {
+                indicator.setLayoutParams(indicatorWidth, minCellSize);
             }
         }
 
         //den grids so viel size geben wie sie brauchen und dann zentrieren sie sich im constraing layout weil die gechained sind
-        int griddiSolutionHeight = minCellSize + 2 * MARGIN_VERT;
-        int griddiBoardHeight = minCellSize * settings.getNumberRounds() + 2 * MARGIN_VERT;
+        int griddiSolutionHeight = minCellSize + griddiSolution.getPaddingTop() + griddiSolution.getPaddingBottom();
+        int griddiBoardHeight = minCellSize * settings.getNumberRounds() + griddiBoard.getPaddingTop() + griddiBoard.getPaddingBottom();
         setGridLayoutParams(griddiBoard, griddiBoardHeight);
         setGridLayoutParams(griddiSolution, griddiSolutionHeight);
+
+
+        // highlight image view x prozent größer machen als die minCellSize damit planeten einen schönen rahmen bekommen
+        float dingsprozent = 1.3f;
+        highlightView.setImageResource(R.drawable.aura);
+        highlightView.setMaxWidth((int)(minCellSize * dingsprozent));
+        highlightView.setMinimumWidth((int)(minCellSize * dingsprozent));
+        highlightView.setMaxHeight((int)(minCellSize * dingsprozent));
+        highlightView.setMinimumHeight((int)(minCellSize * dingsprozent));
+        highlightView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        highlightView.setAdjustViewBounds(true);
+        gameBackground.addView(highlightView);
+        griddiPins.bringToFront();
     }
 
     private void setGridLayoutParams(GridLayout griddi, int height) {
         ConstraintLayout.LayoutParams griddiPinsParams = (ConstraintLayout.LayoutParams)griddi.getLayoutParams();
-        griddiPinsParams.height = height - 2 * MARGIN_VERT;
-        griddiPinsParams.setMargins(MARGIN_HORI, MARGIN_VERT, MARGIN_HORI, MARGIN_VERT);
+        griddiPinsParams.height = height;
+//        griddiPinsParams.setMargins(MARGIN_HORI, MARGIN_VERT, MARGIN_HORI, MARGIN_VERT);
         griddi.setLayoutParams(griddiPinsParams);
     }
 
@@ -229,8 +247,8 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
 
         //solution griddi
         this.solutionCells.forEach(celli -> {
-            celli.setPinColor(PinColor.EMPTY);
-            celli.displayUnselected(this);
+            celli.setPinColor(PinColor.SOLUTION);
+            celli.display();
         });
 
         //board cell griddi
@@ -238,25 +256,27 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
             for (BoardCell boardCell : boardCellRow) {
 //                boardCell.setMinimumHeight(boardCell.getWidth());
                 boardCell.setPinColor(PinColor.EMPTY);
-                boardCell.displayUnselected(this);
+                boardCell.display();
             }
         }
         //indicators
-        for (Indikator[] indicatorRow : indicators) {
-            for (Indikator indikator : indicatorRow) {
-                indikator.setText(""); //TODO
+        for (Indicator[] indicatorRow : indicators) {
+            for (Indicator indikator : indicatorRow) {
+                indikator.setNumber(-1,true); //-1 is invalid, default value is transparent
             }
         }
         //pin palette
-        this.pinCells.forEach(cell ->
-                cell.displayUnselected(this));
+        this.pinCells.forEach(BoardCell::display);
+
+        // TODO ugly
+        highlightView.setX(-1000);
+        highlightView.setY(-1000);
 
     }
 
     void highlightCurrentRow() {
         int row = gamei.getCurrenRound();
-        indicators[row][0].setTextColor(Color.BLACK);
-        indicators[row][0].setText("\u2192");
+        indicators[row][0].highlight();
     }
 
     /**
@@ -272,7 +292,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         for (int j = 0; j < griddiSolution.getColumnCount(); j++) {
             if (j == 0 || j == 5) {
                 //dummy damit so breit ist wie board dadrunter
-                Indikator indi = new Indikator(this, 0, j);
+                Indicator indi = new Indicator(this, 0, j);
                 griddiSolution.addView(indi);
             } else {
                 BoardCell boardCell = new BoardCell(this, 0, j);
@@ -290,7 +310,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         griddiBoard.setRowCount(numberRows);
         griddiBoard.setColumnCount(6);
         boardCells = new BoardCell[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 2];
-        indicators = new Indikator[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 4];
+        indicators = new Indicator[griddiBoard.getRowCount()][griddiBoard.getColumnCount() - 4];
 
         for (int i = griddiBoard.getRowCount() - 1; i >= 0; i--) {
             //gibt 10 rows
@@ -298,7 +318,7 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
                 //gibt 6 columns
                 if (j == 0 || j == 5) {
                     //nach links und rechts müssen text für die indikatoren
-                    Indikator indi = new Indikator(this, i, j);
+                    Indicator indi = new Indicator(this, i, j);
                     //%4 für indizierung des indikator arrays
                     indicators[i][j % 4] = indi;
 
@@ -329,41 +349,34 @@ abstract public class GameActivity extends AppCompatActivity implements DialogIn
         for (int j = 0; j < griddiPins.getColumnCount(); j++) {
             BoardCell boardCell = new BoardCell(this, 0, j);
             boardCell.setPinColor(PinColor.values()[j]);
-            boardCell.displayUnselected(this);
-            boardCell.setOnClickListener(v -> {
-                BoardCell celli = (BoardCell) v;
-                this.selectedPinColor = celli.pinColor;
-                //die anderen unselected machen
-                this.pinCells.forEach(cell ->
-                        cell.displayUnselected(this));
-                //dieses selected machen
-                celli.displaySelected(this);
-            });
+            boardCell.display();
+            boardCell.setOnClickListener(this::onClickPinCell);
             griddiPins.addView(boardCell);
             pinCells.add(boardCell);
         }
+    }
 
+    protected void onClickPinCell(View v){
+        BoardCell celli = (BoardCell) v;
+        this.selectedPinColor = celli.getPinColor();
+        //dieses selected machen - highlight imageview an den platz bewegen
+        int[] location = new int[2];
+        celli.getLocationOnScreen(location);
+        int[] highlightLocation = new int[2];
+        highlightView.getLocationOnScreen(highlightLocation);
+        highlightView.setX(highlightView.getX() + location[0] - highlightLocation[0] - highlightView.getWidth()/2 + celli.getWidth()/2);
+        highlightView.setY(highlightView.getY() + location[1] - highlightLocation[1] - highlightView.getHeight()/2 + celli.getHeight()/2);
     }
 
     protected abstract void onClickSolutionCell(View v);
 
     protected abstract void onClickBoardCell(View v);
 
-    void onclickSolutionCell(){
-
-    }
-
     // für dialog wenn man neues spiel macht obwohl grade eins läuft
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-        switch (which) {
-            case DialogInterface.BUTTON_POSITIVE:
-                startGame();
-                break;
-
-            case DialogInterface.BUTTON_NEGATIVE:
-                //No button clicked
-                break;
+    public void onClick(View view) {
+        if (view.getId() == DialogInterface.BUTTON_POSITIVE) {
+            startGame();
         }
     }
 }

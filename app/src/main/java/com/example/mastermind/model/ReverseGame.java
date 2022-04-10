@@ -4,7 +4,6 @@ public class ReverseGame extends Game{
 
     public ReverseGame(Settings settings) {
         super(settings);
-        // TODO get solution from user input
     }
 
     public void setSolution(PinColor[] solution){

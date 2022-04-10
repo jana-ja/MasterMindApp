@@ -1,9 +1,11 @@
 package com.example.mastermind.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,7 +19,7 @@ import com.example.mastermind.model.Stats;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatsActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
+public class StatsActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView valueStarted, valueWon, valueLost, valueQuit, valueAvgRounds;
     Button btnResetStats;
@@ -38,9 +40,8 @@ public class StatsActivity extends AppCompatActivity implements DialogInterface.
 
         this.btnResetStats = findViewById(R.id.button_reset_stats);
         this.btnResetStats.setOnClickListener(v -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(getString(R.string.alert_text_reset_stats)).setPositiveButton(R.string.text_alert_positive, this)
-                        .setNegativeButton(R.string.text_alert_negative, this).show();
+                CustomAlertDialog dialog = new CustomAlertDialog(getString(R.string.alert_text_reset_stats), this);
+                dialog.show(getSupportFragmentManager(), "reset_stats_alert");
         });
 
         stats = loadStatsFromPreferences(this);
@@ -120,17 +121,10 @@ public class StatsActivity extends AppCompatActivity implements DialogInterface.
     }
 
 
-
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-        switch (which) {
-            case DialogInterface.BUTTON_POSITIVE:
-                resetStats();
-                break;
-
-            case DialogInterface.BUTTON_NEGATIVE:
-                //No button clicked
-                break;
+    public void onClick(View view) {
+        if (view.getId() == R.id.button_positive) {
+            resetStats();
         }
     }
 }

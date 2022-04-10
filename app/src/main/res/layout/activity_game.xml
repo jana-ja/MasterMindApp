@@ -6,15 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="fill_horizontal"
-    android:background="@color/wood"
-    android:padding="10dp"
     app:layout_gravity="fill_horizontal"
     tools:context=".view.GameActivity">
-
+    <ImageView
+        android:id="@+id/background_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop" />
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/solution_cells"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/board_cells"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +29,7 @@
         android:id="@+id/board_cells"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toTopOf="@+id/pincolor_palette"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +40,7 @@
         android:id="@+id/pincolor_palette"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline90"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,33 +52,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
+        app:layout_constraintGuide_percent="0.92" />
 
     <Button
         android:id="@+id/button_start_game"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
         android:text="@string/button_text_start_game"
-        android:textColor="@color/black"
+        android:textColor="@color/game_button_text"
+        android:textSize="@dimen/text_size_init_new_game_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline90" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_next_round"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
         android:text="@string/button_text_next_round"
-        android:textColor="@color/black"
+        android:textColor="@color/game_button_text"
+        android:textSize="@dimen/text_size_game_buttons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/guideline90" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline90"
+        android:visibility="invisible"/>
 
 
     <androidx.constraintlayout.widget.Guideline

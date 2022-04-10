@@ -6,18 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity"
     android:background="@color/background_color">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_blank"
+        android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/textView"
-        android:textSize="@dimen/title_big"
+        android:textSize="@dimen/text_size_big_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:text="@string/app_name"
+        android:fontFamily="@font/title_font"
         app:layout_constraintBottom_toTopOf="@+id/guideline_main_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_main_1"
@@ -26,49 +30,57 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_play"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_text_play"
-        android:textColor="@color/black"
+        android:textColor="@color/textcolor"
+        android:textSize="@dimen/text_size_button"
+        app:strokeColor="@color/buttonborder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline_main_1"
         app:layout_constraintBottom_toTopOf="@+id/button_play_ai"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_play_ai"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_text_play_ai"
-        android:textColor="@color/black"
+        android:textColor="@color/textcolor"
+        android:textSize="@dimen/text_size_button"
+        app:strokeColor="@color/buttonborder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_play"
         app:layout_constraintBottom_toTopOf="@+id/button_settings"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_settings"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_text_settings"
-        android:textColor="@color/black"
+        android:textColor="@color/textcolor"
+        android:textSize="@dimen/text_size_button"
+        app:strokeColor="@color/buttonborder"
         app:layout_constraintBottom_toTopOf="@+id/button_stats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_play_ai" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_text_stats"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:textColor="@color/black"
+        android:textColor="@color/textcolor"
+        android:textSize="@dimen/text_size_button"
+        app:strokeColor="@color/buttonborder"
         app:layout_constraintBottom_toTopOf="@+id/guideline_main_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,30 +8,56 @@ import androidx.core.content.ContextCompat;
 import com.example.mastermind.R;
 
 public enum PinColor {
-    RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, EMPTY;
+    RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, EMPTY, SOLUTION;
 
-    public int getColor(Context context){
+
+    public int getImageName(){
         switch(this){
-            case BLUE:
-                return ContextCompat.getColor(context, R.color.blue_pin);
-            case GREEN:
-                return ContextCompat.getColor(context, R.color.green_pin);
-            case ORANGE:
-                return ContextCompat.getColor(context, R.color.orange_pin);
-            case PINK:
-                return ContextCompat.getColor(context, R.color.pink_pin);
             case RED:
-                return ContextCompat.getColor(context, R.color.red_pin);
-            case WHITE:
-                return ContextCompat.getColor(context, R.color.white_pin);
-            case GREY:
-                return ContextCompat.getColor(context, R.color.grey_pin);
+                return R.drawable.merkur;
+            case ORANGE:
+                return R.drawable.venus;
             case YELLOW:
-                return ContextCompat.getColor(context, R.color.yellow_pin);
+                return R.drawable.erde;
+            case GREEN:
+                return R.drawable.mars;
+            case BLUE:
+                return R.drawable.jupiter;
+            case PINK:
+                return R.drawable.saturn;
+            case GREY:
+                return R.drawable.uranus;
+            case WHITE:
+                return R.drawable.neptun;
             case EMPTY:
-                return ContextCompat.getColor(context, R.color.empty_pin);
+                return R.drawable.empty;
+            case SOLUTION:
+                return R.drawable.black_hole;
             default:
-                return Color.TRANSPARENT;
+                return R.drawable.empty;
+        }
+    }
+
+    public int getStringId(){
+        switch(this) {
+            case RED:
+                return R.string.merkur;
+            case ORANGE:
+                return R.string.venus;
+            case YELLOW:
+                return R.string.erde;
+            case GREEN:
+                return R.string.mars;
+            case BLUE:
+                return R.string.jupiter;
+            case PINK:
+                return R.string.saturn;
+            case GREY:
+                return R.string.uranus;
+            case WHITE:
+                return R.string.neptun;
+            default:
+                return 0;
         }
     }
 }

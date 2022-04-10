@@ -30,8 +30,11 @@ public class GameAI {
     ReverseGameActivity gameActivity;
 
     public GameAI(Settings settings) {
+        //TODO testen ob immernoch alles funktionoert, nachdem ich bei PinColor SOLUTION als weiteren typ hinzugefügt habe
         this.settings = settings;
         colors = new ArrayList<>(Arrays.asList(PinColor.values()));
+        //remove last element (because PinColor.SOLUTION is not used here)
+        colors.remove(colors.size() - 1);
         colorInSolution = new Boolean[colors.size()];
         allClauses = new Vec<>();
 
@@ -54,6 +57,7 @@ public class GameAI {
 //        if(!settings.isEmptyPins()) {
             colorInSolution[colorInSolution.length - 1] = false;
 //            colorPossible[colorPossible.length - 1] = false;
+        // remove last element (PinColor.EMPTY) because it is not used with this setting
             colors.remove(colors.size() - 1);
 //        }
 

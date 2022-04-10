@@ -1,38 +1,44 @@
 package com.example.mastermind.view;
 
 import android.content.Context;
-import android.view.Gravity;
+import android.graphics.Color;
 import android.widget.ImageView;
 
-import androidx.core.widget.TextViewCompat;
 import androidx.gridlayout.widget.GridLayout;
 
-import com.example.mastermind.R;
 
-public class Indikator extends androidx.appcompat.widget.AppCompatTextView {
+public abstract class Cell extends androidx.appcompat.widget.AppCompatImageButton{
+    int xPos, yPos; //achtung xpos wird von unten nach oben indiziert, x=0 ist also ganz unten, y=0 ist links
 
-    private int xPos, yPos;
-
-    public Indikator(Context context) {
+    public Cell(Context context, int xPos, int yPos) {
         super(context);
 
-
-    }
-
-    public Indikator(Context context, int xPos, int yPos) {
-        super(context);
         this.xPos = xPos;
         this.yPos = yPos;
 
-        //TODO wenn ich das wegmache uentriert sich die solution nicht mehr, gute lösung finden oder so lassen?
+
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
         params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-        this.setLayoutParams(params);
-        this.setGravity(Gravity.CENTER);
 
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(this, AUTO_SIZE_TEXT_TYPE_UNIFORM);
+        this.setLayoutParams(params);
+
+
+        // to use image resources
+        this.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        this.setAdjustViewBounds(true);
+        this.setPadding(0,0,0,0);
+        this.setBackgroundColor(Color.TRANSPARENT);
     }
+
+    public int getxPos() {
+        return xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
     public void setLayoutParams(int width, int height){
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         double dings = 0.95;
