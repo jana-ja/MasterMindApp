@@ -5,6 +5,7 @@
     <!-- MainActivity -->
     <string name="button_text_play">Spielen</string>
     <string name="button_text_play_ai">Spielen KI</string>
+    <string name="button_text_how_to_play">Anleitung</string>
     <string name="button_text_settings">Einstellungen</string>
     <string name="button_text_stats">Statistiken</string>
 
