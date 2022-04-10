@@ -56,7 +56,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_play"
-        app:layout_constraintBottom_toTopOf="@+id/button_settings"/>
+        app:layout_constraintBottom_toTopOf="@+id/button_how_to_play"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_how_to_play"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_text_how_to_play"
+        android:textColor="@color/textcolor"
+        android:textSize="@dimen/text_size_button"
+        app:layout_constraintBottom_toTopOf="@+id/button_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_play_ai"
+        app:strokeColor="@color/buttonborder" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_settings"
@@ -66,11 +80,11 @@
         android:text="@string/button_text_settings"
         android:textColor="@color/textcolor"
         android:textSize="@dimen/text_size_button"
-        app:strokeColor="@color/buttonborder"
         app:layout_constraintBottom_toTopOf="@+id/button_stats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_play_ai" />
+        app:layout_constraintTop_toBottomOf="@+id/button_how_to_play"
+        app:strokeColor="@color/buttonborder" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_stats"
