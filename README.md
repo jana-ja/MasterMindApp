@@ -1,4 +1,4 @@
-# MasterMindApp
+## MasterMindApp
 
 When I learned about the game "MasterMind" I immediately got the motivation to create my own app version of it.  
 I really enjoy puzzle games with short rounds that you can play a quick round of in between your daily acitvites, so this game was a perfect fit for me.  
