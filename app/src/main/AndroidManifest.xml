@@ -28,6 +28,11 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
         <activity
+            android:name=".view.HowToPlayActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <activity
             android:name=".view.SettingsActivity"
             android:screenOrientation="portrait"
             android:exported="false"

@@ -13,7 +13,7 @@ import com.example.mastermind.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnPlay, btnPlayAI, btnSettings, btnStats;
+    Button btnPlay, btnPlayAI, btnHowtoplay, btnSettings, btnStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +21,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         btnPlay = findViewById(R.id.button_play);
         btnPlayAI = findViewById(R.id.button_play_ai);
+        btnHowtoplay = findViewById(R.id.button_how_to_play);
         btnSettings = findViewById(R.id.button_settings);
         btnStats = findViewById(R.id.button_stats);
 
         btnPlay.setOnClickListener(this);
+        btnHowtoplay.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnStats.setOnClickListener(this);
     }
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if(preferences.getBoolean("ai_mode", false)){
+        if (preferences.getBoolean("ai_mode", false)) {
             btnPlayAI.setOnClickListener(this);
             btnPlayAI.setVisibility(View.VISIBLE);
         } else {
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.button_play) {
             Intent intiPlay = new Intent(this, NormalGameActivity.class);
             startActivity(intiPlay);
+        } else if (id == R.id.button_how_to_play) {
+            Intent intiHowtoplay = new Intent(this, HowToPlayActivity.class);
+            startActivity(intiHowtoplay);
         } else if (id == R.id.button_play_ai) {
             Intent intiPlayReverse = new Intent(this, ReverseGameActivity.class);
             startActivity(intiPlayReverse);

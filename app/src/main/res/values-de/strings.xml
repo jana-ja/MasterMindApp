@@ -19,6 +19,14 @@
     <string name="is_in_solution">ist in der Lösung</string>
     <string name="is_not_in_solution">ist nicht in der Lösung</string>
 
+    <!-- How to play -->
+    <string name="button_text_htp_back">zurück</string>
+    <string name="button_text_htp_next">weiter</string>
+    <string name="htp_screen1">Willkommen bei [name].\nDas Ziel des Spiels ist es, herauszufinden welche Planeten sich hinter den schwarzen Löchern verbergen, bevor deine Rakete dort ankommt.</string>
+    <string name="htp_screen2">Um zu raten tippe einen der Planeten unten an um ihn auszuwählen und platziere ihn dann in der leeren Reihe, in der sich deine Rakete gerade befindet.</string>
+<!--    <string name="htp_screen3">Wenn du deine Vermutung fertig eingetragen hast, tippe auf \"Nächste Runde\" um zwei Hinweise zu erhalten.\nDie schwarze Zahl zeigt, wie viele richtige Planeten du gewählt hast. Die rote Zahl zeigt, wie viele davon auch an der richtigen Stelle liegen.</string>-->
+    <string name="htp_screen3">Wenn du deine Vermutung fertig eingetragen hast, tippe auf \"Nächste Runde\" um zwei Hinweise zu erhalten.\nDie schwarze Zahl zeigt, wie viele der Planeten richtig sind. Die rote Zahl zeigt, wie viele davon auch an der richtigen Stelle liegen.</string>
+    <string name="htp_screen4">So kannst du Reihe für Reihe fortfahren und die Hinweise kombinieren, um die richtigen Planeten aufzudekcen</string>
 
     <!-- SettingsActivity -->
     <string name="text_title_settings">Einstellungen</string>

@@ -18,6 +18,14 @@
     <string name="is_in_solution">is in the solution</string>
     <string name="is_not_in_solution">is not in the solution</string>
 
+    <!-- How to play -->
+    <string name="button_text_htp_back">back</string>
+    <string name="button_text_htp_next">next</string>
+    <string name="htp_screen1">Welcome to [name].\nThe main goal is to find out which planets are hidden behind the black holes before your rocket gets there.</string>
+    <string name="htp_screen2">To make a guess tap a planet from the bottom of the screen to select it and then place it in the empty row next to your rocket.</string>
+    <string name="htp_screen3">When you finished the row hit "next round" to get two hints.\nThe black number tells you how many planets you guessed right. The red number tells you how many of those are also in the right place.</string>
+    <string name="htp_screen4">You can use each row to make a guess and combine your hints to find the hidden planets.</string>
+
     <!-- SettingsActivity -->
     <string name="text_title_settings">Settings</string>
     <string name="game_settings_category">Game Settings</string>
