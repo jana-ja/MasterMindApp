@@ -21,10 +21,10 @@
     <!-- SettingsActivity -->
     <string name="text_title_settings">Settings</string>
     <string name="game_settings_category">Game Settings</string>
-    <string name="duplicate_pins_title">Use duplicate colors</string>
-    <string name="duplicate_pins_text">Colors can occur multiple times in the solution.</string>
-    <string name="empty_pins_title">Leave fields empty</string>
-    <string name="empty_pins_text">Fields can be left empty in the solution.</string>
+    <string name="duplicate_pins_title">Use duplicate planets</string>
+    <string name="duplicate_pins_text">Planets can occur multiple times in the solution.</string>
+    <string name="empty_pins_title">Pluto Mode</string>
+    <string name="empty_pins_text">Use Pluto as ninth planet.</string>
     <string name="round_number_text">Number of tries you got in the game.</string>
     <string name="experimental_settings_category">Experimental Settings</string>
     <string name="ai_mode_title">Activate AI game mode</string>

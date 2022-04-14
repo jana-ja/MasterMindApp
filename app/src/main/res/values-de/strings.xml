@@ -23,10 +23,10 @@
     <!-- SettingsActivity -->
     <string name="text_title_settings">Einstellungen</string>
     <string name="game_settings_category">Spiel Einstellungen</string>
-    <string name="duplicate_pins_title">Farben mehrfach verwenden</string>
-    <string name="duplicate_pins_text">In der Lösung können Farben mehrfach vorkommen.</string>
-    <string name="empty_pins_title">Felder leer lassen</string>
-    <string name="empty_pins_text">In der Lösung können Felder leer gelassen werden.</string>
+    <string name="duplicate_pins_title">Planeten mehrfach verwenden</string>
+    <string name="duplicate_pins_text">In der Lösung können Planeten mehrfach vorkommen.</string>
+    <string name="empty_pins_title">Pluto Modus</string>
+    <string name="empty_pins_text">Pluto als neunten Planeten verwenden.</string>
     <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat.</string>
     <string name="experimental_settings_category">Experimentelle Einstellungen</string>
     <string name="ai_mode_title">AI Modus aktivieren</string>
