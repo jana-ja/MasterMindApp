@@ -1,33 +1,28 @@
 package com.example.mastermind.model;
 
-import android.content.Context;
-import android.graphics.Color;
-
-import androidx.core.content.ContextCompat;
-
 import com.example.mastermind.R;
 
 public enum PinColor {
-    RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, PLUTO, EMPTY, SOLUTION;
+    MERCURY, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUN, PLUTO, EMPTY, SOLUTION;
 
 
     public int getImageName(){
         switch(this){
-            case RED:
+            case MERCURY:
                 return R.drawable.merkur;
-            case ORANGE:
+            case VENUS:
                 return R.drawable.venus;
-            case YELLOW:
+            case EARTH:
                 return R.drawable.erde;
-            case GREEN:
+            case MARS:
                 return R.drawable.mars;
-            case BLUE:
+            case JUPITER:
                 return R.drawable.jupiter;
-            case PINK:
+            case SATURN:
                 return R.drawable.saturn;
-            case GREY:
+            case URANUS:
                 return R.drawable.uranus;
-            case WHITE:
+            case NEPTUN:
                 return R.drawable.neptun;
             case PLUTO:
                 return R.drawable.pluto;
@@ -42,21 +37,21 @@ public enum PinColor {
 
     public int getStringId(){
         switch(this) {
-            case RED:
+            case MERCURY:
                 return R.string.merkur;
-            case ORANGE:
+            case VENUS:
                 return R.string.venus;
-            case YELLOW:
+            case EARTH:
                 return R.string.erde;
-            case GREEN:
+            case MARS:
                 return R.string.mars;
-            case BLUE:
+            case JUPITER:
                 return R.string.jupiter;
-            case PINK:
+            case SATURN:
                 return R.string.saturn;
-            case GREY:
+            case URANUS:
                 return R.string.uranus;
-            case WHITE:
+            case NEPTUN:
                 return R.string.neptun;
             case PLUTO:
                 return R.string.pluto;
