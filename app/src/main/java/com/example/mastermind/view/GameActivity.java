@@ -377,7 +377,7 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
     // für dialog wenn man neues spiel macht obwohl grade eins läuft
     @Override
     public void onClick(View view) {
-        if (view.getId() == DialogInterface.BUTTON_POSITIVE) {
+        if (view.getId() == R.id.button_positive) {
             startGame();
         }
     }
