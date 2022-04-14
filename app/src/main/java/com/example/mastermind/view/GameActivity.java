@@ -154,6 +154,8 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
         //größe der boardcells in griddiPins
         for (BoardCell pinCell : this.pinCells) {
             pinCell.setLayoutParams(widthPerPin, widthPerPin);
+            // to set right margin
+            pinCell.setPinColor(pinCell.getPinColor());
         }
         //höhe von griddiPins daran anpassen
         setGridLayoutParams(griddiPins, pinGridHeight);

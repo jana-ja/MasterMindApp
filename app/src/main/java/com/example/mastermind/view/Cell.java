@@ -9,6 +9,7 @@ import androidx.gridlayout.widget.GridLayout;
 
 public abstract class Cell extends androidx.appcompat.widget.AppCompatImageButton{
     int xPos, yPos; //achtung xpos wird von unten nach oben indiziert, x=0 ist also ganz unten, y=0 ist links
+    int width, height;
 
     public Cell(Context context, int xPos, int yPos) {
         super(context);
@@ -40,16 +41,30 @@ public abstract class Cell extends androidx.appcompat.widget.AppCompatImageButto
     }
 
     public void setLayoutParams(int width, int height){
+        setLayoutParams(width, height, 0.95);
+    }
+
+    public void setLayoutParams(int width, int height, double percent){
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-        double dings = 0.95;
 
-        params.height = (int)(dings * height);
-        params.width = (int)(dings * width);
+        this.width = width;
+        this.height = height;
 
-        int horizontalMargin = (int)((1 - dings) * width / 2);
-        int verticalMargin = (int)((1- dings) * height / 2);
+        params.height = (int)(percent * height);
+        params.width = (int)(percent * width);
+
+        int horizontalMargin = (int)((1 - percent) * width / 2);
+        int verticalMargin = (int)((1- percent) * height / 2);
         params.setMargins(horizontalMargin, verticalMargin, horizontalMargin, verticalMargin);
         this.setLayoutParams(params);
+    }
+
+    /**
+     * can only be used after init with setLayoutParams
+     * @param percent
+     */
+    public void setMargin(double percent){
+        setLayoutParams(width,height,1.0-percent);
     }
 
 }

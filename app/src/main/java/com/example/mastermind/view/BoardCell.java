@@ -14,6 +14,18 @@ public class BoardCell extends Cell {
     }
 
     public void setPinColor(PinColor pinColor) {
+        // adapt margin
+        switch(pinColor){
+            case SATURN:
+                setMargin(0);
+                break;
+//            case PLUTO:
+//                setMargin(0.15);
+//                break;
+            default:
+                setMargin(0.05);
+                break;
+        }
         this.pinColor = pinColor;
     }
 
