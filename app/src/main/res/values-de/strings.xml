@@ -49,14 +49,14 @@
     <string name="alert_text_start_game">Wirklich das aktuelle Spiel verwerfen und ein Neues starten?</string>
 
     <!-- planets -->
-    <string name="merkur">Mercury</string>
+    <string name="merkur">Merkur</string>
     <string name="venus">Venus</string>
-    <string name="erde">Earth</string>
+    <string name="erde">Erde</string>
     <string name="mars">Mars</string>
     <string name="jupiter">Jupiter</string>
     <string name="saturn">Saturn</string>
     <string name="uranus">Uranus</string>
-    <string name="neptun">Neptune</string>
+    <string name="neptun">Neptun</string>
     <string name="pluto">Pluto</string>
     <!-- generated -->
 </resources>
