@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat;
 import com.example.mastermind.R;
 
 public enum PinColor {
-    RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, EMPTY, SOLUTION;
+    RED, ORANGE, YELLOW, GREEN, BLUE, PINK, GREY, WHITE, PLUTO, EMPTY, SOLUTION;
 
 
     public int getImageName(){
@@ -29,6 +29,8 @@ public enum PinColor {
                 return R.drawable.uranus;
             case WHITE:
                 return R.drawable.neptun;
+            case PLUTO:
+                return R.drawable.pluto;
             case EMPTY:
                 return R.drawable.empty;
             case SOLUTION:
@@ -56,6 +58,8 @@ public enum PinColor {
                 return R.string.uranus;
             case WHITE:
                 return R.string.neptun;
+            case PLUTO:
+                return R.string.pluto;
             default:
                 return 0;
         }
