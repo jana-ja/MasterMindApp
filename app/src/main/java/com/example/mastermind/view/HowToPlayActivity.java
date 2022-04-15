@@ -18,10 +18,10 @@ public class HowToPlayActivity extends AppCompatActivity implements View.OnClick
     private MaterialButton buttonBack, buttonNext;
 
     private int currentScreen;
-    private final int maxScreen = 4;
+    private final int maxScreen = 5;
 
-    private int[] imageIds = new int[]{R.drawable.htp_screen1, R.drawable.htp_screen2, R.drawable.htp_screen3, R.drawable.htp_screen4};
-    private int[] textIds = new int[]{R.string.htp_screen1, R.string.htp_screen2, R.string.htp_screen3, R.string.htp_screen4};;
+    private int[] imageIds = new int[]{R.drawable.htp_screen1, R.drawable.htp_screen1, R.drawable.htp_screen2, R.drawable.htp_screen3, R.drawable.htp_screen4};
+    private int[] textIds = new int[]{R.string.htp_screen1, R.string.htp_screen1_5, R.string.htp_screen2, R.string.htp_screen3, R.string.htp_screen4};;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
