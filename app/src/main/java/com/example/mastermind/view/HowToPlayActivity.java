@@ -53,18 +53,27 @@ public class HowToPlayActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.htp_back_button) {
-            buttonNext.setClickable(true);
             currentScreen--;
             if(currentScreen == 1)
                 buttonBack.setClickable(false);
+            // going back from last page -> next button is no longer finish button
+            if(currentScreen == maxScreen-1){
+                buttonNext.setText(getString(R.string.button_text_htp_next));
+            }
 
         } else if (id == R.id.htp_next_button) {
             buttonBack.setClickable(true);
+            // when on last page -> finish activity with next button
+            if(currentScreen == maxScreen) {
+                this.finish();
+                return;
+            }
             currentScreen++;
+            // switching to last page -> next button becomes finish button
             if(currentScreen == maxScreen)
-                buttonNext.setClickable(false);
-
+                buttonNext.setText(getString(R.string.button_text_htp_finish));
         }
         refreshView();
     }
+
 }

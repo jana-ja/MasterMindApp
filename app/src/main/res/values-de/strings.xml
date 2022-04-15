@@ -22,6 +22,7 @@
     <!-- How to play -->
     <string name="button_text_htp_back">zurück</string>
     <string name="button_text_htp_next">weiter</string>
+    <string name="button_text_htp_finish">fertig</string>
     <string name="htp_screen1">Willkommen bei [name].\nDas Ziel des Spiels ist es, herauszufinden welche Planeten sich hinter den schwarzen Löchern verbergen, bevor deine Rakete dort ankommt.</string>
     <string name="htp_screen1.5">Die möglichen Planeten sind Merkur, Venus, Erde, Mars, Jupiter, Saturn, Uranus und Neptun, wie in unserem Sonnensystem.</string>
     <string name="htp_screen2">Um zu raten tippe einen der Planeten an um ihn auszuwählen und platziere ihn dann in der leeren Reihe, in der sich deine Rakete gerade befindet. Um einen Planeten wieder zu entfernen tippe ihn noch einmal an.</string>
