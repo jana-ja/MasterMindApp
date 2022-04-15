@@ -57,8 +57,8 @@
     <Button
         android:id="@+id/button_start_game"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/button_text_start_game"
         android:textColor="@color/game_button_text"
         android:textSize="@dimen/text_size_init_new_game_button"
@@ -70,8 +70,8 @@
     <Button
         android:id="@+id/button_next_round"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/button_text_next_round"
         android:textColor="@color/game_button_text"
         android:textSize="@dimen/text_size_game_buttons"
