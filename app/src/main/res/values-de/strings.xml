@@ -49,6 +49,9 @@
     <string name="stats_lost_text">Verlorene Spiele:</string>
     <string name="stats_quit_text">Nicht beendete Spiele:</string>
     <string name="stats_avg_rounds_text">Durchschnittliche Versuche zum Gewinnen:</string>
+    <string name="stats_shortest_time_text">Längstes Spiel:</string>
+    <string name="stats_longest_time_text">Schnellstes Spiel:</string>
+    <string name="stats_avg_time_text">Durchschnittliche Spieldauer:</string>
     <string name="button_text_reset_stats">Statistiken zurücksetzen</string>
     <string name="alert_text_reset_stats">Wirklich die Statistiken löschen?</string>
 

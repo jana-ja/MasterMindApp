@@ -12,109 +12,187 @@
         android:layout_height="match_parent"
         android:src="@drawable/background_blank"
         android:scaleType="centerCrop" />
-    <TableLayout
-        android:id="@+id/gridLayout"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="0"
-        android:shrinkColumns="0"
-        android:layout_margin="20dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3">
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintVertical_bias="0.0">
 
-        <TableRow>
-            <TextView
-                android:gravity="start"
-                android:textSize="@dimen/text_size_stats"
-                android:text="@string/stats_started_text"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/value_started"
-                android:gravity="end"
-                android:textSize="@dimen/text_size_stats"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
-        </TableRow>
+            <TableLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:shrinkColumns="0"
+                android:stretchColumns="0">
 
-        <TableRow>
-            <TextView
-                android:gravity="start"
-                android:textSize="@dimen/text_size_stats"
-                android:text="@string/stats_won_text"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
+                <TableRow>
 
-            <TextView
-                android:id="@+id/value_won"
-                android:gravity="end"
-                android:textSize="@dimen/text_size_stats"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:gravity="start"
-                android:textSize="@dimen/text_size_stats"
-                android:text="@string/stats_lost_text"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
+                    <TextView
+                        android:gravity="start"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:text="@string/stats_started_text"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
 
-            <TextView
-                android:id="@+id/value_lost"
-                android:gravity="end"
-                android:textSize="@dimen/text_size_stats"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
-        </TableRow>
+                    <TextView
+                        android:id="@+id/value_started"
+                        android:gravity="end"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+                </TableRow>
 
-        <TableRow>
-            <TextView
-                android:gravity="start"
-                android:textSize="@dimen/text_size_stats"
-                android:text="@string/stats_quit_text"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
+                <TableRow>
 
-            <TextView
-                android:id="@+id/value_quit"
-                android:gravity="end"
-                android:textSize="@dimen/text_size_stats"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
-        </TableRow>
+                    <TextView
+                        android:gravity="start"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:text="@string/stats_won_text"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
 
-        <TableRow>
-            <TextView
-                android:gravity="start"
-                android:textSize="@dimen/text_size_stats"
-                android:text="@string/stats_avg_rounds_text"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
+                    <TextView
+                        android:id="@+id/value_won"
+                        android:gravity="end"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+                </TableRow>
 
-            <TextView
-                android:id="@+id/value_avg_rounds"
-                android:gravity="end"
-                android:textSize="@dimen/text_size_stats"
-                android:textColor="@color/textcolor"
-                android:paddingVertical="@dimen/table_vert_padding"
-                android:paddingHorizontal="@dimen/table_hor_padding"/>
-        </TableRow>
+                <TableRow>
 
-    </TableLayout>
+                    <TextView
+                        android:gravity="start"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:text="@string/stats_lost_text"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
 
-<!--    <androidx.gridlayout.widget.GridLayout-->
+                    <TextView
+                        android:id="@+id/value_lost"
+                        android:gravity="end"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:gravity="start"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:text="@string/stats_quit_text"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+
+                    <TextView
+                        android:id="@+id/value_quit"
+                        android:gravity="end"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:gravity="start"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:text="@string/stats_avg_rounds_text"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+
+                    <TextView
+                        android:id="@+id/value_avg_rounds"
+                        android:gravity="end"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:gravity="start"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:text="@string/stats_shortest_time_text"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+
+                    <TextView
+                        android:id="@+id/value_shortest_time"
+                        android:gravity="end"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:gravity="start"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:text="@string/stats_longest_time_text"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+
+                    <TextView
+                        android:id="@+id/value_longest_time"
+                        android:gravity="end"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:gravity="start"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:text="@string/stats_avg_time_text"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+
+                    <TextView
+                        android:id="@+id/value_avg_time"
+                        android:gravity="end"
+                        android:paddingHorizontal="@dimen/table_hor_padding"
+                        android:paddingVertical="@dimen/table_vert_padding"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/text_size_stats" />
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!--    <androidx.gridlayout.widget.GridLayout-->
 <!--        android:id="@+id/gridLayout"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->

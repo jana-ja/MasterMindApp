@@ -2,6 +2,7 @@ package jana.ja.mastermind.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.view.View;
 
 import jana.ja.mastermind.R;
@@ -12,6 +13,9 @@ import jana.ja.mastermind.model.Stats;
 
 public class NormalGameActivity extends GameActivity{
 
+    private long startTime;
+    // timeElapsed stores the accumulated measured time when acitivty is paused
+    private long timeElapsed = 0;
 
     @Override
     void startGame() {
@@ -26,6 +30,9 @@ public class NormalGameActivity extends GameActivity{
         int numberStarted = sharedPref.getInt(getString(R.string.stats_started_key), 0);
         editor.putInt(getString(R.string.stats_started_key), numberStarted + 1);
         editor.apply();
+
+        startTime = SystemClock.elapsedRealtime();
+        timeElapsed = 0;
     }
 
     @Override
@@ -70,14 +77,26 @@ public class NormalGameActivity extends GameActivity{
         //add to stats
         Stats stats = StatsActivity.loadStatsFromPreferences(this);
 
+
+
         if (won) {
-            int numberWon = stats.getNumberWon();
+            // ------ round ------
+            int oldNumberWon = stats.getNumberWon();
             //anzahl der rounds zu den avgRoundsPerWin dazu rechnen
             int oldAvgRounds = stats.getAvgRoundsPerWin();
-            int newAvgRounds = (numberWon *  oldAvgRounds + 1 * gamei.getCurrenRound()) / (numberWon + 1); //gamei round von 0 - zB 9, beim beenden wird noch einmal erhöht also ist richtig die zahl
+            int newAvgRounds = (oldNumberWon *  oldAvgRounds + 1 * gamei.getCurrenRound()) / (oldNumberWon + 1); //gamei round von 0 - zB 9, beim beenden wird noch einmal erhöht also ist richtig die zahl
 
-            stats.setNumberWon(numberWon + 1);
+            stats.setNumberWon(oldNumberWon + 1);
             stats.setAvgRoundsPerWin(newAvgRounds);
+
+            // ------ time ------
+            long totalTime = timeElapsed + SystemClock.elapsedRealtime() - startTime;
+            long newAvgTime = (oldNumberWon * stats.getAvgTime() + 1 * totalTime) / (oldNumberWon + 1);
+            stats.setAvgTime(newAvgTime);
+            if(totalTime < stats.getShortestTime())
+                stats.setShortestTime(totalTime);
+            if(totalTime > stats.getLongestTime())
+                stats.setLongestTime(totalTime);
 
         }
         else {
@@ -121,4 +140,20 @@ public class NormalGameActivity extends GameActivity{
             this.selectedBoardCell.display();
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // dont measure time when acitivty is not active
+        timeElapsed += SystemClock.elapsedRealtime() - startTime;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        startTime = SystemClock.elapsedRealtime();
+    }
+
 }

@@ -18,7 +18,7 @@ import java.util.List;
 
 public class StatsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView valueStarted, valueWon, valueLost, valueQuit, valueAvgRounds;
+    TextView valueStarted, valueWon, valueLost, valueQuit, valueAvgRounds, valueShortestTime, valueLongestTime, valueAvgTime;
     Button btnResetStats;
     Stats stats;
 
@@ -34,6 +34,9 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         this.valueLost = findViewById(R.id.value_lost);
         this.valueQuit = findViewById(R.id.value_quit);
         this.valueAvgRounds = findViewById(R.id.value_avg_rounds);
+        this.valueShortestTime = findViewById(R.id.value_shortest_time);
+        this.valueLongestTime = findViewById(R.id.value_longest_time);
+        this.valueAvgTime = findViewById(R.id.value_avg_time);
 
         this.btnResetStats = findViewById(R.id.button_reset_stats);
         this.btnResetStats.setOnClickListener(v -> {
@@ -56,6 +59,10 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         editor.putInt(context.getString(R.string.stats_won_key), stats.getNumberWon());
         editor.putInt(context.getString(R.string.stats_lost_key), stats.getNumberLost());
         editor.putInt(context.getString(R.string.stats_avg_rounds_key), stats.getAvgRoundsPerWin());
+        // time
+        editor.putLong(context.getString(R.string.stats_shortest_time_key), stats.getShortestTime());
+        editor.putLong(context.getString(R.string.stats_longest_time_key), stats.getLongestTime());
+        editor.putLong(context.getString(R.string.stats_avg_time_key), stats.getAvgTime());
 
         editor.apply();
 
@@ -69,6 +76,10 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         stats.setNumberWon(sharedPref.getInt(context.getString(R.string.stats_won_key), 0));
         stats.setNumberLost(sharedPref.getInt(context.getString(R.string.stats_lost_key), 0));
         stats.setAvgRoundsPerWin(sharedPref.getInt(context.getString(R.string.stats_avg_rounds_key), 0));
+        // time
+        stats.setLongestTime(sharedPref.getLong(context.getString(R.string.stats_shortest_time_key), Long.MIN_VALUE));
+        stats.setShortestTime(sharedPref.getLong(context.getString(R.string.stats_longest_time_key), Long.MAX_VALUE));
+        stats.setAvgTime(sharedPref.getLong(context.getString(R.string.stats_avg_time_key), 0));
 
         return stats;
     }
@@ -80,6 +91,9 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
 
         List<String> allStatsKeys = getAllStatsKeys();
         allStatsKeys.forEach(key -> editor.putInt(key, 0));
+        editor.putLong(getString(R.string.stats_shortest_time_key), Long.MAX_VALUE);
+        editor.putLong(getString(R.string.stats_longest_time_key), Long.MIN_VALUE);
+        editor.putLong(getString(R.string.stats_avg_time_key), 0);
         editor.apply();
 
         stats = loadStatsFromPreferences(this);
@@ -100,9 +114,22 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         valueQuit.setText(String.valueOf(numberQuit));
         valueAvgRounds.setText(String.valueOf(avgRounds));
 
+        // time
+        valueShortestTime.setText(convertTime(stats.getShortestTime()));
+        valueLongestTime.setText(convertTime(stats.getLongestTime()));
+        valueAvgTime.setText(convertTime(stats.getAvgTime()));
 
         //TODO stats pro spielmodus??
 
+    }
+
+    private String convertTime(long time) {
+        if(time == Long.MAX_VALUE || time == Long.MIN_VALUE || time == 0)
+            return "-";
+        long sek = time / 1000;
+        int min = (int)(sek / 60);
+        sek = sek % 60;
+        return min + ":" + sek;
     }
 
     private List<String> getAllStatsKeys(){
@@ -112,6 +139,10 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         allKeys.add(getString(R.string.stats_won_key));
         allKeys.add(getString(R.string.stats_lost_key));
         allKeys.add(getString(R.string.stats_avg_rounds_key));
+//        allKeys.add(getString(R.string.stats_shortest_time_key));
+//        allKeys.add(getString(R.string.stats_longest_time_key));
+//        allKeys.add(getString(R.string.stats_avg_time_key));
+
 
         return allKeys;
 

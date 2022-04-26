@@ -47,6 +47,9 @@
     <string name="stats_lost_text">Games lost:</string>
     <string name="stats_quit_text">Games not finished:</string>
     <string name="stats_avg_rounds_text">Average tries to win:</string>
+    <string name="stats_shortest_time_text">Shortest game:</string>
+    <string name="stats_longest_time_text">Longest game:</string>
+    <string name="stats_avg_time_text">Average game time:</string>
     <string name="button_text_reset_stats">Reset statistics</string>
     <string name="alert_text_reset_stats">Do you really want to reset your statistics?</string>
 
@@ -56,6 +59,9 @@
     <string name="stats_won_key" translatable="false">stats_won</string>
     <string name="stats_lost_key" translatable="false">stats_lost</string>
     <string name="stats_avg_rounds_key" translatable="false">stats_avg_rounds</string>
+    <string name="stats_shortest_time_key" translatable="false">stats_shortest_time</string>
+    <string name="stats_longest_time_key" translatable="false">stats_longest_time</string>
+    <string name="stats_avg_time_key" translatable="false">stats_avg_time</string>
 
     <!-- allgemein -->
     <string name="text_alert_positive">Yes</string>

@@ -9,6 +9,10 @@ public class Stats {
     private int numberLost;
     private int avgRoundsPerWin;
 
+    private long shortestTime;
+    private long longestTime;
+    private long avgTime;
+
 
     //TODO infos zu den einstellung (schwierigkeit) speichern?
 
@@ -45,5 +49,29 @@ public class Stats {
 
     public void setAvgRoundsPerWin(int avgRoundsPerWin) {
         this.avgRoundsPerWin = avgRoundsPerWin;
+    }
+
+    public long getShortestTime() {
+        return shortestTime;
+    }
+
+    public void setShortestTime(long shortestTime) {
+        this.shortestTime = shortestTime;
+    }
+
+    public long getLongestTime() {
+        return longestTime;
+    }
+
+    public void setLongestTime(long longestTime) {
+        this.longestTime = longestTime;
+    }
+
+    public long getAvgTime() {
+        return avgTime;
+    }
+
+    public void setAvgTime(long avgTime) {
+        this.avgTime = avgTime;
     }
 }
