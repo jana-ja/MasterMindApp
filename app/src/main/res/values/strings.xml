@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MasterMind\u00A0</string>
+    <string name="app_name">Galaxy Guesser\u00A0</string>
 
     <!-- MainActivity -->
     <string name="button_text_play">Play</string>
@@ -22,7 +22,7 @@
     <string name="button_text_htp_back">back</string>
     <string name="button_text_htp_next">next</string>
     <string name="button_text_htp_finish">finish</string>
-    <string name="htp_screen1">Welcome to [name].\nThe main goal is to find out which planets are hidden behind the black holes before your rocket gets there.</string>
+    <string name="htp_screen1">Welcome to Galaxy Guesser.\nThe main goal is to find out which planets are hidden behind the black holes before your rocket gets there.</string>
     <string name="htp_screen1.5">The possible planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune, like in our solar system.</string>
     <string name="htp_screen2">To make a guess tap a planet from the bottom of the screen to select it and then place it in the empty row next to your rocket. To remove a planet simply tap it again.</string>
     <string name="htp_screen3">When you finished the row hit "next round" to get two hints.\nThe black number tells you how many planets you guessed right. The red number tells you how many of those are also in the right place.</string>
