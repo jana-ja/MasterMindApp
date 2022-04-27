@@ -37,7 +37,7 @@
     <string name="duplicate_pins_text">In der Lösung können Planeten mehrfach vorkommen.</string>
     <string name="empty_pins_title">Pluto Modus</string>
     <string name="empty_pins_text">Pluto als neunten Planeten verwenden.</string>
-    <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat.</string>
+    <string name="round_number_text">Die Anzahl der Versuche die man pro Spiel hat. Bei weniger Reihen werden die Planeten auf breiteren Bildschirmen größer dargestellt.</string>
     <string name="experimental_settings_category">Experimentelle Einstellungen</string>
     <string name="ai_mode_title">AI Modus aktivieren</string>
     <string name="ai_mode_text">Entsperrt den AI Spielmodus im Hauptmenü</string>

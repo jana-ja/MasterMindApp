@@ -35,7 +35,7 @@
     <string name="duplicate_pins_text">Planets can occur multiple times in the solution.</string>
     <string name="empty_pins_title">Pluto Mode</string>
     <string name="empty_pins_text">Use Pluto as ninth planet.</string>
-    <string name="round_number_text">Number of tries you got in the game.</string>
+    <string name="round_number_text">Number of tries you got in the game. Smaller number of rows can also make planets appear bigger on wider screens.</string>
     <string name="experimental_settings_category">Experimental Settings</string>
     <string name="ai_mode_title">Activate AI game mode</string>
     <string name="ai_mode_text">Unlocks AI game mode in main menu (alpha).</string>
