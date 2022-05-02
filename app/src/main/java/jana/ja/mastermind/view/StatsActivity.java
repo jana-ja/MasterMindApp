@@ -77,8 +77,8 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         stats.setNumberLost(sharedPref.getInt(context.getString(R.string.stats_lost_key), 0));
         stats.setAvgRoundsPerWin(sharedPref.getInt(context.getString(R.string.stats_avg_rounds_key), 0));
         // time
-        stats.setLongestTime(sharedPref.getLong(context.getString(R.string.stats_shortest_time_key), Long.MIN_VALUE));
-        stats.setShortestTime(sharedPref.getLong(context.getString(R.string.stats_longest_time_key), Long.MAX_VALUE));
+        stats.setShortestTime(sharedPref.getLong(context.getString(R.string.stats_shortest_time_key), Long.MAX_VALUE));
+        stats.setLongestTime(sharedPref.getLong(context.getString(R.string.stats_longest_time_key), Long.MIN_VALUE));
         stats.setAvgTime(sharedPref.getLong(context.getString(R.string.stats_avg_time_key), 0));
 
         return stats;
