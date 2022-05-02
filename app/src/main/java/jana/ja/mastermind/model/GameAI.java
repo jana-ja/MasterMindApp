@@ -35,6 +35,10 @@ public class GameAI {
         colors = new ArrayList<>(Arrays.asList(PinColor.values()));
         //remove last element (because PinColor.SOLUTION is not used here)
         colors.remove(colors.size() - 1);
+        if(!settings.isEmptyPins()){
+            // no empty pins -> no pluto
+            colors.remove(colors.size() - 1);
+        }
         colorInSolution = new Boolean[colors.size()];
         allClauses = new Vec<>();
 
