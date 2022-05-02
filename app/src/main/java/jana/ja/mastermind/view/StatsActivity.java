@@ -129,7 +129,10 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         long sek = time / 1000;
         int min = (int)(sek / 60);
         sek = sek % 60;
-        return min + ":" + sek;
+        if(sek < 10)
+            return min + ":0" +sek;
+        else
+            return min + ":" + sek;
     }
 
     private List<String> getAllStatsKeys(){
