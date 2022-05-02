@@ -17,6 +17,7 @@ import jana.ja.mastermind.model.Game;
 import jana.ja.mastermind.model.PinColor;
 import jana.ja.mastermind.model.Settings;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +43,8 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
 
     BoardCell selectedBoardCell;
     PinColor selectedPinColor;
+
+    FirebaseAnalytics mFirebaseAnalytics;
 
 
     private boolean gameRunning = false;
@@ -81,6 +84,8 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
 
         firstRound = true;
         loadSettings();
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     private void loadSettings() {

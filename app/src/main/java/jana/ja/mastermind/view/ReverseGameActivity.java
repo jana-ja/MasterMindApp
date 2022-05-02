@@ -1,9 +1,12 @@
 package jana.ja.mastermind.view;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintSet;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import jana.ja.mastermind.R;
 import jana.ja.mastermind.model.PinRow;
@@ -39,6 +42,14 @@ public class ReverseGameActivity extends GameActivity {
         userSolutionReady = false;
         ai = new GameAI(settings);
         ai.setGameActivity(this);
+
+        // analytics
+        Bundle bundle = new Bundle();
+        bundle.putString("game_mode", "ai");
+//        bundle.putBoolean("settings_duplicates", settings.isDuplicatePins());
+//        bundle.putBoolean("settings_pluto", settings.isEmptyPins());
+//        bundle.putInt("settings_rounds", settings.getNumberRounds());
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_START, bundle);
     }
 
     @Override
@@ -53,6 +64,10 @@ public class ReverseGameActivity extends GameActivity {
             }
             if (!gamei.checkSettingConformity(pinColors)) {
                 this.notOkayErrorMessage();
+                // analytics
+                Bundle bundle = new Bundle();
+                bundle.putString("game_mode", "ai");
+                mFirebaseAnalytics.logEvent("solution_input_error", bundle);
                 return;
             }
             //set solution of gamei
@@ -95,6 +110,14 @@ public class ReverseGameActivity extends GameActivity {
 
             }
         }
+        // analytics
+        Bundle bundle = new Bundle();
+        bundle.putString("game_mode", "ai");
+//        bundle.putBoolean("settings_duplicates", settings.isDuplicatePins());
+//        bundle.putBoolean("settings_pluto", settings.isEmptyPins());
+//        bundle.putInt("settings_rounds", settings.getNumberRounds());
+        bundle.putInt("rounds", gamei.getCurrenRound());
+        mFirebaseAnalytics.logEvent("next_round", bundle);
 
     }
 
@@ -104,6 +127,13 @@ public class ReverseGameActivity extends GameActivity {
 
         ReverseGameEndDialog dialog = new ReverseGameEndDialog(won);
         dialog.show(getSupportFragmentManager(), "game_end_alert");
+
+        // analytics
+        Bundle bundle = new Bundle();
+        bundle.putString("game_mode", "ai");
+        bundle.putBoolean("won", won);
+        bundle.putInt("rounds", gamei.getCurrenRound());
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_END, bundle);
 
     }
 

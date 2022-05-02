@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import jana.ja.mastermind.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class HowToPlayActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,6 +23,8 @@ public class HowToPlayActivity extends AppCompatActivity implements View.OnClick
 
     private int[] imageIds = new int[]{R.drawable.htp_screen1, R.drawable.htp_screen1, R.drawable.htp_screen2, R.drawable.htp_screen3, R.drawable.htp_screen4};
     private int[] textIds = new int[]{R.string.htp_screen1, R.string.htp_screen1_5, R.string.htp_screen2, R.string.htp_screen3, R.string.htp_screen4};;
+
+    FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +42,11 @@ public class HowToPlayActivity extends AppCompatActivity implements View.OnClick
 
         currentScreen = 1;
         buttonBack.setClickable(false);
+
+        // analytics
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, bundle);
 
         refreshView();
     }
@@ -65,6 +73,9 @@ public class HowToPlayActivity extends AppCompatActivity implements View.OnClick
             buttonBack.setClickable(true);
             // when on last page -> finish activity with next button
             if(currentScreen == maxScreen) {
+                // analytics
+                Bundle bundle = new Bundle();
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, bundle);
                 this.finish();
                 return;
             }

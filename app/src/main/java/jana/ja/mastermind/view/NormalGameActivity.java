@@ -2,8 +2,11 @@ package jana.ja.mastermind.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import jana.ja.mastermind.R;
 import jana.ja.mastermind.model.PinRow;
@@ -16,6 +19,7 @@ public class NormalGameActivity extends GameActivity{
     private long startTime;
     // timeElapsed stores the accumulated measured time when acitivty is paused
     private long timeElapsed = 0;
+
 
     @Override
     void startGame() {
@@ -30,6 +34,15 @@ public class NormalGameActivity extends GameActivity{
         int numberStarted = sharedPref.getInt(getString(R.string.stats_started_key), 0);
         editor.putInt(getString(R.string.stats_started_key), numberStarted + 1);
         editor.apply();
+
+        // analytics
+        Bundle bundle = new Bundle();
+        bundle.putString("game_mode", "normal");
+        bundle.putBoolean("settings_duplicates", settings.isDuplicatePins());
+        bundle.putBoolean("settings_pluto", settings.isEmptyPins());
+        bundle.putInt("settings_rounds", settings.getNumberRounds());
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_START, bundle);
+
 
         startTime = SystemClock.elapsedRealtime();
         timeElapsed = 0;
@@ -59,6 +72,15 @@ public class NormalGameActivity extends GameActivity{
             }
 
             highlightCurrentRow();
+
+            // analytics
+            Bundle bundle = new Bundle();
+            bundle.putString("game_mode", "normal");
+            bundle.putBoolean("settings_duplicates", settings.isDuplicatePins());
+            bundle.putBoolean("settings_pluto", settings.isEmptyPins());
+            bundle.putInt("settings_rounds", settings.getNumberRounds());
+            bundle.putInt("rounds", gamei.getCurrenRound());
+            mFirebaseAnalytics.logEvent("next_round", bundle);
         } else {
             this.notOkayErrorMessage();
         }
@@ -74,11 +96,12 @@ public class NormalGameActivity extends GameActivity{
             solutionCells.get(i).display();
         }
 
+
+
         //add to stats
         Stats stats = StatsActivity.loadStatsFromPreferences(this);
 
-
-
+        long totalTime = timeElapsed + SystemClock.elapsedRealtime() - startTime;
         if (won) {
             // ------ round ------
             int oldNumberWon = stats.getNumberWon();
@@ -90,7 +113,7 @@ public class NormalGameActivity extends GameActivity{
             stats.setAvgRoundsPerWin(newAvgRounds);
 
             // ------ time ------
-            long totalTime = timeElapsed + SystemClock.elapsedRealtime() - startTime;
+
             long newAvgTime = (oldNumberWon * stats.getAvgTime() + 1 * totalTime) / (oldNumberWon + 1);
             stats.setAvgTime(newAvgTime);
             if(totalTime < stats.getShortestTime())
@@ -98,13 +121,28 @@ public class NormalGameActivity extends GameActivity{
             if(totalTime > stats.getLongestTime())
                 stats.setLongestTime(totalTime);
 
+
+
+
         }
         else {
             int numberLost = stats.getNumberLost();
             stats.setNumberLost(numberLost);
         }
 
+        // stats
         StatsActivity.saveStatsToPreferences(this, stats);
+
+        // analytics
+        Bundle bundle = new Bundle();
+        bundle.putString("game_mode", "normal");
+        bundle.putBoolean("settings_duplicates", settings.isDuplicatePins());
+        bundle.putBoolean("settings_pluto", settings.isEmptyPins());
+        bundle.putInt("settings_rounds", settings.getNumberRounds());
+        bundle.putBoolean("won", won);
+        bundle.putInt("rounds", gamei.getCurrenRound());
+        bundle.putLong("time", totalTime);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_END, bundle);
 
         NormalGameEndDialog dialog = new NormalGameEndDialog(won);
         dialog.show(getSupportFragmentManager(), "game_end_alert");
