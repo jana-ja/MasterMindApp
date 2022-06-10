@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "104709839656",
+    "project_id": "spacemastermind-8e55c",
+    "storage_bucket": "spacemastermind-8e55c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104709839656:android:6a2153427dd0ea02af0e1d",
+        "android_client_info": {
+          "package_name": "jana.ja.MasterMind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104709839656-bjub008su8si69fkl83ip1oa9j31eiu1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL5ut3COMBXG16J4GhTXOpolGY7Y1AGVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104709839656-bjub008su8si69fkl83ip1oa9j31eiu1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
