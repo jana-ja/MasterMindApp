@@ -1,12 +1,18 @@
 package jana.ja.mastermind.view;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
@@ -35,11 +41,21 @@ public class ReverseGameEndDialog  extends DialogFragment {
         View view = inflater.inflate(R.layout.game_end_dialog, null);
         TextView textView = view.findViewById(R.id.dialog_message);
         textView.setText(text);
-        MaterialButton buttonPos = view.findViewById(R.id.button_okay);
-        buttonPos.setOnClickListener(v -> dismiss());
+        textView.setOnClickListener(v -> dismiss());
+        // TODO image einfügen oder so
 
         builder.setView(view);
         return builder.create();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Window window = getDialog().getWindow();
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        window.setDimAmount(NormalGameEndDialog.DIM_AMOUNT);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
 }
