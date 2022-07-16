@@ -41,7 +41,6 @@ public class HowToPlayActivity extends AppCompatActivity implements View.OnClick
         buttonNext.setOnClickListener(this);
 
         currentScreen = 1;
-        buttonBack.setClickable(false);
 
         // analytics
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -61,13 +60,17 @@ public class HowToPlayActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.htp_back_button) {
-            currentScreen--;
-            if(currentScreen == 1)
-                buttonBack.setClickable(false);
+            // when on first page -> finish activity with back button
+            if(currentScreen == 1){
+                this.finish();
+                return;
+            }
             // going back from last page -> next button is no longer finish button
-            if(currentScreen == maxScreen-1){
+            if(currentScreen == maxScreen){
                 buttonNext.setText(getString(R.string.button_text_htp_next));
             }
+            currentScreen--;
+
 
         } else if (id == R.id.htp_next_button) {
             buttonBack.setClickable(true);
