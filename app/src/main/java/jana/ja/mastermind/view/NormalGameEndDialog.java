@@ -45,7 +45,7 @@ public class NormalGameEndDialog extends DialogFragment {
         textView.setText(text);
         textView.setOnClickListener(v -> dismiss());
         ImageView imageView = view.findViewById((R.id.dialog_image));
-        imageView.setImageResource(R.drawable.win);
+        imageView.setImageResource(won? R.drawable.win : R.drawable.lose);
         imageView.setOnClickListener(v -> dismiss());
 
         builder.setView(view);
