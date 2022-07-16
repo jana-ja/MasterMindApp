@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.preference.PreferenceManager;
 
@@ -35,6 +36,7 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
     Button bStartGame;
     Button bNextRound;
     ImageView highlightView;
+    Guideline guidelineVert;
 
     List<BoardCell> solutionCells;
     BoardCell[][] boardCells;
@@ -82,6 +84,8 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
 
         highlightView = new ImageView(this);
 
+        guidelineVert = findViewById(R.id.guideline_vertical);
+
         firstRound = true;
         loadSettings();
 
@@ -116,6 +120,10 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
     void endGame(boolean won){
         gameRunning = false;
         bNextRound.setEnabled(false);
+        bNextRound.setVisibility(View.GONE);
+
+        // give start game button full screen width
+        guidelineVert.setGuidelinePercent(1.0f);
     }
 
     void startGame() {
@@ -130,7 +138,7 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
     }
 
     /**
-     * berechnungen hier sind jetzt abhängig vom in XML angegebenem padding. sollte alles automatisch daran angepasst werden. kann für alle 3 grids beliebig gewählt werden.
+     * Berechnungen hier sind jetzt abhängig vom in XML angegebenem padding. sollte alles automatisch daran angepasst werden. kann für alle 3 grids beliebig gewählt werden.
      */
     void initView() {
         // put start game button in the right place
@@ -248,8 +256,12 @@ abstract public class GameActivity extends AppCompatActivity implements View.OnC
 
     // when a new game is started
     void resetView() {
+        // put start gamebutton back to left side
+        guidelineVert.setGuidelinePercent(0.5f);
+
         //next round button
         this.bNextRound.setEnabled(true);
+        this.bNextRound.setVisibility(View.VISIBLE);
 
         //solution griddi
         this.solutionCells.forEach(celli -> {
