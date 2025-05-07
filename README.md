@@ -9,7 +9,6 @@ A while after implementing the game as a native android app I created a simple A
 that would try to find a code that was set by the player.
 
 Later I decided to make my first attempts at designing and gave the app a new coat of paint with a space themed look.  
-I'm planning to soon publish the app on the google play store, after refining details and final testing on multiple devices.  
 
 </br>
 
